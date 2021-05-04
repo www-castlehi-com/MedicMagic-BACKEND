@@ -1,0 +1,5 @@
+MedicMagic\user\dao\UserDaoJDBC.class
+MedicMagic\user\dao\UserDao.class
+MedicMagic\user\dao\UserDaoJDBC$1.class
+MedicMagic\user\dao\DuplicateUserIdException.class
+MedicMagic\user\domain\User.class
