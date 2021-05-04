@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="userDao" class="MedicMagic_SPRING.user.dao.UserDaoJDBC">
+    <bean id="userDao" class="MedicMagic.user.dao.UserDaoJDBC">
         <property name="jdbcTemplate" ref="dataSource" />
     </bean>
 

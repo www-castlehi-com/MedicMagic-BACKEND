@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDaoJDBC implements UserDao {
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(DataSource dataSource) { this.jdbcTemplate = new JdbcTemplate(dataSource); }
