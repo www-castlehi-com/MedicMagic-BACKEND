@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+               http://www.springframework.org/schema/aop
+               http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+               http://www.springframework.org/schema/tx
+               http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
     <bean id="userDao" class="MedicMagic.user.dao.UserDaoJDBC">
         <property name="jdbcTemplate" ref="dataSource" />
+    </bean>
+
+    <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
+
+    <bean id="testUserService" class="MedicMagic.user.service.UserServiceTest$TestUserServiceImpl" parent="userService" />
+
+    <bean id="userServiceImpl" class="MedicMagic.user.service.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
+
+    <tx:annotation-driven/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
