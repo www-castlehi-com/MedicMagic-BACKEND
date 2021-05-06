@@ -34,7 +34,7 @@ public class UserDaoJDBC implements UserDao {
     @Override
     public void add(final User user) throws DuplicateUserIdException {
         try {
-            this.jdbcTemplate.update("INSERT INTO user(id, name, password, birthday, age) values(?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
+            this.jdbcTemplate.update("INSERT INTO user(id, name, password, birthday, age) VALUES(?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
         } catch (DuplicateKeyException e) {
             throw new DuplicateUserIdException(e);
         }
@@ -52,9 +52,9 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public void update(User user1) {
+    public void update(User user) {
         this.jdbcTemplate.update(
-                "update user set name = ?, password = ?, birthday = ?, age = ? where id = ?", user1.getName(), user1.getPassword(), user1.getBirthday(), user1.getAge(), user1.getId()
+                "update user set name = ?, password = ?, birthday = ?, age = ? where id = ?", user.getName(), user.getPassword(), user.getBirthday(), user.getAge(), user.getId()
         );
     }
 
