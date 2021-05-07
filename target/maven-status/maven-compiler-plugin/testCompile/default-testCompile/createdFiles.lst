@@ -1,0 +1,4 @@
+MedicMagic\user\service\UserServiceTest$TestUserServiceImpl.class
+MedicMagic\userCalender\dao\userCalenderDaoTest.class
+MedicMagic\user\dao\UserDaoTest.class
+MedicMagic\user\service\UserServiceTest.class
