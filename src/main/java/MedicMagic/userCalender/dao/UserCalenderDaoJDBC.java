@@ -5,6 +5,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.List;
 public class UserCalenderDaoJDBC implements UserCalenderDao {
     private JdbcTemplate jdbcTemplate;
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public void setJdbcTemplate(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     private RowMapper<UserCalender> userCalenderRowMapper =
@@ -39,9 +40,37 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     @Override
     public void add(UserCalender userCalender) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update("INSERT INTO userCalender(id, date) VALUES (?, ?)", userCalender.getId(), userCalender.getDate());
+            this.jdbcTemplate.update("INSERT INTO userCalender(id, date, emotion, symptom) VALUES (?, ?, ?, ?)", userCalender.getId(), userCalender.getDate(), userCalender.getEmotion(), userCalender.isSymptom());
+            nullCheck(userCalender);
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
+        }
+    }
+    private void nullCheck(UserCalender userCalender) {
+        if(userCalender.getWeigh() != null) {
+            userCalender.setWeigh(negativeInspection(userCalender.getWeigh()));
+            update(userCalender, "weigh", userCalender.getWeigh());
+        }
+
+        if(userCalender.getSleepTime() != null) {
+            update(userCalender, "sleepTime", java.sql.Time.valueOf(userCalender.getSleepTime()));
+        }
+
+        if(userCalender.getExerciseTime() != null) {
+            update(userCalender, "exerciseTime", java.sql.Time.valueOf(userCalender.getExerciseTime()));
+        }
+
+        if(userCalender.getWaterIntake() != null) {
+            userCalender.setWaterIntake(negativeInspection(userCalender.getWaterIntake()));
+            update(userCalender, "waterIntake", userCalender.getWaterIntake());
+        }
+
+        if(userCalender.getStartDay() != null) {
+            update(userCalender, "startDay", java.sql.Date.valueOf(userCalender.getStartDay()));
+        }
+
+        if(userCalender.getEndDay() != null) {
+            update(userCalender, "endDay", java.sql.Date.valueOf(userCalender.getEndDay()));
         }
     }
 
@@ -72,7 +101,16 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     }
 
     @Override
-    public void update(UserCalender userCalender) {
-
+    public void update(UserCalender userCalender, String column, Object object) {
+        this.jdbcTemplate.update(
+                "update userCalender SET "+ column +"= ? WHERE id = ? AND date = ?", object, userCalender.getId(), userCalender.getDate()
+        );
     }
+
+    private Double negativeInspection(Double object) throws NegativeException {
+
+        if(object < 0.0) { throw new NegativeException("양수를 입력해주세요!"); }
+
+        return object;
+    };
 }

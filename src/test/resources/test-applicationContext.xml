@@ -14,6 +14,10 @@
         <property name="jdbcTemplate" ref="dataSource" />
     </bean>
 
+    <bean id="userCalenderDao" class="MedicMagic.userCalender.dao.UserCalenderDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
     </bean>

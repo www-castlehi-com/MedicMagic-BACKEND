@@ -4511,10 +4511,12 @@ ALL PRIVILEGES|db
     <column id="1101" parent="367" name="id">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="1102" parent="367" name="date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="1103" parent="367" name="weigh">
       <Position>3</Position>
@@ -4548,5 +4550,11 @@ ALL PRIVILEGES|db
       <Position>10</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
+    <key id="1111" parent="367" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id
+date</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

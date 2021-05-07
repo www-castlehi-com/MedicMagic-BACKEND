@@ -11,5 +11,5 @@ public interface UserCalenderDao {
     void deleteAll();
     int getCount();
     int eachIdGetCount();
-    void update(UserCalender userCalender);
+    void update(UserCalender userCalender, String column, Object object);
 }
