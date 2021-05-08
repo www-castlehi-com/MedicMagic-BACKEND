@@ -34,9 +34,15 @@ public class UserDaoJDBC implements UserDao {
     @Override
     public void add(final User user) throws DuplicateUserIdException {
         try {
+            nullCheck(user);
             this.jdbcTemplate.update("INSERT INTO user(id, name, password, birthday, age) VALUES(?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
         } catch (DuplicateKeyException e) {
             throw new DuplicateUserIdException(e);
+        }
+    }
+    private void nullCheck(User user) throws NullKeyException {
+        if(user.getId() == null || user.getName() == null || user.getPassword() == null || user.getBirthday() == null || user.getAge() == null) {
+            throw new NullKeyException("필수 입력 사항입니다!");
         }
     }
 

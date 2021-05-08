@@ -32,6 +32,7 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
                     userCalender.setEndDay(resultSet.getString("endDay"));
                     userCalender.setEmotion(resultSet.getString("emotion"));
                     userCalender.setSymptom(resultSet.getBoolean("symptom"));
+                    userCalender.setMucus(resultSet.getBoolean("mucus"));
 
                     return userCalender;
                 }
@@ -40,7 +41,7 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     @Override
     public void add(UserCalender userCalender) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update("INSERT INTO userCalender(id, date, emotion, symptom) VALUES (?, ?, ?, ?)", userCalender.getId(), userCalender.getDate(), userCalender.getEmotion(), userCalender.isSymptom());
+            this.jdbcTemplate.update("INSERT INTO userCalender(id, date, emotion, symptom, mucus) VALUES (?, ?, ?, ?, ?)", userCalender.getId(), userCalender.getDate(), userCalender.getEmotion(), userCalender.isSymptom(), userCalender.isMucus());
             nullCheck(userCalender);
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
@@ -86,6 +87,12 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     }
 
     @Override
+    public List<UserCalender> getEachId(String id) {
+        return this.jdbcTemplate.query("SELECT * FROM userCalender WHERE id = ?",
+                new Object[]{id}, this.userCalenderRowMapper);
+    }
+
+    @Override
     public void deleteAll() {
         this.jdbcTemplate.update("DELETE FROM userCalender");
     }
@@ -96,8 +103,8 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     }
 
     @Override
-    public int eachIdGetCount() {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userCalender GROUP BY id");
+    public int getCountEachId(String id) {
+        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userCalender GROUP BY id = ?", id);
     }
 
     @Override

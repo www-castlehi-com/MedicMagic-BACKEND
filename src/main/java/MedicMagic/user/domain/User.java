@@ -5,9 +5,9 @@ public class User {
     String name;
     String password;
     String birthday;
-    int age;
+    Integer age;
 
-    public User(String id, String name, String password, String birthday, int age) {
+    public User(String id, String name, String password, String birthday, Integer age) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -49,11 +49,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }

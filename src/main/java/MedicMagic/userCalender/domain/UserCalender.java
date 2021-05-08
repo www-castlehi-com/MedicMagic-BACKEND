@@ -12,8 +12,9 @@ public class UserCalender {
     String endDay;
     String emotion;
     boolean symptom;
+    boolean mucus;
 
-    public UserCalender(String id, String date, Double weigh, String sleepTime, String exerciseTime, Double waterIntake, String startDay, String endDay, String emotion, boolean symptom) {
+    public UserCalender(String id, String date, Double weigh, String sleepTime, String exerciseTime, Double waterIntake, String startDay, String endDay, String emotion, boolean symptom, boolean mucus) {
         this.id = id;
         this.date = date;
         this.weigh = weigh;
@@ -24,6 +25,7 @@ public class UserCalender {
         this.endDay = endDay;
         this.emotion = emotion;
         this.symptom = symptom;
+        this.mucus = mucus;
     }
 
     public UserCalender() {
@@ -107,5 +109,13 @@ public class UserCalender {
 
     public void setSymptom(boolean symptom) {
         this.symptom = symptom;
+    }
+
+    public boolean isMucus() {
+        return mucus;
+    }
+
+    public void setMucus(boolean mucus) {
+        this.mucus = mucus;
     }
 }

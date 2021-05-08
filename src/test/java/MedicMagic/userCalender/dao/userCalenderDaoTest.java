@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -43,10 +44,10 @@ public class userCalenderDaoTest {
         this.user4 = new User("slytherin", "슬리데린", "19011668", "2000-04-09", 22);
 
 
-        userCalender1 = new UserCalender(null, null, 51.4, "07:30:00", "01:30:00", 1.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, "즐거움", true);
-        userCalender2 = new UserCalender(null, null, -49.5, "01:20:00", "00:00:00", 0.0, null, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "변덕스러움", false);
-        userCalender3 = new UserCalender(null, null, null, null, null, null, null, null, null, false);
-        userCalender4 = new UserCalender(null, null, 52.5, "13:00:00", "02:00:00", 2.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true);
+        userCalender1 = new UserCalender(null, null, 51.4, "07:30:00", "01:30:00", 1.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, "즐거움", true, true);
+        userCalender2 = new UserCalender(null, null, -49.5, "01:20:00", "00:00:00", 0.0, null, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "변덕스러움", false, false);
+        userCalender3 = new UserCalender(null, null, null, null, null, null, null, null, null, false, false);
+        userCalender4 = new UserCalender(null, null, 52.5, "13:00:00", "02:00:00", 2.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
 
         userCalender1.setId(user1.getId());
         userCalender2.setId(user2.getId());
@@ -126,6 +127,24 @@ public class userCalenderDaoTest {
         checkSameUserCalender(userCalenderGet2, userCalender4);
     }
 
+    @Test
+    public void getGroupById() {
+        userCalenderDao.deleteAll();
+        assertThat(userCalenderDao.getCount(), is(0));
+
+        userCalender4.setId(userCalender1.getId());
+        userCalender4.setDate("2000-01-01");
+
+        userCalenderDao.add(userCalender1);
+        userCalenderDao.add(userCalender4);
+        assertThat(userCalenderDao.getCount(), is(2));
+        assertThat(userCalenderDao.getCountEachId(userCalender1.getId()), is(2));
+
+        List<UserCalender> userCalenders = userCalenderDao.getEachId(userCalender1.getId());
+        checkSameUserCalender(userCalenders.get(0), userCalender4);
+        checkSameUserCalender(userCalenders.get(1), userCalender1);
+    }
+
     private void checkSameUserCalender(UserCalender userCalender1, UserCalender userCalender2) {
         assertThat(userCalender1.getId(), is(userCalender2.getId()));
         assertThat(userCalender1.getDate(), is(userCalender2.getDate()));
@@ -137,5 +156,6 @@ public class userCalenderDaoTest {
         assertThat(userCalender1.getEndDay(), is(userCalender2.getEndDay()));
         assertThat(userCalender1.getEmotion(), is(userCalender2.getEmotion()));
         assertThat(userCalender1.isSymptom(), is(userCalender2.isSymptom()));
+        assertThat(userCalender1.isMucus(), is(userCalender2.isMucus()));
     }
 }

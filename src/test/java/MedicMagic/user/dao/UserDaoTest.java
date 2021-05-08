@@ -131,6 +131,14 @@ public class UserDaoTest {
         dao.add(user1);
     }
 
+    @Test(expected = NullKeyException.class)
+    public void nullKey() {
+        dao.deleteAll();
+
+        User mockUser = new User(null, null, null, null, null);
+        dao.add(mockUser);
+    }
+
     private void checkSameUser(User user1, User user2) {
         assertThat(user1.getId(), is(user2.getId()));
         assertThat(user1.getName(), is(user2.getName()));

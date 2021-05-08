@@ -1,16 +1,19 @@
-package MedicMagic.userCalender.dao;
+package MedicMagic.userCalender.service;
 
 import MedicMagic.userCalender.domain.UserCalender;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface UserCalenderDao {
+@Transactional
+public interface UserCalenderService {
     void add(UserCalender userCalender);
+    @Transactional(readOnly = true)
     UserCalender get(String id, String date);
+    @Transactional(readOnly = true)
     List<UserCalender> getAll();
+    @Transactional(readOnly = true)
     List<UserCalender> getEachId(String id);
     void deleteAll();
-    int getCount();
-    int getCountEachId(String id);
     void update(UserCalender userCalender, String column, Object object);
 }
