@@ -18,12 +18,20 @@
         <property name="jdbcTemplate" ref="dataSource" />
     </bean>
 
+    <bean id="userSymptomDao" class="MedicMagic.userSymptom.dao.UserSymptomDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
     </bean>
 
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
         <property name="userCalenderDao" ref="userCalenderDao" />
+    </bean>
+
+    <bean id="userSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceImpl">
+        <property name="userSymptomDao" ref="userSymptomDao" />
     </bean>
 
     <bean id="testUserService" class="MedicMagic.user.service.UserServiceTest$TestUserServiceImpl" parent="userService" />
@@ -34,6 +42,11 @@
     <bean id="testUserCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceTest$TestUserCalenderServiceImpl" parent="userCalenderService" />
     <bean id="testUserCalenderServiceImpl" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
         <property name="userCalenderDao" ref="userCalenderDao" />
+    </bean>
+
+    <bean id="testUserSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceTest$TestUserSymptomServiceImpl" parent="userSymptomService" />
+    <bean id="testUserSymptomServiceImpl" class="MedicMagic.userSymptom.service.UserSymptomServiceImpl">
+        <property name="userSymptomDao" ref="userSymptomDao" />
     </bean>
 
     <tx:annotation-driven/>

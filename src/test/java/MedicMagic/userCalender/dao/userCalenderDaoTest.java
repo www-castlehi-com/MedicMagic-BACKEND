@@ -141,6 +141,7 @@ public class userCalenderDaoTest {
         assertThat(userCalenderDao.getCountEachId(userCalender1.getId()), is(2));
 
         List<UserCalender> userCalenders = userCalenderDao.getEachId(userCalender1.getId());
+        assertThat(userCalenders.size(), is(2));
         checkSameUserCalender(userCalenders.get(0), userCalender4);
         checkSameUserCalender(userCalenders.get(1), userCalender1);
     }
