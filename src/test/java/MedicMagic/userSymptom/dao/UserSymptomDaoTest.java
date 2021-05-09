@@ -132,6 +132,19 @@ public class UserSymptomDaoTest {
         assertThat(symptomsGet.get(2), is("설사"));
     }
 
+    @Test
+    public void update() {
+        userSymptomDao.deleteAll();
+        assertThat(userSymptomDao.getCount(), is(0));
+
+        userSymptomDao.add(userSymptom2);
+        assertThat(userSymptomDao.getCount(), is(1));
+
+        userSymptom2.setAbdominalBloating(true);
+        userSymptomDao.update(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), "abdominalBloating", userSymptom2.isAbdominalBloating());
+        checkSameUserSymptom(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userSymptom2);
+    }
+
     private void checkSameUserSymptom(UserSymptom userSymptom1, UserSymptom userSymptom2) {
         assertThat(userSymptom1.getId(), is(userSymptom2.getId()));
         assertThat(userSymptom1.getDate(), is(userSymptom2.getDate()));

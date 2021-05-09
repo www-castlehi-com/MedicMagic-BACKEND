@@ -18,11 +18,11 @@ public class UserSymptomServiceTest {
     @Autowired
     UserSymptomService testUserSymptomService;
 
-    List<UserSymptom> userSymtpoms;
+    List<UserSymptom> userSymptoms;
 
     @Before
     public void setUp() throws Exception {
-        userSymtpoms = Arrays.asList(
+        userSymptoms = Arrays.asList(
                 new UserSymptom()
         );
     }

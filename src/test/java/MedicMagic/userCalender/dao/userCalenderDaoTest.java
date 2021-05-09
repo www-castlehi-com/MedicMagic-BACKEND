@@ -146,6 +146,23 @@ public class userCalenderDaoTest {
         checkSameUserCalender(userCalenders.get(1), userCalender1);
     }
 
+    @Test
+    public void update() {
+        userCalenderDao.deleteAll();
+        assertThat(userCalenderDao.getCount(), is(0));
+
+        userCalenderDao.add(userCalender1);
+        userCalenderDao.add(userCalender4);
+
+        userCalender4.setWeigh(100.2);
+        userCalenderDao.update(userCalender4, "weigh", userCalender4.getWeigh());
+
+        UserCalender userCalenderGet1 = userCalenderDao.get(userCalender1.getId(), userCalender1.getDate());
+        checkSameUserCalender(userCalenderGet1, userCalender1);
+        UserCalender userCalenderGet2 = userCalenderDao.get(userCalender4.getId(), userCalender4.getDate());
+        checkSameUserCalender(userCalenderGet2, userCalender4);
+    }
+
     private void checkSameUserCalender(UserCalender userCalender1, UserCalender userCalender2) {
         assertThat(userCalender1.getId(), is(userCalender2.getId()));
         assertThat(userCalender1.getDate(), is(userCalender2.getDate()));

@@ -77,7 +77,7 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
         symptoms.add(userSymptom.getDate());
 
         if(userSymptom.isNone()) {
-            symptoms.add("증상이 없음");
+            symptoms.add("없음");
         }
 
         if(userSymptom.isCramps()){
