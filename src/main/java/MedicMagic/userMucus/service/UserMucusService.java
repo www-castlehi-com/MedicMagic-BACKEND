@@ -1,5 +1,6 @@
 package MedicMagic.userMucus.service;
 
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.domain.UserMucus;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,4 +19,5 @@ public interface UserMucusService {
     List<String> getMucusTrue(UserMucus userMucus);
     void deleteAll();
     void update(UserMucus userMucus, String column, boolean object);
+    void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender);
 }

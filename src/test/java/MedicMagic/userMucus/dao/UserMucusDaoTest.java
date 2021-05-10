@@ -176,6 +176,24 @@ public class UserMucusDaoTest {
         checkSameUserMucus(userMucusList.get(1), userMucusDao.get(userMucusList.get(1).getId(), userMucusList.get(1).getDate()));
     }
 
+    @Test
+    public void deleteColumnIfMucusIsAllFalse() {
+        userMucusDao.deleteAll();
+        assertThat(userMucusDao.getCount(), is(0));
+
+        UserCalender userCalender = new UserCalender(userMucusList.get(0).getId(), userMucusList.get(0).getDate(), null, null, null, null, null, null, null, false, true);
+        UserMucus userMucus = new UserMucus(userMucusList.get(0).getId(), userMucusList.get(0).getDate(), false, false, false, false, false, false, true);
+
+        userMucusDao.add(userMucus);
+        assertThat(userMucusDao.getCount(), is(1));
+
+        userMucus.setAbnormal(false);
+        userMucusDao.update(userMucusDao.get(userMucus.getId(), userMucus.getDate()), "abnormal", userMucus.isAbnormal());
+        userMucusDao.updateUserCalenderIfMucusIsFalse(userMucusDao.get(userMucus.getId(), userMucus.getDate()), userCalender);
+        assertThat(userMucusDao.getCount(), is(0));
+        assertThat(userCalender.isMucus(), is(false));
+    }
+
     private void checkSameUserMucus(UserMucus userMucus1, UserMucus userMucus2) {
         assertThat(userMucus1.getId(), is(userMucus2.getId()));
         assertThat(userMucus1.getDate(), is(userMucus2.getDate()));

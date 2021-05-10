@@ -1,5 +1,7 @@
 package MedicMagic.userSymptom.service;
 
+import MedicMagic.userCalender.dao.UserCalenderDao;
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.dao.UserSymptomDao;
 import MedicMagic.userSymptom.domain.UserSymptom;
 
@@ -45,5 +47,10 @@ public class UserSymptomServiceImpl implements UserSymptomService {
     @Override
     public void update(UserSymptom userSymptom, String column, boolean object) {
         userSymptomDao.update(userSymptom, column, object);
+    }
+
+    @Override
+    public void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender) {
+        userSymptomDao.updateUserCalenderIfSymptomIsFalse(userSymptom, userCalender);
     }
 }

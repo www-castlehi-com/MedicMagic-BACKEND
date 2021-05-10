@@ -1,6 +1,7 @@
 package MedicMagic.userMucus.dao;
 
 import MedicMagic.userCalender.dao.DuplicateDateException;
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.domain.UserMucus;
 import MedicMagic.userSymptom.domain.UserSymptom;
 import org.springframework.dao.DuplicateKeyException;
@@ -128,5 +129,13 @@ public class UserMucusDaoJDBC implements UserMucusDao {
         this.jdbcTemplate.update(
                 "UPDATE userMucus SET " + column + "= ? WHERE id = ? AND date = ?", object, userMucus.getId(), userMucus.getDate()
         );
+    }
+
+    @Override
+    public void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender) {
+        if(this.getMucusTrue(userMucus).size() == 2) {
+            userCalender.setMucus(false);
+            this.jdbcTemplate.update("DELETE FROM userMucus WHERE id = ? AND date = ?", userCalender.getId(), userCalender.getDate());
+        }
     }
 }

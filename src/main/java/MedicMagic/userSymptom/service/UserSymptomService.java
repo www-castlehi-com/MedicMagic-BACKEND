@@ -1,5 +1,6 @@
 package MedicMagic.userSymptom.service;
 
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,4 +19,5 @@ public interface UserSymptomService {
     List<String> getSymptomTrue(UserSymptom userSymptom);
     void deleteAll();
     void update(UserSymptom userSymptom, String column, boolean object);
+    void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender);
 }

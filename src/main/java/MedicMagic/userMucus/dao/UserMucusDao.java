@@ -1,5 +1,6 @@
 package MedicMagic.userMucus.dao;
 
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.domain.UserMucus;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface UserMucusDao {
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);
     void update(UserMucus userMucus, String column, boolean object);
+    void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender);
 }

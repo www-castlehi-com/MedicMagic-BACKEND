@@ -1,6 +1,8 @@
 package MedicMagic.userSymptom.dao;
 
 import MedicMagic.userCalender.dao.DuplicateDateException;
+import MedicMagic.userCalender.dao.UserCalenderDao;
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -152,5 +154,14 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
         this.jdbcTemplate.update(
                 "UPDATE userSymptom SET " + column +"= ? WHERE id = ? AND date = ?", object, userSymptom.getId(), userSymptom.getDate()
         );
+    }
+
+    @Override
+    public void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender) {
+        if(this.getSymptomTrue(userSymptom).size() == 2) {
+            userCalender.setSymptom(false);
+            this.jdbcTemplate.update("DELETE FROM userSymptom WHERE id = ? AND date = ?", userCalender.getId(), userCalender.getDate());
+        }
+
     }
 }

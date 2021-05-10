@@ -1,5 +1,6 @@
 package MedicMagic.userMucus.service;
 
+import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.dao.UserMucusDao;
 import MedicMagic.userMucus.domain.UserMucus;
 
@@ -45,5 +46,10 @@ public class UserMucusServiceImpl implements UserMucusService{
     @Override
     public void update(UserMucus userMucus, String column, boolean object) {
         userMucusDao.update(userMucus, column, object);
+    }
+
+    @Override
+    public void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender) {
+        userMucusDao.updateUserCalenderIfMucusIsFalse(userMucus, userCalender);
     }
 }

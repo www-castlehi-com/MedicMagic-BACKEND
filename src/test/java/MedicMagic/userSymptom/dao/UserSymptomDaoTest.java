@@ -1,6 +1,7 @@
 package MedicMagic.userSymptom.dao;
 
 import MedicMagic.userCalender.dao.DuplicateDateException;
+import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +22,8 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/test-applicationContext.xml")
 public class UserSymptomDaoTest {
+    @Autowired
+    private UserCalenderDao userCalenderDao;
     @Autowired
     private UserSymptomDao userSymptomDao;
     @Autowired
@@ -143,6 +145,21 @@ public class UserSymptomDaoTest {
         userSymptom2.setAbdominalBloating(true);
         userSymptomDao.update(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), "abdominalBloating", userSymptom2.isAbdominalBloating());
         checkSameUserSymptom(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userSymptom2);
+    }
+
+    @Test
+    public void deleteColumnIfSymptomIsAllFalse() {
+        userSymptomDao.deleteAll();
+        assertThat(userSymptomDao.getCount(), is(0));
+
+        userSymptomDao.add(userSymptom2);
+        assertThat(userSymptomDao.getCount(), is(1));
+
+        userSymptom2.setDiarrhea(false);
+        userSymptomDao.update(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), "diarrhea", userSymptom2.isDiarrhea());
+        userSymptomDao.updateUserCalenderIfSymptomIsFalse(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userCalender2);
+        assertThat(userSymptomDao.getCount(), is(0));
+        assertThat(userCalender2.isSymptom(), is(false));
     }
 
     private void checkSameUserSymptom(UserSymptom userSymptom1, UserSymptom userSymptom2) {
