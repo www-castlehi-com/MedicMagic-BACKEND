@@ -10,6 +10,7 @@ public interface UserCalenderDao {
     List<UserCalender> getAll();
     List<UserCalender> getEachId(String id);
     void deleteAll();
+    void deleteEachIdAndDate(String id, String date);
     int getCount();
     int getCountEachId(String id);
     void update(UserCalender userCalender, String column, Object object);

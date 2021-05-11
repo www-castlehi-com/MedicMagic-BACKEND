@@ -194,6 +194,18 @@ public class UserMucusDaoTest {
         assertThat(userCalender.isMucus(), is(false));
     }
 
+    @Test
+    public void deleteEachIdAndDate() {
+        userMucusDao.deleteAll();
+        assertThat(userMucusDao.getCount(), is(0));
+
+        userMucusDao.add(userMucusList.get(0));
+        assertThat(userMucusDao.getCount(), is(1));
+
+        userMucusDao.deleteEachIdAndDate(userMucusList.get(0).getId(), userMucusList.get(0).getDate());
+        assertThat(userMucusDao.getCount(), is(0));
+    }
+
     private void checkSameUserMucus(UserMucus userMucus1, UserMucus userMucus2) {
         assertThat(userMucus1.getId(), is(userMucus2.getId()));
         assertThat(userMucus1.getDate(), is(userMucus2.getDate()));

@@ -12,6 +12,7 @@ public interface UserMucusDao {
     List<UserMucus> getEachId(String id);
     List<String> getMucusTrue(UserMucus userMucus);
     void deleteAll();
+    void deleteEachIdAndDate(String id, String date);
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);

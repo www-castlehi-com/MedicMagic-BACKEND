@@ -39,6 +39,11 @@ public class UserCalenderServiceImpl implements UserCalenderService{
     }
 
     @Override
+    public void deleteEachIdAndDate(String id, String date) {
+        userCalenderDao.deleteEachIdAndDate(id, date);
+    }
+
+    @Override
     public void update(UserCalender userCalender, String column, Object object) {
         userCalenderDao.update(userCalender, column, object);
     }

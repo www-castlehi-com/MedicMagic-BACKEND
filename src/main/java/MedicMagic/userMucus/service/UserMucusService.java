@@ -18,6 +18,7 @@ public interface UserMucusService {
     @Transactional(readOnly = true)
     List<String> getMucusTrue(UserMucus userMucus);
     void deleteAll();
+    void deleteEachIdAndDate(String id, String date);
     void update(UserMucus userMucus, String column, boolean object);
     void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender);
 }

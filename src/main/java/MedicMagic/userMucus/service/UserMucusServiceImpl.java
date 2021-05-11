@@ -44,6 +44,11 @@ public class UserMucusServiceImpl implements UserMucusService{
     }
 
     @Override
+    public void deleteEachIdAndDate(String id, String date) {
+        userMucusDao.deleteEachIdAndDate(id, date);
+    }
+
+    @Override
     public void update(UserMucus userMucus, String column, boolean object) {
         userMucusDao.update(userMucus, column, object);
     }

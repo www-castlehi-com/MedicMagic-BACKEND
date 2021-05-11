@@ -15,5 +15,6 @@ public interface UserCalenderService {
     @Transactional(readOnly = true)
     List<UserCalender> getEachId(String id);
     void deleteAll();
+    void deleteEachIdAndDate(String id, String date);
     void update(UserCalender userCalender, String column, Object object);
 }

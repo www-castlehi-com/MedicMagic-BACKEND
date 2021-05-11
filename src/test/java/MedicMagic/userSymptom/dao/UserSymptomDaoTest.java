@@ -162,6 +162,18 @@ public class UserSymptomDaoTest {
         assertThat(userCalender2.isSymptom(), is(false));
     }
 
+    @Test
+    public void deleteEachIdAndDate() {
+        userSymptomDao.deleteAll();
+        assertThat(userSymptomDao.getCount(), is(0));
+
+        userSymptomDao.add(userSymptom1);
+        assertThat(userSymptomDao.getCount(), is(1));
+
+        userSymptomDao.deleteEachIdAndDate(userSymptom1.getId(), userSymptom2.getDate());
+        assertThat(userSymptomDao.getCount(), is(0));
+    }
+
     private void checkSameUserSymptom(UserSymptom userSymptom1, UserSymptom userSymptom2) {
         assertThat(userSymptom1.getId(), is(userSymptom2.getId()));
         assertThat(userSymptom1.getDate(), is(userSymptom2.getDate()));

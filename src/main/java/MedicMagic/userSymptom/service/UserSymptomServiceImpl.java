@@ -45,6 +45,11 @@ public class UserSymptomServiceImpl implements UserSymptomService {
     }
 
     @Override
+    public void deleteEachIdAndDate(String id, String date) {
+        userSymptomDao.deleteEachIdAndDate(id, date);
+    }
+
+    @Override
     public void update(UserSymptom userSymptom, String column, boolean object) {
         userSymptomDao.update(userSymptom, column, object);
     }

@@ -12,6 +12,7 @@ public interface UserSymptomDao {
     List<UserSymptom> getEachId(String id);
     List<String> getSymptomTrue(UserSymptom userSymptom);
     void deleteAll();
+    void deleteEachIdAndDate(String id, String date);
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);

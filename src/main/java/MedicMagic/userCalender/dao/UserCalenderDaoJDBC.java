@@ -104,6 +104,11 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     }
 
     @Override
+    public void deleteEachIdAndDate(String id, String date) {
+        this.jdbcTemplate.update(this.sqlService.getSql("userCalenderDeleteEachIdAndDate"), id, date);
+    }
+
+    @Override
     public int getCount() {
         return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userCalenderGetCount"));
     }

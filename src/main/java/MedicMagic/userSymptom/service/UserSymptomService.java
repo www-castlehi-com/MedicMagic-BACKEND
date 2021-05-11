@@ -18,6 +18,7 @@ public interface UserSymptomService {
     @Transactional(readOnly = true)
     List<String> getSymptomTrue(UserSymptom userSymptom);
     void deleteAll();
+    void deleteEachIdAndDate(String id, String date);
     void update(UserSymptom userSymptom, String column, boolean object);
     void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender);
 }

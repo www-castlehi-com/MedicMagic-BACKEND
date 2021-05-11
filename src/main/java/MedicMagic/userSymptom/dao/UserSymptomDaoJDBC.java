@@ -141,6 +141,11 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
     }
 
     @Override
+    public void deleteEachIdAndDate(String id, String date) {
+        this.jdbcTemplate.update(this.sqlService.getSql("userSymptomDeleteEachIdAndDate"), id, date);
+    }
+
+    @Override
     public int getCount() {
         return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCount"));
     }
