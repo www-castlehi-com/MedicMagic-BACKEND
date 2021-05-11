@@ -1,5 +1,6 @@
 package MedicMagic.userSymptom.dao;
 
+import MedicMagic.sqlService.SqlService;
 import MedicMagic.userCalender.dao.DuplicateDateException;
 import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
@@ -17,8 +18,13 @@ import java.util.List;
 
 public class UserSymptomDaoJDBC implements UserSymptomDao{
     private JdbcTemplate jdbcTemplate;
+    private SqlService sqlService;
 
     public void setJdbcTemplate(DataSource dataSource) { this.jdbcTemplate = new JdbcTemplate(dataSource); }
+
+    public void setSqlService(SqlService sqlService) {
+        this.sqlService = sqlService;
+    }
 
     private RowMapper<UserSymptom> userSymptomRowMapper =
             new RowMapper<UserSymptom>() {
@@ -48,7 +54,7 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
     @Override
     public void add(UserSymptom userSymptom) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update("INSERT INTO userSymptom(id, date, none, cramps, breastTenderness, headache, acne, lumbago, nausea, fatigue, abdominalBloating, desires, insomnia, constipation, diarrhea) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", userSymptom.getId(), java.sql.Date.valueOf(userSymptom.getDate()), userSymptom.isNone(), userSymptom.isCramps(), userSymptom.isBreastTenderness(), userSymptom.isHeadache(), userSymptom.isAcne(), userSymptom.isLumbago(), userSymptom.isLumbago(), userSymptom.isFatigue(), userSymptom.isAbdominalBloating(), userSymptom.isDesires(), userSymptom.isInsomnia(), userSymptom.isConstipation(), userSymptom.isDiarrhea());
+            this.jdbcTemplate.update(this.sqlService.getSql("userSymptomAdd"), userSymptom.getId(), java.sql.Date.valueOf(userSymptom.getDate()), userSymptom.isNone(), userSymptom.isCramps(), userSymptom.isBreastTenderness(), userSymptom.isHeadache(), userSymptom.isAcne(), userSymptom.isLumbago(), userSymptom.isLumbago(), userSymptom.isFatigue(), userSymptom.isAbdominalBloating(), userSymptom.isDesires(), userSymptom.isInsomnia(), userSymptom.isConstipation(), userSymptom.isDiarrhea());
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
         }
@@ -56,18 +62,18 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
 
     @Override
     public UserSymptom get(String id, String date) {
-        return this.jdbcTemplate.queryForObject("SELECT * FROM userSymptom WHERE id = ? AND date = ?",
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGet"),
                 new Object[]{id, date}, this.userSymptomRowMapper);
     }
 
     @Override
     public List<UserSymptom> getAll() {
-        return this.jdbcTemplate.query("SELECT * FROM userSymptom ORDER BY id, date DESC", this.userSymptomRowMapper);
+        return this.jdbcTemplate.query(this.sqlService.getSql("userSymptomGetAll"), this.userSymptomRowMapper);
     }
 
     @Override
     public List<UserSymptom> getEachId(String id) {
-        return this.jdbcTemplate.query("SELECT * FROM userSymptom WHERE id = ?",
+        return this.jdbcTemplate.query(this.sqlService.getSql("userSymptomGetEachId"),
                 new Object[]{id}, this.userSymptomRowMapper);
     }
 
@@ -131,22 +137,22 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
 
     @Override
     public void deleteAll() {
-        this.jdbcTemplate.update("DELETE FROM userSymptom");
+        this.jdbcTemplate.update(this.sqlService.getSql("userSymptomDeleteAll"));
     }
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userSymptom");
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCount"));
     }
 
     @Override
     public int getCountEachId(String id) {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userSymptom GROUP BY id = ?", id);
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCountEachId"), id);
     }
 
     @Override
     public int getCountEachIdAndDate(String id, String date) {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userSymptom WHERE date = ? GROUP BY id = ?", date, id);
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCountEachIdAndDate"), date, id);
     }
 
     @Override
@@ -160,7 +166,7 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
     public void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender) {
         if(this.getSymptomTrue(userSymptom).size() == 2) {
             userCalender.setSymptom(false);
-            this.jdbcTemplate.update("DELETE FROM userSymptom WHERE id = ? AND date = ?", userCalender.getId(), userCalender.getDate());
+            this.jdbcTemplate.update(this.sqlService.getSql("userSymptomUpdateUserCalenderIfSymptomIsFalse"), userCalender.getId(), userCalender.getDate());
         }
 
     }

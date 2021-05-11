@@ -1,5 +1,6 @@
 package MedicMagic.userMucus.dao;
 
+import MedicMagic.sqlService.SqlService;
 import MedicMagic.userCalender.dao.DuplicateDateException;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.domain.UserMucus;
@@ -16,9 +17,14 @@ import java.util.List;
 
 public class UserMucusDaoJDBC implements UserMucusDao {
     private JdbcTemplate jdbcTemplate;
+    private SqlService sqlService;
 
     public void setJdbcTemplate(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    public void setSqlService(SqlService sqlService) {
+        this.sqlService = sqlService;
     }
 
     private RowMapper<UserMucus> userMucusRowMapper =
@@ -43,7 +49,7 @@ public class UserMucusDaoJDBC implements UserMucusDao {
     @Override
     public void add(UserMucus userMucus) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update("INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggwhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)", userMucus.getId(), userMucus.getDate(), userMucus.isNone(), userMucus.isMottled(), userMucus.isSticky(), userMucus.isCreamy(), userMucus.isLikeEggWhite(), userMucus.isWatery(), userMucus.isAbnormal());
+            this.jdbcTemplate.update(this.sqlService.getSql("userMucusAdd"), userMucus.getId(), userMucus.getDate(), userMucus.isNone(), userMucus.isMottled(), userMucus.isSticky(), userMucus.isCreamy(), userMucus.isLikeEggWhite(), userMucus.isWatery(), userMucus.isAbnormal());
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
         }
@@ -51,18 +57,18 @@ public class UserMucusDaoJDBC implements UserMucusDao {
 
     @Override
     public UserMucus get(String id, String date) {
-        return this.jdbcTemplate.queryForObject("SELECT * FROM userMucus WHERE id = ? AND date = ?",
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userMucusGet"),
                 new Object[]{id, date}, this.userMucusRowMapper);
     }
 
     @Override
     public List<UserMucus> getAll() {
-        return this.jdbcTemplate.query("SELECT * FROM userMucus ORDER BY id, date DESC", this.userMucusRowMapper);
+        return this.jdbcTemplate.query(this.sqlService.getSql("userMucusGetAll"), this.userMucusRowMapper);
     }
 
     @Override
     public List<UserMucus> getEachId(String id) {
-        return this.jdbcTemplate.query("SELECT * FROM userMucus WHERE id = ?",
+        return this.jdbcTemplate.query(this.sqlService.getSql("userMucusGetEachId"),
                 new Object[]{id}, this.userMucusRowMapper);
     }
 
@@ -106,22 +112,22 @@ public class UserMucusDaoJDBC implements UserMucusDao {
 
     @Override
     public void deleteAll() {
-        this.jdbcTemplate.update("DELETE FROM userMucus");
+        this.jdbcTemplate.update(this.sqlService.getSql("userMucusDeleteAll"));
     }
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userMucus");
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userMucusGetCount"));
     }
 
     @Override
     public int getCountEachId(String id) {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userMucus GROUP BY id = ?", id);
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userMucusGetCountEachId"), id);
     }
 
     @Override
     public int getCountEachIdAndDate(String id, String date) {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userMucus WHERE date = ? GROUP BY id = ?", date, id);
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userMucusGetCountEachIdAndDate"), date, id);
     }
 
     @Override
@@ -135,7 +141,7 @@ public class UserMucusDaoJDBC implements UserMucusDao {
     public void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender) {
         if(this.getMucusTrue(userMucus).size() == 2) {
             userCalender.setMucus(false);
-            this.jdbcTemplate.update("DELETE FROM userMucus WHERE id = ? AND date = ?", userCalender.getId(), userCalender.getDate());
+            this.jdbcTemplate.update(this.sqlService.getSql("userMucusUpdateUserCalenderIfMucusIsFalse"), userCalender.getId(), userCalender.getDate());
         }
     }
 }

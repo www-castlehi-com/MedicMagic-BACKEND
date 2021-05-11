@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlmap xmlns="http://www.epril.com/sqlmap"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.epril.com/sqlmap
+                http://www.epril.com/sqlmap/sqlmap.xsd">
+    <sql key="userAdd">INSERT INTO user(id, name, password, birthday, age) values(?,?,?,?,?)</sql>
+    <sql key="userGet">SELECT * FROM user WHERE id = ?</sql>
+    <sql key="userGetAll">SELECT * FROM user ORDER BY id</sql>
+    <sql key="userDeleteAll">DELETE FROM user</sql>
+    <sql key="userGetCount">SELECT COUNT(*) FROM user</sql>
+    <sql key="userUpdate">update user set name = ?, password = ?, birthday = ?, age = ? where id = ?</sql>
+
+    <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, emotion, symptom, mucus) VALUES (?, ?, ?, ?, ?)</sql>
+    <sql key="userCalenderGet">SELECT * FROM userCalender WHERE id = ? AND date = ?</sql>
+    <sql key="userCalenderGetAll">SELECT * FROM userCalender ORDER BY id, date DESC</sql>
+    <sql key="userCalenderGetEachId">SELECT * FROM userCalender WHERE id = ?</sql>
+    <sql key="userCalenderDeleteAll">DELETE FROM userCalender</sql>
+    <sql key="userCalenderGetCount">SELECT COUNT(*) FROM userCalender</sql>
+    <sql key="userCalenderGetCountEachId">SELECT COUNT(*) FROM userCalender GROUP BY id = ?</sql>
+    <sql key="userCalenderUpdate">update userCalender SET "+ column +"= ? WHERE id = ? AND date = ?</sql>
+
+    <sql key="userMucusAdd">INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggwhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)</sql>
+    <sql key="userMucusGet">SELECT * FROM userMucus WHERE id = ? AND date = ?</sql>
+    <sql key="userMucusGetAll">SELECT * FROM userMucus ORDER BY id, date DESC</sql>
+    <sql key="userMucusGetEachId">SELECT * FROM userMucus WHERE id = ?</sql>
+    <sql key="userMucusDeleteAll">DELETE FROM userMucus</sql>
+    <sql key="userMucusGetCount">SELECT COUNT(*) FROM userMucus</sql>
+    <sql key="userMucusGetCountEachId">SELECT COUNT(*) FROM userMucus GROUP BY id = ?</sql>
+    <sql key="userMucusGetCountEachIdAndDate">SELECT COUNT(*) FROM userMucus WHERE date = ? GROUP BY id = ?</sql>
+    <sql key="userMucusUpdateUserCalenderIfMucusIsFalse">DELETE FROM userMucus WHERE id = ? AND date = ?</sql>
+
+    <sql key="userSymptomAdd">INSERT INTO userSymptom(id, date, none, cramps, breastTenderness, headache, acne, lumbago, nausea, fatigue, abdominalBloating, desires, insomnia, constipation, diarrhea) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</sql>
+    <sql key="userSymptomGet">SELECT * FROM userSymptom WHERE id = ? AND date = ?</sql>
+    <sql key="userSymptomGetAll">SELECT * FROM userSymptom ORDER BY id, date DESC</sql>
+    <sql key="userSymptomGetEachId">SELECT * FROM userSymptom WHERE id = ?</sql>
+    <sql key="userSymptomDeleteAll">DELETE FROM userSymptom</sql>
+    <sql key="userSymptomGetCount">SELECT COUNT(*) FROM userSymptom</sql>
+    <sql key="userSymptomGetCountEachId">SELECT COUNT(*) FROM userSymptom GROUP BY id = ?</sql>
+    <sql key="userSymptomGetCountEachIdAndDate">SELECT COUNT(*) FROM userSymptom WHERE date = ? GROUP BY id = ?</sql>
+    <sql key="userSymptomUpdateUserCalenderIfSymptomIsFalse">DELETE FROM userSymptom WHERE id = ? AND date = ?</sql>
+</sqlmap>

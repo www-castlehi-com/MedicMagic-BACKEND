@@ -1,5 +1,6 @@
 package MedicMagic.userCalender.dao;
 
+import MedicMagic.sqlService.SqlService;
 import MedicMagic.userCalender.domain.UserCalender;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,9 +13,14 @@ import java.util.List;
 
 public class UserCalenderDaoJDBC implements UserCalenderDao {
     private JdbcTemplate jdbcTemplate;
+    private SqlService sqlService;
 
     public void setJdbcTemplate(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    public void setSqlService(SqlService sqlService) {
+        this.sqlService = sqlService;
     }
 
     private RowMapper<UserCalender> userCalenderRowMapper =
@@ -41,7 +47,7 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     @Override
     public void add(UserCalender userCalender) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update("INSERT INTO userCalender(id, date, emotion, symptom, mucus) VALUES (?, ?, ?, ?, ?)", userCalender.getId(), userCalender.getDate(), userCalender.getEmotion(), userCalender.isSymptom(), userCalender.isMucus());
+            this.jdbcTemplate.update(this.sqlService.getSql("userCalenderAdd"), userCalender.getId(), userCalender.getDate(), userCalender.getEmotion(), userCalender.isSymptom(), userCalender.isMucus());
             nullCheck(userCalender);
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
@@ -77,40 +83,41 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
 
     @Override
     public UserCalender get(String id, String date) {
-        return this.jdbcTemplate.queryForObject("SELECT * FROM userCalender WHERE id = ? AND date = ?",
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userCalenderGet"),
                 new Object[]{id, date}, this.userCalenderRowMapper);
     }
 
     @Override
     public List<UserCalender> getAll() {
-        return this.jdbcTemplate.query("SELECT * FROM userCalender ORDER BY id, date DESC", this.userCalenderRowMapper);
+        return this.jdbcTemplate.query(this.sqlService.getSql("userCalenderGetAll"), this.userCalenderRowMapper);
     }
 
     @Override
     public List<UserCalender> getEachId(String id) {
-        return this.jdbcTemplate.query("SELECT * FROM userCalender WHERE id = ?",
+        return this.jdbcTemplate.query(this.sqlService.getSql("userCalenderGetEachId"),
                 new Object[]{id}, this.userCalenderRowMapper);
     }
 
     @Override
     public void deleteAll() {
-        this.jdbcTemplate.update("DELETE FROM userCalender");
+        this.jdbcTemplate.update(this.sqlService.getSql("userCalenderDeleteAll"));
     }
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userCalender");
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userCalenderGetCount"));
     }
 
     @Override
     public int getCountEachId(String id) {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM userCalender GROUP BY id = ?", id);
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userCalenderGetCountEachId"), id);
     }
 
     @Override
     public void update(UserCalender userCalender, String column, Object object) {
         this.jdbcTemplate.update(
-                "update userCalender SET "+ column +"= ? WHERE id = ? AND date = ?", object, userCalender.getId(), userCalender.getDate()
+                "update userCalender SET "+ column +"= ? WHERE id = ? AND date = ?",
+                object, userCalender.getId(), userCalender.getDate()
         );
     }
 

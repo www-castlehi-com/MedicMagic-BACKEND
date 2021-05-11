@@ -1,5 +1,6 @@
 package MedicMagic.user.dao;
 
+import MedicMagic.sqlService.SqlService;
 import MedicMagic.user.domain.User;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,8 +13,13 @@ import java.util.List;
 
 public class UserDaoJDBC implements UserDao {
     private JdbcTemplate jdbcTemplate;
+    private SqlService sqlService;
 
     public void setJdbcTemplate(DataSource dataSource) { this.jdbcTemplate = new JdbcTemplate(dataSource); }
+
+    public void setSqlService(SqlService sqlService) {
+        this.sqlService = sqlService;
+    }
 
     private RowMapper<User> userMapper =
             new RowMapper<User>() {
@@ -35,7 +41,7 @@ public class UserDaoJDBC implements UserDao {
     public void add(final User user) throws DuplicateUserIdException {
         try {
             nullCheck(user);
-            this.jdbcTemplate.update("INSERT INTO user(id, name, password, birthday, age) VALUES(?, ?, ?, ?, ?)", user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
+            this.jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
         } catch (DuplicateKeyException e) {
             throw new DuplicateUserIdException(e);
         }
@@ -48,29 +54,28 @@ public class UserDaoJDBC implements UserDao {
 
     @Override
     public User get(String id) {
-        return this.jdbcTemplate.queryForObject("SELECT * FROM user WHERE id = ?",
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGet"),
                 new Object[]{id}, this.userMapper);
     }
 
     @Override
     public List<User> getAll() {
-        return this.jdbcTemplate.query("SELECT * FROM user ORDER BY id", this.userMapper);
+        return this.jdbcTemplate.query(this.sqlService.getSql("userGetAll"), this.userMapper);
     }
 
     @Override
     public void update(User user) {
-        this.jdbcTemplate.update(
-                "update user set name = ?, password = ?, birthday = ?, age = ? where id = ?", user.getName(), user.getPassword(), user.getBirthday(), user.getAge(), user.getId()
+        this.jdbcTemplate.update(this.sqlService.getSql("userUpdate"), user.getName(), user.getPassword(), user.getBirthday(), user.getAge(), user.getId()
         );
     }
 
     @Override
     public void deleteAll() {
-        this.jdbcTemplate.update("DELETE FROM user");
+        this.jdbcTemplate.update(this.sqlService.getSql("userDeleteAll"));
     }
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt("SELECT COUNT(*) FROM user");
+        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userGetCount"));
     }
 }
