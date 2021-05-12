@@ -50,6 +50,16 @@ public class UserDaoTest {
 
         User userget2 = dao.get(user2.getId());
         checkSameUser(userget2, user2);
+
+        dao.add(user3);
+        assertThat(dao.getCount(), is(3));
+        User userget3 = dao.get(user3.getId());
+        checkSameUser(userget3, user3);
+
+        dao.add(user4);
+        assertThat(dao.getCount(), is(4));
+        User userget4 = dao.get(user4.getId());
+        checkSameUser(userget4, user4);
     }
 
     @Test
