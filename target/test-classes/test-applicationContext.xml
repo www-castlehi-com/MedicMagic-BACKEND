@@ -33,6 +33,11 @@
         <property name="sqlService" ref="sqlService" />
     </bean>
 
+    <bean id="userGoalDao" class="MedicMagic.userGoal.dao.UserGoalDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
     </bean>
@@ -47,6 +52,10 @@
 
     <bean id="userMucusService" class="MedicMagic.userMucus.service.UserMucusServiceImpl">
         <property name="userMucusDao" ref="userMucusDao" />
+    </bean>
+
+    <bean id="userGoalService" class="MedicMagic.userGoal.service.UserGoalServiceImpl">
+        <property name="userGoalDao" ref="userGoalDao" />
     </bean>
 
     <bean id="testUserService" class="MedicMagic.user.service.UserServiceTest$TestUserServiceImpl" parent="userService" />
@@ -67,6 +76,11 @@
     <bean id="testUserMucusService" class="MedicMagic.userMucus.service.UserMucusServiceTest$TestUserMucusServiceImpl" parent="userMucusService" />
     <bean id="testUserMucusServiceImpl" class="MedicMagic.userMucus.service.UserMucusServiceImpl">
         <property name="userMucusDao" ref="userMucusDao" />
+    </bean>
+
+    <bean id="testUserGoalService" class="MedicMagic.userGoal.service.UserGoalServiceTest$TestUserGoalServiceImpl" parent="userGoalService"/>
+    <bean id="testUserGoalServiceImpl" class="MedicMagic.userGoal.service.UserGoalServiceImpl">
+        <property name="userGoalDao" ref="userGoalDao" />
     </bean>
 
     <tx:annotation-driven/>

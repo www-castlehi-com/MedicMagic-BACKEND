@@ -94,7 +94,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>3.0.7.RELEASE</version>
+      <version>4.0.0.RELEASE</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->

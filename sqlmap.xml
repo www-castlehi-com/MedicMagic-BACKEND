@@ -8,7 +8,7 @@
     <sql key="userGetAll">SELECT * FROM user ORDER BY id</sql>
     <sql key="userDeleteAll">DELETE FROM user</sql>
     <sql key="userGetCount">SELECT COUNT(*) FROM user</sql>
-    <sql key="userUpdate">update user set name = ?, password = ?, birthday = ?, age = ? where id = ?</sql>
+    <sql key="userUpdate">UPDATE user SET name = ?, password = ?, birthday = ?, age = ? where id = ?</sql>
 
     <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, emotion, symptom, mucus) VALUES (?, ?, ?, ?, ?)</sql>
     <sql key="userCalenderGet">SELECT * FROM userCalender WHERE id = ? AND date = ?</sql>
@@ -18,7 +18,7 @@
     <sql key="userCalenderDeleteEachIdAndDate">DELETE FROM userCalender WHERE id = ? AND date = ?</sql>
     <sql key="userCalenderGetCount">SELECT COUNT(*) FROM userCalender</sql>
     <sql key="userCalenderGetCountEachId">SELECT COUNT(*) FROM userCalender GROUP BY id = ?</sql>
-    <sql key="userCalenderUpdate">update userCalender SET "+ column +"= ? WHERE id = ? AND date = ?</sql>
+    <sql key="userCalenderUpdate">UPDATE userCalender SET "+ column +"= ? WHERE id = ? AND date = ?</sql>
 
     <sql key="userMucusAdd">INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggwhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)</sql>
     <sql key="userMucusGet">SELECT * FROM userMucus WHERE id = ? AND date = ?</sql>
@@ -41,4 +41,11 @@
     <sql key="userSymptomGetCountEachId">SELECT COUNT(*) FROM userSymptom GROUP BY id = ?</sql>
     <sql key="userSymptomGetCountEachIdAndDate">SELECT COUNT(*) FROM userSymptom WHERE date = ? GROUP BY id = ?</sql>
     <sql key="userSymptomUpdateUserCalenderIfSymptomIsFalse">DELETE FROM userSymptom WHERE id = ? AND date = ?</sql>
+
+    <sql key="userGoalAdd">INSERT INTO userGoal(id) VALUES (?)</sql>
+    <sql key="userGoalGet">SELECT * FROM userGoal WHERE id = ?</sql>
+    <sql key="userGoalGetAll">SELECT * FROM userGoal ORDER BY id</sql>
+    <sql key="userGoalDeleteAll">DELETE FROM userGoal</sql>
+    <sql key="userGoalDeleteEachId">DELETE FROM userGoal WHERE id = ?</sql>
+    <sql key="userGoalGetCount">SELECT COUNT(*) FROM userGoal</sql>
 </sqlmap>
