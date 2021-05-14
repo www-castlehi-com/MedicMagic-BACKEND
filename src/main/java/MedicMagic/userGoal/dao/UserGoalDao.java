@@ -5,7 +5,7 @@ import MedicMagic.userGoal.domain.UserGoal;
 import java.util.List;
 
 public interface UserGoalDao {
-    void add(UserGoal userGoal);
+    void add(String id);
     UserGoal get(String id);
     List<UserGoal> getAll();
     void deleteAll();

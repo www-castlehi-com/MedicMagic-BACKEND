@@ -13,8 +13,8 @@ public class UserGoalServiceImpl implements UserGoalService{
     }
 
     @Override
-    public void add(UserGoal userGoal) {
-        userGoalDao.add(userGoal);
+    public void add(String id) {
+        userGoalDao.add(id);
     }
 
     @Override

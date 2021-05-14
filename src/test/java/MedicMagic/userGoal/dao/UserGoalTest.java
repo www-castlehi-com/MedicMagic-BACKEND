@@ -49,7 +49,7 @@ public class UserGoalTest {
         userGoalDao.deleteAll();
         assertThat(userGoalDao.getCount(), is(0));
 
-        userGoalDao.add(userGoal1);
+        userGoalDao.add(userGoal1.getId());
         assertThat(userGoalDao.getCount(), is(1));
         Iterator<Map.Entry<String, Object>> entries = goals.entrySet().iterator();
         while(entries.hasNext()) {
@@ -59,7 +59,7 @@ public class UserGoalTest {
         UserGoal userGoalGet1 = userGoalDao.get(userGoal1.getId());
         checkSameUser(userGoalGet1, userGoal1);
 
-        userGoalDao.add(userGoal2);
+        userGoalDao.add(userGoal2.getId());
         assertThat(userGoalDao.getCount(), is(2));
         entries = goals.entrySet().iterator();
         while(entries.hasNext()) {
@@ -75,8 +75,8 @@ public class UserGoalTest {
         userGoalDao.deleteAll();
         assertThat(userGoalDao.getCount(), is(0));
 
-        userGoalDao.add(userGoal1);
-        userGoalDao.add(userGoal1);
+        userGoalDao.add(userGoal1.getId());
+        userGoalDao.add(userGoal1.getId());
     }
 
     @Test(expected = NegativeException.class)
@@ -84,16 +84,16 @@ public class UserGoalTest {
         userGoalDao.deleteAll();
         assertThat(userGoalDao.getCount(), is(0));
 
-        userGoalDao.add(userGoal1);
+        userGoalDao.add(userGoal1.getId());
         userGoalDao.update("waterIntake", -2.5, userGoal1.getId());
     }
 
     @Test
-    public void deleteEachIdAndDate() {
+    public void deleteEachId() {
         userGoalDao.deleteAll();
         assertThat(userGoalDao.getCount(), is(0));
 
-        userGoalDao.add(userGoal1);
+        userGoalDao.add(userGoal1.getId());
         assertThat(userGoalDao.getCount(), is(1));
         Iterator<Map.Entry<String, Object>> entries = goals.entrySet().iterator();
         while(entries.hasNext()) {
@@ -101,7 +101,7 @@ public class UserGoalTest {
             userGoalDao.update(entry.getKey(), entry.getValue(), userGoal1.getId());
         }
 
-        userGoalDao.add(userGoal2);
+        userGoalDao.add(userGoal2.getId());
         assertThat(userGoalDao.getCount(), is(2));
         entries = goals.entrySet().iterator();
         while(entries.hasNext()) {

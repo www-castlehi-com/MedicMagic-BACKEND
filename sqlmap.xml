@@ -48,4 +48,11 @@
     <sql key="userGoalDeleteAll">DELETE FROM userGoal</sql>
     <sql key="userGoalDeleteEachId">DELETE FROM userGoal WHERE id = ?</sql>
     <sql key="userGoalGetCount">SELECT COUNT(*) FROM userGoal</sql>
+
+    <sql key="userReminderAdd">INSERT INTO userReminder(id) VALUES (?)</sql>
+    <sql key="userReminderGet">SELECT * FROM userReminder WHERE id = ?</sql>
+    <sql key="userReminderGetAll">SELECT * FROM userReminder ORDER BY id</sql>
+    <sql key="userReminderDeleteAll">DELETE FROM userReminder</sql>
+    <sql key="userReminderDeleteEachId">DELETE FROM userReminder WHERE id = ?</sql>
+    <sql key="userReminderGetCount">SELECT COUNT(*) FROM userReminder</sql>
 </sqlmap>

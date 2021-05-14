@@ -38,6 +38,11 @@
         <property name="sqlService" ref="sqlService" />
     </bean>
 
+    <bean id="userReminderDao" class="MedicMagic.userReminder.dao.UserReminderDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
     </bean>
@@ -56,6 +61,10 @@
 
     <bean id="userGoalService" class="MedicMagic.userGoal.service.UserGoalServiceImpl">
         <property name="userGoalDao" ref="userGoalDao" />
+    </bean>
+
+    <bean id="userReminderService" class="MedicMagic.userReminder.service.UserReminderServiceImpl" >
+        <property name="userReminderDao" ref="userReminderDao" />
     </bean>
 
     <bean id="testUserService" class="MedicMagic.user.service.UserServiceTest$TestUserServiceImpl" parent="userService" />
@@ -81,6 +90,11 @@
     <bean id="testUserGoalService" class="MedicMagic.userGoal.service.UserGoalServiceTest$TestUserGoalServiceImpl" parent="userGoalService"/>
     <bean id="testUserGoalServiceImpl" class="MedicMagic.userGoal.service.UserGoalServiceImpl">
         <property name="userGoalDao" ref="userGoalDao" />
+    </bean>
+
+    <bean id="testUserReminderService" class="MedicMagic.userReminder.service.UserReminderServiceTest$TestUserReminderServiceImpl" parent="userReminderService" />
+    <bean id="testUserReminderServiceImpl" class="MedicMagic.userReminder.service.UserReminderServiceImpl">
+        <property name="userReminderDao" ref="userReminderDao" />
     </bean>
 
     <tx:annotation-driven/>

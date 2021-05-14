@@ -42,9 +42,9 @@ public class UserGoalDaoJDBC implements UserGoalDao{
 
 
     @Override
-    public void add(final UserGoal userGoal) throws DuplicateUserIdException {
+    public void add(String id) throws DuplicateUserIdException {
         try {
-            this.jdbcTemplate.update(this.sqlService.getSql("userGoalAdd"), userGoal.getId());
+            this.jdbcTemplate.update(this.sqlService.getSql("userGoalAdd"), id);
         } catch (DuplicateKeyException e) {
             throw new DuplicateUserIdException(e);
         }

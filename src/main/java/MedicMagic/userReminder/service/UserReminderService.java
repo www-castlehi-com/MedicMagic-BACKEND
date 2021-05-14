@@ -1,17 +1,17 @@
-package MedicMagic.userGoal.service;
+package MedicMagic.userReminder.service;
 
-import MedicMagic.userGoal.domain.UserGoal;
+import MedicMagic.userReminder.domain.UserReminder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional
-public interface UserGoalService {
+public interface UserReminderService {
     void add(String id);
     @Transactional(readOnly = true)
-    UserGoal get(String id);
+    UserReminder get(String id);
     @Transactional(readOnly = true)
-    List<UserGoal> getAll();
+    List<UserReminder> getAll();
     void deleteAll();
     void deleteEachId(String id);
     void update(String column, Object object, String id);
