@@ -49,8 +49,8 @@ public class UserMucusServiceImpl implements UserMucusService{
     }
 
     @Override
-    public void update(UserMucus userMucus, String column, boolean object) {
-        userMucusDao.update(userMucus, column, object);
+    public void update(UserMucus userMucus) {
+        userMucusDao.update(userMucus);
     }
 
     @Override

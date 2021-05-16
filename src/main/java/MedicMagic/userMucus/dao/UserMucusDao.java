@@ -16,6 +16,6 @@ public interface UserMucusDao {
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);
-    void update(UserMucus userMucus, String column, boolean object);
+    void update(UserMucus userMucus);
     void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender);
 }

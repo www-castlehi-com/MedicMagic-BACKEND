@@ -50,8 +50,8 @@ public class UserSymptomServiceImpl implements UserSymptomService {
     }
 
     @Override
-    public void update(UserSymptom userSymptom, String column, boolean object) {
-        userSymptomDao.update(userSymptom, column, object);
+    public void update(UserSymptom userSymptom) {
+        userSymptomDao.update(userSymptom);
     }
 
     @Override

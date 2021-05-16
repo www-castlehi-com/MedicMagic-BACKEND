@@ -14,5 +14,5 @@ public interface UserGoalService {
     List<UserGoal> getAll();
     void deleteAll();
     void deleteEachId(String id);
-    void update(String column, Object object, String id);
+    void update(UserGoal userGoal);
 }

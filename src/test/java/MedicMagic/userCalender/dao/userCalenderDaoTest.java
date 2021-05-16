@@ -155,7 +155,7 @@ public class userCalenderDaoTest {
         userCalenderDao.add(userCalender4);
 
         userCalender4.setWeigh(100.2);
-        userCalenderDao.update(userCalender4, "weigh", userCalender4.getWeigh());
+        userCalenderDao.update(userCalender4);
 
         UserCalender userCalenderGet1 = userCalenderDao.get(userCalender1.getId(), userCalender1.getDate());
         checkSameUserCalender(userCalenderGet1, userCalender1);

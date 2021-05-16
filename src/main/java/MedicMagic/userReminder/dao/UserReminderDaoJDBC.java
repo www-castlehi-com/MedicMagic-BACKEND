@@ -78,7 +78,22 @@ public class UserReminderDaoJDBC implements UserReminderDao{
     }
 
     @Override
-    public void update(String column, Object object, String id) {
+    public void update(UserReminder userReminder) {
+        this.jdbcTemplate.update(this.sqlService.getSql("userReminderUpdate"),
+                userReminder.isBirthControlPills(),
+                nullCheck("beforeBirthControlPills", userReminder.getBeforeBirthControlPills()),
+                nullCheck("birthControlPillsTime", userReminder.getBirthControlPillsTime()),
+                userReminder.isPhysiology(),
+                nullCheck("beforePhysiology", userReminder.getBeforePhysiology()),
+                userReminder.isSleepTimeGoal(),
+                userReminder.isExerciseTimeGoal(),
+                userReminder.isHospital(),
+                nullCheck("hospitalDate", userReminder.getHospitalDate()),
+                userReminder.getId()
+        );
+    }
+
+    private Object nullCheck(String column, Object object) {
         if(column == "beforeBirthControlPills" && object == null) { object = 21; }
         else if(column == "birthControlPillsTime") {
             if(object == null) { object = java.sql.Time.valueOf("08:00:00"); }
@@ -87,6 +102,6 @@ public class UserReminderDaoJDBC implements UserReminderDao{
         else if(column == "beforePhysiology" && object == null) { object = 3; }
         else if(column == "hospitalDate" && object == null) { object = 1; }
 
-        this.jdbcTemplate.update("UPDATE userReminder SET "+ column +" = ? WHERE id = ?", object, id);
+        return object;
     }
 }

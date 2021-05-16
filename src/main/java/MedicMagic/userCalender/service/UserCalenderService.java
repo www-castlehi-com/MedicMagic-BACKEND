@@ -16,5 +16,5 @@ public interface UserCalenderService {
     List<UserCalender> getEachId(String id);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
-    void update(UserCalender userCalender, String column, Object object);
+    void update(UserCalender userCalender);
 }

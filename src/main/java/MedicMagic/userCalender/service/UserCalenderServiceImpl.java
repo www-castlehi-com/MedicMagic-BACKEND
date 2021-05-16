@@ -44,7 +44,7 @@ public class UserCalenderServiceImpl implements UserCalenderService{
     }
 
     @Override
-    public void update(UserCalender userCalender, String column, Object object) {
-        userCalenderDao.update(userCalender, column, object);
+    public void update(UserCalender userCalender) {
+        userCalenderDao.update(userCalender);
     }
 }

@@ -143,7 +143,7 @@ public class UserSymptomDaoTest {
         assertThat(userSymptomDao.getCount(), is(1));
 
         userSymptom2.setAbdominalBloating(true);
-        userSymptomDao.update(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), "abdominalBloating", userSymptom2.isAbdominalBloating());
+        userSymptomDao.update(userSymptom2);
         checkSameUserSymptom(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userSymptom2);
     }
 
@@ -156,7 +156,7 @@ public class UserSymptomDaoTest {
         assertThat(userSymptomDao.getCount(), is(1));
 
         userSymptom2.setDiarrhea(false);
-        userSymptomDao.update(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), "diarrhea", userSymptom2.isDiarrhea());
+        userSymptomDao.update(userSymptom2);
         userSymptomDao.updateUserCalenderIfSymptomIsFalse(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userCalender2);
         assertThat(userSymptomDao.getCount(), is(0));
         assertThat(userCalender2.isSymptom(), is(false));

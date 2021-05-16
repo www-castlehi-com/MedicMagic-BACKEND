@@ -49,7 +49,17 @@ public class UserMucusDaoJDBC implements UserMucusDao {
     @Override
     public void add(UserMucus userMucus) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update(this.sqlService.getSql("userMucusAdd"), userMucus.getId(), userMucus.getDate(), userMucus.isNone(), userMucus.isMottled(), userMucus.isSticky(), userMucus.isCreamy(), userMucus.isLikeEggWhite(), userMucus.isWatery(), userMucus.isAbnormal());
+            this.jdbcTemplate.update(this.sqlService.getSql("userMucusAdd"),
+                    userMucus.getId(),
+                    userMucus.getDate(),
+                    userMucus.isNone(),
+                    userMucus.isMottled(),
+                    userMucus.isSticky(),
+                    userMucus.isCreamy(),
+                    userMucus.isLikeEggWhite(),
+                    userMucus.isWatery(),
+                    userMucus.isAbnormal()
+            );
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
         }
@@ -136,9 +146,18 @@ public class UserMucusDaoJDBC implements UserMucusDao {
     }
 
     @Override
-    public void update(UserMucus userMucus, String column, boolean object) {
+    public void update(UserMucus userMucus) {
         this.jdbcTemplate.update(
-                "UPDATE userMucus SET " + column + "= ? WHERE id = ? AND date = ?", object, userMucus.getId(), userMucus.getDate()
+                this.sqlService.getSql("userMucusUpdate"),
+                userMucus.isNone(),
+                userMucus.isMottled(),
+                userMucus.isSticky(),
+                userMucus.isCreamy(),
+                userMucus.isLikeEggWhite(),
+                userMucus.isWatery(),
+                userMucus.isAbnormal(),
+                userMucus.getId(),
+                userMucus.getDate()
         );
     }
 

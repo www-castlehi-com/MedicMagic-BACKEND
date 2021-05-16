@@ -76,7 +76,17 @@ public class UserGoalDaoJDBC implements UserGoalDao{
     }
 
     @Override
-    public void update(String column, Object object, String id) {
+    public void update(UserGoal userGoal) {
+        this.jdbcTemplate.update(this.sqlService.getSql("userGoalUpdate"),
+                nullCheck("weigh", userGoal.getWeigh()),
+                nullCheck("sleepTime", userGoal.getSleepTime()),
+                nullCheck("exerciseTime", userGoal.getExerciseTime()),
+                nullCheck("waterIntake", userGoal.getWaterIntake()),
+                userGoal.getId()
+        );
+    }
+
+    private Object nullCheck(String column, Object object) {
         if((column == "sleepTime" || column == "exerciseTime") && object != null) {
             object = java.sql.Time.valueOf(object.toString());
         }
@@ -84,7 +94,9 @@ public class UserGoalDaoJDBC implements UserGoalDao{
             if(Double.parseDouble(object.toString()) < 0.0) {
                 throw new NegativeException("양수를 입력해주세요!");
             }
+            object = Double.parseDouble(object.toString());
         }
-        this.jdbcTemplate.update("UPDATE userGoal SET "+column+"= ? WHERE id = ?", object, id);
+
+        return object;
     }
 }

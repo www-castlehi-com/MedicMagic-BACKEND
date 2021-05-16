@@ -19,6 +19,6 @@ public interface UserMucusService {
     List<String> getMucusTrue(UserMucus userMucus);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
-    void update(UserMucus userMucus, String column, boolean object);
+    void update(UserMucus userMucus);
     void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender);
 }

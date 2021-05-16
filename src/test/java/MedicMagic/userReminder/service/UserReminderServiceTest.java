@@ -23,7 +23,7 @@ public class UserReminderServiceTest {
         @Override
         public List<UserReminder> getAll() {
             for(UserReminder userReminder : super.getAll()) {
-                super.update("hospital", userReminder.isHospital(), userReminder.getId());
+                super.update(userReminder);
             }
             return null;
         }

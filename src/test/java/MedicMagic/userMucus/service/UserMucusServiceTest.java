@@ -26,7 +26,7 @@ public class UserMucusServiceTest {
         @Override
         public List<UserMucus> getAll() {
             for(UserMucus userMucus : super.getAll()) {
-                super.update(userMucus, "none", userMucus.isNone());
+                super.update(userMucus);
             }
             return null;
         }

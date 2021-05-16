@@ -38,7 +38,7 @@ public class UserGoalServiceImpl implements UserGoalService{
     }
 
     @Override
-    public void update(String column, Object object, String id) {
-        userGoalDao.update(column, object, id);
+    public void update(UserGoal userGoal) {
+        userGoalDao.update(userGoal);
     }
 }

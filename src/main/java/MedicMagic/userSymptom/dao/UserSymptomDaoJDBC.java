@@ -161,9 +161,24 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
     }
 
     @Override
-    public void update(UserSymptom userSymptom, String column, boolean object) {
+    public void update(UserSymptom userSymptom) {
         this.jdbcTemplate.update(
-                "UPDATE userSymptom SET " + column +"= ? WHERE id = ? AND date = ?", object, userSymptom.getId(), userSymptom.getDate()
+                this.sqlService.getSql("userSymptomUpdate"),
+                userSymptom.isNone(),
+                userSymptom.isCramps(),
+                userSymptom.isBreastTenderness(),
+                userSymptom.isHeadache(),
+                userSymptom.isAcne(),
+                userSymptom.isLumbago(),
+                userSymptom.isNausea(),
+                userSymptom.isFatigue(),
+                userSymptom.isAbdominalBloating(),
+                userSymptom.isDesires(),
+                userSymptom.isInsomnia(),
+                userSymptom.isConstipation(),
+                userSymptom.isDiarrhea(),
+                userSymptom.getId(),
+                userSymptom.getDate()
         );
     }
 

@@ -25,7 +25,7 @@ public class UserGoalServiceTest {
         @Override
         public List<UserGoal> getAll() {
             for(UserGoal userGoal : super.getAll()) {
-                super.update("weigh", userGoal.getWeigh(), userGoal.getId());
+                super.update(userGoal);
             }
             return null;
         }

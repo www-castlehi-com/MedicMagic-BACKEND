@@ -11,5 +11,5 @@ public interface UserGoalDao {
     void deleteAll();
     void deleteEachId(String id);
     int getCount();
-    void update(String column, Object object, String id);
+    void update(UserGoal userGoal);
 }

@@ -16,6 +16,6 @@ public interface UserSymptomDao {
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);
-    void update(UserSymptom userSymptom, String column, boolean object);
+    void update(UserSymptom userSymptom);
     void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender);
 }

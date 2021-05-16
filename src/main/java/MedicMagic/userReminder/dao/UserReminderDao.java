@@ -11,5 +11,5 @@ public interface UserReminderDao {
     void deleteAll();
     void deleteEachId(String id);
     int getCount();
-    void update(String column, Object object, String id);
+    void update(UserReminder userReminder);
 }

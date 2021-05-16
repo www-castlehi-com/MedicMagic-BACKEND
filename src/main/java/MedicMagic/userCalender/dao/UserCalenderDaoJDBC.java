@@ -47,37 +47,20 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     @Override
     public void add(UserCalender userCalender) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update(this.sqlService.getSql("userCalenderAdd"), userCalender.getId(), userCalender.getDate(), userCalender.getEmotion(), userCalender.isSymptom(), userCalender.isMucus());
-            nullCheck(userCalender);
+            this.jdbcTemplate.update(this.sqlService.getSql("userCalenderAdd"),
+                    userCalender.getId(),
+                    userCalender.getDate(),
+                    nullCheck("weigh", userCalender.getWeigh()),
+                    nullCheck("sleepTime", userCalender.getSleepTime()),
+                    nullCheck("exerciseTime", userCalender.getExerciseTime()),
+                    nullCheck("waterIntake", userCalender.getWaterIntake()),
+                    nullCheck("startDay", userCalender.getStartDay()),
+                    nullCheck("endDay", userCalender.getEndDay()),
+                    userCalender.getEmotion(),
+                    userCalender.isSymptom(),
+                    userCalender.isMucus());
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
-        }
-    }
-    private void nullCheck(UserCalender userCalender) {
-        if(userCalender.getWeigh() != null) {
-            userCalender.setWeigh(negativeInspection(userCalender.getWeigh()));
-            update(userCalender, "weigh", userCalender.getWeigh());
-        }
-
-        if(userCalender.getSleepTime() != null) {
-            update(userCalender, "sleepTime", java.sql.Time.valueOf(userCalender.getSleepTime()));
-        }
-
-        if(userCalender.getExerciseTime() != null) {
-            update(userCalender, "exerciseTime", java.sql.Time.valueOf(userCalender.getExerciseTime()));
-        }
-
-        if(userCalender.getWaterIntake() != null) {
-            userCalender.setWaterIntake(negativeInspection(userCalender.getWaterIntake()));
-            update(userCalender, "waterIntake", userCalender.getWaterIntake());
-        }
-
-        if(userCalender.getStartDay() != null) {
-            update(userCalender, "startDay", java.sql.Date.valueOf(userCalender.getStartDay()));
-        }
-
-        if(userCalender.getEndDay() != null) {
-            update(userCalender, "endDay", java.sql.Date.valueOf(userCalender.getEndDay()));
         }
     }
 
@@ -119,10 +102,20 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     }
 
     @Override
-    public void update(UserCalender userCalender, String column, Object object) {
+    public void update(UserCalender userCalender) {
         this.jdbcTemplate.update(
-                "update userCalender SET "+ column +"= ? WHERE id = ? AND date = ?",
-                object, userCalender.getId(), userCalender.getDate()
+                this.sqlService.getSql("userCalenderUpdate"),
+                nullCheck("weigh", userCalender.getWeigh()),
+                nullCheck("sleepTime", userCalender.getSleepTime()),
+                nullCheck("exerciseTime", userCalender.getExerciseTime()),
+                nullCheck("waterIntake", userCalender.getWaterIntake()),
+                nullCheck("startDay", userCalender.getStartDay()),
+                nullCheck("endDay", userCalender.getEndDay()),
+                userCalender.getEmotion(),
+                userCalender.isSymptom(),
+                userCalender.isMucus(),
+                userCalender.getId(),
+                userCalender.getDate()
         );
     }
 
@@ -132,4 +125,27 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
 
         return object;
     };
+
+    private Object nullCheck(String column, Object object) {
+        if(column == "weigh" && object != null) {
+            object = negativeInspection(Double.parseDouble(object.toString()));
+        }
+        else if(column == "sleepTime" && object != null) {
+            object = java.sql.Time.valueOf(object.toString());
+        }
+        else if(column == "exerciseTime" && object != null) {
+            object = java.sql.Time.valueOf(object.toString());
+        }
+        else if(column == "waterIntake" && object != null) {
+            object = negativeInspection(Double.parseDouble(object.toString()));
+        }
+        else if(column == "startDay" && object != null) {
+            object = java.sql.Date.valueOf(object.toString());
+        }
+        else if(column == "endDay" && object != null) {
+            object = java.sql.Date.valueOf(object.toString());
+        }
+
+        return object;
+    }
 }

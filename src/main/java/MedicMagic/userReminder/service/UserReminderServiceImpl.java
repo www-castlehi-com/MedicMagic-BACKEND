@@ -38,7 +38,7 @@ public class UserReminderServiceImpl implements UserReminderService{
     }
 
     @Override
-    public void update(String column, Object object, String id) {
-        userReminderDao.update(column, object, id);
+    public void update(UserReminder userReminder) {
+        userReminderDao.update(userReminder);
     }
 }

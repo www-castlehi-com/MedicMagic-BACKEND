@@ -14,5 +14,5 @@ public interface UserReminderService {
     List<UserReminder> getAll();
     void deleteAll();
     void deleteEachId(String id);
-    void update(String column, Object object, String id);
+    void update(UserReminder userReminder);
 }

@@ -171,7 +171,7 @@ public class UserMucusDaoTest {
         assertThat(userMucusDao.getCount(), is(2));
 
         userMucusList.get(1).setWatery(true);
-        userMucusDao.update(userMucusDao.get(userMucusList.get(1).getId(), userMucusList.get(1).getDate()), "watery", userMucusList.get(1).isWatery());
+        userMucusDao.update(userMucusList.get(1));
 
         checkSameUserMucus(userMucusList.get(1), userMucusDao.get(userMucusList.get(1).getId(), userMucusList.get(1).getDate()));
     }
@@ -188,7 +188,7 @@ public class UserMucusDaoTest {
         assertThat(userMucusDao.getCount(), is(1));
 
         userMucus.setAbnormal(false);
-        userMucusDao.update(userMucusDao.get(userMucus.getId(), userMucus.getDate()), "abnormal", userMucus.isAbnormal());
+        userMucusDao.update(userMucus);
         userMucusDao.updateUserCalenderIfMucusIsFalse(userMucusDao.get(userMucus.getId(), userMucus.getDate()), userCalender);
         assertThat(userMucusDao.getCount(), is(0));
         assertThat(userCalender.isMucus(), is(false));

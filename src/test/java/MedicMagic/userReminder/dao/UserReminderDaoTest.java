@@ -10,9 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,36 +24,11 @@ public class UserReminderDaoTest {
 
     private UserReminder userReminder1;
     private UserReminder userReminder2;
-    private HashMap<String, Object> reminders1;
-    private HashMap<String, Object> reminders2;
 
     @Before
     public void setUp() throws Exception {
         userReminder1 = new UserReminder("gryffindor", true, 15, "08:00:00", false, 3, true, false, true, 3);
         userReminder2 = new UserReminder("hufflepuff", true, 21, "07:00:00", true, 3, false, true, true, 1);
-
-        reminders1 = new HashMap<String, Object>(){{
-            put("birthControlPills", true);
-            put("beforeBirthControlPills", 15);
-            put("birthControlPillsTime", null);
-            put("physiology", false);
-            put("beforePhysiology", null);
-            put("sleepTimeGoal", true);
-            put("exerciseTimeGoal", false);
-            put("hospital", true);
-            put("hospitalDate", 3);
-        }};
-        reminders2 = new HashMap<String, Object>() {{
-            put("birthControlPills", true);
-            put("beforeBirthControlPills", null);
-            put("birthControlPillsTime", "07:00:00");
-            put("physiology", true);
-            put("beforePhysiology", null);
-            put("sleepTimeGoal", false);
-            put("exerciseTimeGoal", true);
-            put("hospital", true);
-            put("hospitalDate", null);
-        }};
     }
 
     @Test
@@ -66,23 +38,15 @@ public class UserReminderDaoTest {
 
         userReminderDao.add(userReminder1.getId());
         assertThat(userReminderDao.getCount(), is(1));
+        userReminderDao.update(userReminder1);
 
-        Iterator<Map.Entry<String, Object>> entries = reminders1.entrySet().iterator();
-        while(entries.hasNext()) {
-            Map.Entry<String,Object> entry = entries.next();
-            userReminderDao.update(entry.getKey(), entry.getValue(), userReminder1.getId());
-        }
         UserReminder userReminderGet1 = userReminderDao.get(userReminder1.getId());
         checkSameUser(userReminderGet1, userReminder1);
 
         userReminderDao.add(userReminder2.getId());
         assertThat(userReminderDao.getCount(), is(2));
+        userReminderDao.update(userReminder2);
 
-        entries = reminders2.entrySet().iterator();
-        while(entries.hasNext()) {
-            Map.Entry<String,Object> entry = entries.next();
-            userReminderDao.update(entry.getKey(), entry.getValue(), userReminder2.getId());
-        }
         UserReminder userReminderGet2 = userReminderDao.get(userReminder2.getId());
         checkSameUser(userReminderGet2, userReminder2);
     }
@@ -104,19 +68,11 @@ public class UserReminderDaoTest {
 
         userReminderDao.add(userReminder1.getId());
         assertThat(userReminderDao.getCount(), is(1));
-        Iterator<Map.Entry<String, Object>> entries = reminders1.entrySet().iterator();
-        while(entries.hasNext()) {
-            Map.Entry<String,Object> entry = entries.next();
-            userReminderDao.update(entry.getKey(), entry.getValue(), userReminder1.getId());
-        }
+        userReminderDao.update(userReminder1);
 
         userReminderDao.add(userReminder2.getId());
         assertThat(userReminderDao.getCount(), is(2));
-        entries = reminders2.entrySet().iterator();
-        while(entries.hasNext()) {
-            Map.Entry<String,Object> entry = entries.next();
-            userReminderDao.update(entry.getKey(), entry.getValue(), userReminder2.getId());
-        }
+        userReminderDao.update(userReminder2);
 
         userReminderDao.deleteEachId(userReminder1.getId());
         assertThat(userReminderDao.getCount(), is(1));

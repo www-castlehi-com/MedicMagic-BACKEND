@@ -25,7 +25,7 @@ public class UserCalenderServiceTest {
         @Override
         public List<UserCalender> getAll() {
             for(UserCalender userCalender : super.getAll()) {
-                super.update(userCalender, "weigh", userCalender.getWeigh());
+                super.update(userCalender);
             }
             return null;
         }

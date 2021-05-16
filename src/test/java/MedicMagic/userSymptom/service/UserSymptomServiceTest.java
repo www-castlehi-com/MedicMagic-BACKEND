@@ -18,15 +18,6 @@ public class UserSymptomServiceTest {
     @Autowired
     UserSymptomService testUserSymptomService;
 
-    List<UserSymptom> userSymptoms;
-
-    @Before
-    public void setUp() throws Exception {
-        userSymptoms = Arrays.asList(
-                new UserSymptom()
-        );
-    }
-
     @Test(expected = TransientDataAccessException.class)
     public void readOnlyTransactionAttribute() { testUserSymptomService.getAll(); }
 
@@ -34,7 +25,7 @@ public class UserSymptomServiceTest {
         @Override
         public List<UserSymptom> getAll() {
             for(UserSymptom userSymptom : super.getAll()) {
-                super.update(userSymptom, "none", userSymptom.isNone());
+                super.update(userSymptom);
             }
             return null;
         }
