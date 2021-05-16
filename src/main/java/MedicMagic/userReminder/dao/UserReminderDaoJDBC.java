@@ -1,7 +1,7 @@
 package MedicMagic.userReminder.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.user.dao.DuplicateUserIdException;
+import MedicMagic.user.DuplicateUserIdException;
 import MedicMagic.userReminder.domain.UserReminder;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;

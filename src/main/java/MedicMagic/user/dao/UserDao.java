@@ -1,6 +1,7 @@
 package MedicMagic.user.dao;
 
 import MedicMagic.user.domain.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <mvc:annotation-driven></mvc:annotation-driven> <!-- Annotation 활성화 -->
-    <context:component-scan base-package="MedicMagic.controller"></context:component-scan> <!-- Component 패키지 지정 -->
+    <context:component-scan base-package="MedicMagic"></context:component-scan> <!-- Component 패키지 지정 -->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"></property>

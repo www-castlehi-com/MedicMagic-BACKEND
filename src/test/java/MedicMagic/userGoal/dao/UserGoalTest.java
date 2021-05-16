@@ -1,6 +1,6 @@
 package MedicMagic.userGoal.dao;
 
-import MedicMagic.user.dao.DuplicateUserIdException;
+import MedicMagic.user.DuplicateUserIdException;
 import MedicMagic.userCalender.dao.NegativeException;
 import MedicMagic.userGoal.domain.UserGoal;
 import org.junit.Before;

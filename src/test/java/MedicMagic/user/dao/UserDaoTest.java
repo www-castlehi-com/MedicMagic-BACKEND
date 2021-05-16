@@ -1,5 +1,7 @@
 package MedicMagic.user.dao;
 
+import MedicMagic.user.DuplicateUserIdException;
+import MedicMagic.user.NullKeyException;
 import MedicMagic.user.domain.User;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package MedicMagic.userReminder.dao;
 
-import MedicMagic.user.dao.DuplicateUserIdException;
+import MedicMagic.user.DuplicateUserIdException;
 import MedicMagic.userReminder.domain.UserReminder;
 import org.junit.Before;
 import org.junit.Test;

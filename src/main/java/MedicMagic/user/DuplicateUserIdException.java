@@ -1,4 +1,4 @@
-package MedicMagic.user.dao;
+package MedicMagic.user;
 
 public class DuplicateUserIdException extends RuntimeException{
     public DuplicateUserIdException(Throwable cause) {

@@ -1,7 +1,7 @@
 package MedicMagic.userGoal.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.user.dao.DuplicateUserIdException;
+import MedicMagic.user.DuplicateUserIdException;
 import MedicMagic.userCalender.dao.NegativeException;
 import MedicMagic.userGoal.domain.UserGoal;
 import org.springframework.dao.DuplicateKeyException;
