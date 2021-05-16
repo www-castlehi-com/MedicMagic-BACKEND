@@ -132,17 +132,17 @@ public class UserMucusDaoJDBC implements UserMucusDao {
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userMucusGetCount"));
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userMucusGetCount"), Integer.class);
     }
 
     @Override
     public int getCountEachId(String id) {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userMucusGetCountEachId"), id);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userMucusGetCountEachId"), new Object[]{id}, Integer.class);
     }
 
     @Override
     public int getCountEachIdAndDate(String id, String date) {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userMucusGetCountEachIdAndDate"), date, id);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userMucusGetCountEachIdAndDate"), new Object[]{date, id}, Integer.class);
     }
 
     @Override

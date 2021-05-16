@@ -72,7 +72,7 @@ public class UserGoalDaoJDBC implements UserGoalDao{
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userGoalGetCount"));
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGoalGetCount"), Integer.class);
     }
 
     @Override

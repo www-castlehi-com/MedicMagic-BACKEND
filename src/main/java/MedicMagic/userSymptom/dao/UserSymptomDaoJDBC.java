@@ -147,17 +147,17 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCount"));
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGetCount"), Integer.class);
     }
 
     @Override
     public int getCountEachId(String id) {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCountEachId"), id);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGetCountEachId"), new Object[]{id}, Integer.class);
     }
 
     @Override
     public int getCountEachIdAndDate(String id, String date) {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userSymptomGetCountEachIdAndDate"), date, id);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGetCountEachIdAndDate"), new Object[]{date, id}, Integer.class);
     }
 
     @Override

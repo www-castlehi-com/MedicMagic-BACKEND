@@ -74,7 +74,7 @@ public class UserReminderDaoJDBC implements UserReminderDao{
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userReminderGetCount"));
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userReminderGetCount"), Integer.class);
     }
 
     @Override

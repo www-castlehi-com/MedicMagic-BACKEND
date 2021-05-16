@@ -93,12 +93,12 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
 
     @Override
     public int getCount() {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userCalenderGetCount"));
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userCalenderGetCount"), Integer.class);
     }
 
     @Override
     public int getCountEachId(String id) {
-        return this.jdbcTemplate.queryForInt(this.sqlService.getSql("userCalenderGetCountEachId"), id);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userCalenderGetCountEachId"), new Object[]{id}, Integer.class);
     }
 
     @Override
