@@ -2,9 +2,11 @@ package MedicMagic.user.dao;
 
 import MedicMagic.sqlService.SqlService;
 import MedicMagic.user.DuplicateUserIdException;
+import MedicMagic.user.NoUserException;
 import MedicMagic.user.NullKeyException;
 import MedicMagic.user.domain.User;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -56,9 +58,13 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public User get(String id) {
-        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGet"),
-                new Object[]{id}, this.userMapper);
+    public User get(String id) throws NoUserException {
+        try {
+            return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGet"),
+                    new Object[]{id}, this.userMapper);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NoUserException("회원이 존재하지 않습니다");
+        }
     }
 
     @Override

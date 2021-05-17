@@ -7,9 +7,4 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-
-id = <%= request.getAttribute("id") %>
-name = <%= request.getAttribute("name") %>
-pw = <%= request.getAttribute("pw") %>
-birthday = <%= request.getAttribute("birthday") %>
-age = <%= request.getAttribute("age") %>
+<%= request.getAttribute("id") %> <%= request.getAttribute("name") %> <%= request.getAttribute("pw") %> <%= request.getAttribute("birthday") %> <%= request.getAttribute("age") %>

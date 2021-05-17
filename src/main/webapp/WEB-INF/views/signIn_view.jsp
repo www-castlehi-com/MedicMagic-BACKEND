@@ -7,15 +7,4 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-<html>
-<head>
-    <title>회원 정보 전달 view</title>
-</head>
-<body>
-    id = <%= request.getAttribute("id") %><br>
-    name = <%= request.getAttribute("name") %><br>
-    pw = <%= request.getAttribute("pw") %><br>
-    birthday = <%= request.getAttribute("birthday") %><br>
-    age = <%= request.getAttribute("age") %><br>
-</body>
-</html>
+<%= request.getAttribute("id") %> <%= request.getAttribute("name") %> <%= request.getAttribute("pw") %> <%= request.getAttribute("birthday") %> <%= request.getAttribute("age") %>

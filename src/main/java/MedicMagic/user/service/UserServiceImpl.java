@@ -43,15 +43,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDto signIn(String id, String pw) throws NullPointerException{
+    public UserDto signIn(String id, String pw){
         User user = get(id);
-        if(id == null || pw == null) {
-            throw new NullPointerException("아이디와 패스워드를 입력해주세요");
-        }
-        else if(user == null) {
-            throw new NullKeyException("회원 정보가 없습니다");
-        }
-        else if(!user.getPassword().equals(pw)) {
+        if(!user.getPassword().equals(pw)) {
             throw new DifferentPasswordException("아이디 혹은 패스워드가 다릅니다");
         }
 
