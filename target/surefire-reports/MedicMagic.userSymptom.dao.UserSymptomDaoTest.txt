@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: MedicMagic.userSymptom.dao.UserSymptomDaoTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.187 s <<< FAILURE! - in MedicMagic.userSymptom.dao.UserSymptomDaoTest
+getSymptomById  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+getSymptomTrue  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+getGroupByIdOrDate  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+update  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+deleteEachIdAndDate  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+addAndGet  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+duplicateIdAndDate  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+connectIdFromUserCalender  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+deleteColumnIfSymptomIsAllFalse  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+

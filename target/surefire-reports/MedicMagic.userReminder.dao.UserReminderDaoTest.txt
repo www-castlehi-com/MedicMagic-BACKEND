@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: MedicMagic.userReminder.dao.UserReminderDaoTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.069 s <<< FAILURE! - in MedicMagic.userReminder.dao.UserReminderDaoTest
+deleteEachId  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+addAndGet  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+duplicateUserId  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+

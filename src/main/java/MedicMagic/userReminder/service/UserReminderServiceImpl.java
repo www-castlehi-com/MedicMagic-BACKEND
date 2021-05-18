@@ -2,6 +2,7 @@ package MedicMagic.userReminder.service;
 
 import MedicMagic.userReminder.dao.UserReminderDao;
 import MedicMagic.userReminder.domain.UserReminder;
+import MedicMagic.userReminder.dto.UserReminderDto;
 
 import java.util.List;
 
@@ -40,5 +41,10 @@ public class UserReminderServiceImpl implements UserReminderService{
     @Override
     public void update(UserReminder userReminder) {
         userReminderDao.update(userReminder);
+    }
+
+    @Override
+    public UserReminderDto conveyUserReminder(String id) {
+        return new UserReminderDto(this.get(id));
     }
 }

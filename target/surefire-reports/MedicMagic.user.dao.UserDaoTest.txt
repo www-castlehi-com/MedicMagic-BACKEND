@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Test set: MedicMagic.user.dao.UserDaoTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 7, Skipped: 0, Time elapsed: 0.198 s <<< FAILURE! - in MedicMagic.user.dao.UserDaoTest
+getUserFailure  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+nullKey  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+getAll  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+update  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+addAndGet  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+count  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+
+duplicateKey  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+

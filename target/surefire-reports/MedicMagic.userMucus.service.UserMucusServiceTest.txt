@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: MedicMagic.userMucus.service.UserMucusServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.031 s <<< FAILURE! - in MedicMagic.userMucus.service.UserMucusServiceTest
+readOnlyTransactionAttribute  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+

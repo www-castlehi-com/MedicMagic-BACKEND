@@ -2,6 +2,7 @@ package MedicMagic.userGoal.service;
 
 import MedicMagic.userGoal.dao.UserGoalDao;
 import MedicMagic.userGoal.domain.UserGoal;
+import MedicMagic.userGoal.dto.UserGoalDto;
 
 import java.util.List;
 
@@ -40,5 +41,10 @@ public class UserGoalServiceImpl implements UserGoalService{
     @Override
     public void update(UserGoal userGoal) {
         userGoalDao.update(userGoal);
+    }
+
+    @Override
+    public UserGoalDto conveyUserGoal(String id) {
+        return new UserGoalDto(this.get(id));
     }
 }

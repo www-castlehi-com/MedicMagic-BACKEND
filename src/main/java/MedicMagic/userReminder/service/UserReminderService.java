@@ -1,6 +1,7 @@
 package MedicMagic.userReminder.service;
 
 import MedicMagic.userReminder.domain.UserReminder;
+import MedicMagic.userReminder.dto.UserReminderDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface UserReminderService {
     void deleteAll();
     void deleteEachId(String id);
     void update(UserReminder userReminder);
+    UserReminderDto conveyUserReminder(String id);
 }

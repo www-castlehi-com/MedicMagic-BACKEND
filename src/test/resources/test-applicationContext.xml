@@ -44,7 +44,9 @@
     </bean>
 
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
-<!--        <property name="userDao" ref="userDao" />-->
+        <property name="userDao" ref="userDao" />
+        <property name="userGoalDao" ref="userGoalDao" />
+        <property name="userReminderDao" ref="userReminderDao" />
     </bean>
 
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
@@ -69,7 +71,7 @@
 
     <bean id="testUserService" class="MedicMagic.user.service.UserServiceTest$TestUserServiceImpl" parent="userService" />
     <bean id="userServiceImpl" class="MedicMagic.user.service.UserServiceImpl">
-<!--        <property name="userDao" ref="userDao" />-->
+        <property name="userDao" ref="userDao" ></property>
     </bean>
 
     <bean id="testUserCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceTest$TestUserCalenderServiceImpl" parent="userCalenderService" />

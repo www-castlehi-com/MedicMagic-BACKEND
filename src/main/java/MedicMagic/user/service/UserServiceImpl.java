@@ -1,25 +1,37 @@
 package MedicMagic.user.service;
 
 import MedicMagic.user.DifferentPasswordException;
-import MedicMagic.user.NullKeyException;
 import MedicMagic.user.dao.UserDao;
 import MedicMagic.user.domain.User;
 import MedicMagic.user.dto.UserDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import MedicMagic.userGoal.dao.UserGoalDao;
+import MedicMagic.userReminder.dao.UserReminderDao;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
     UserDao userDao;
+    UserGoalDao userGoalDao;
+    UserReminderDao userReminderDao;
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
+    public void setUserGoalDao(UserGoalDao userGoalDao) {
+        this.userGoalDao = userGoalDao;
+    }
+
+    public void setUserReminderDao(UserReminderDao userReminderDao) {
+        this.userReminderDao = userReminderDao;
+    }
+
     @Override
     public void add(User user) {
+
         userDao.add(user);
+        userGoalDao.add(user.getId());
+        userReminderDao.add(user.getId());
     }
 
     @Override

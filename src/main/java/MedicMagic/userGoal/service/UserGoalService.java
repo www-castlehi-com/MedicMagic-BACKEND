@@ -1,6 +1,7 @@
 package MedicMagic.userGoal.service;
 
 import MedicMagic.userGoal.domain.UserGoal;
+import MedicMagic.userGoal.dto.UserGoalDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface UserGoalService {
     void deleteAll();
     void deleteEachId(String id);
     void update(UserGoal userGoal);
+    UserGoalDto conveyUserGoal(String id);
 }

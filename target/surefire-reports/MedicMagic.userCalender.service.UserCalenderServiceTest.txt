@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: MedicMagic.userCalender.service.UserCalenderServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.034 s <<< FAILURE! - in MedicMagic.userCalender.service.UserCalenderServiceTest
+readOnlyTransactionAttribute  Time elapsed: 0 s  <<< ERROR!
+java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
+Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+

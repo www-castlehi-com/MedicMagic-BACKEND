@@ -1,6 +1,7 @@
 package MedicMagic.user.dao;
 
 import MedicMagic.user.DuplicateUserIdException;
+import MedicMagic.user.NoUserException;
 import MedicMagic.user.NullKeyException;
 import MedicMagic.user.domain.User;
 import org.junit.Before;
@@ -82,7 +83,7 @@ public class UserDaoTest {
         assertThat(dao.getCount(), is(4));
     }
 
-    @Test(expected = EmptyResultDataAccessException.class)
+    @Test(expected = NoUserException.class)
     public void getUserFailure() {
         dao.deleteAll();
         assertThat(dao.getCount(), is(0));
@@ -147,7 +148,7 @@ public class UserDaoTest {
     public void nullKey() {
         dao.deleteAll();
 
-        User mockUser = new User(null, null, null, null, null);
+        User mockUser = new User("null", "null", "null", "null", 0);
         dao.add(mockUser);
     }
 

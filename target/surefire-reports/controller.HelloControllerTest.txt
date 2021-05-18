@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: controller.HelloControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in controller.HelloControllerTest
+initializationError  Time elapsed: 0.008 s  <<< ERROR!
+java.lang.ArrayStoreException: sun.reflect.annotation.TypeNotPresentExceptionProxy
+
