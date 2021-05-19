@@ -1,7 +1,7 @@
 package MedicMagic.userGoal.dao;
 
 import MedicMagic.user.DuplicateUserIdException;
-import MedicMagic.userCalender.dao.NegativeException;
+import MedicMagic.userCalender.NegativeException;
 import MedicMagic.userGoal.domain.UserGoal;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,8 @@
 package MedicMagic.userCalender.dao;
 
 import MedicMagic.user.domain.User;
+import MedicMagic.userCalender.DuplicateDateException;
+import MedicMagic.userCalender.NegativeException;
 import MedicMagic.userCalender.domain.UserCalender;
 import org.junit.Before;
 import org.junit.Test;

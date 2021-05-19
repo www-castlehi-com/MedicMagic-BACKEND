@@ -3,19 +3,33 @@ package MedicMagic.userCalender.service;
 
 import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
+import MedicMagic.userPhysiology.dao.UserPhysiologyDao;
+import MedicMagic.userPhysiology.domain.UserPhysiology;
 
 import java.util.List;
 
 public class UserCalenderServiceImpl implements UserCalenderService{
     UserCalenderDao userCalenderDao;
+    UserPhysiologyDao userPhysiologyDao;
 
     public void setUserCalenderDao(UserCalenderDao userCalenderDao) {
         this.userCalenderDao = userCalenderDao;
     }
 
+    public void setUserPhysiologyDao(UserPhysiologyDao userPhysiologyDao) {
+        this.userPhysiologyDao = userPhysiologyDao;
+    }
+
     @Override
     public void add(UserCalender userCalender) {
+
         userCalenderDao.add(userCalender);
+        if(userCalender.getStartDay() != null) {
+            UserPhysiology userPhysiology = new UserPhysiology();
+            userPhysiology.setId(userCalender.getId());
+            userPhysiology.setStartPhysiology(userCalender.getStartDay());
+            userPhysiologyDao.add(userPhysiology);
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: MedicMagic.userReminder.service.UserReminderServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.027 s <<< FAILURE! - in MedicMagic.userReminder.service.UserReminderServiceTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.03 s <<< FAILURE! - in MedicMagic.userReminder.service.UserReminderServiceTest
 readOnlyTransactionAttribute  Time elapsed: 0 s  <<< ERROR!
 java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
 Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded

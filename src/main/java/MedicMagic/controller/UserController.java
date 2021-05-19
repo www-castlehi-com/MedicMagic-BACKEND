@@ -27,6 +27,9 @@ public class UserController {
             System.out.println("ID from Android : " + id);
             System.out.println("PW from Android : " + pw);
 
+            if(id == "null") { id= null;}
+            if(pw == "null") {pw = null;}
+
             UserDto userDto = userService.signIn(id, pw);
             ModelAndView mv = new ModelAndView();
             mv.setViewName("user/signIn_view");
@@ -57,6 +60,11 @@ public class UserController {
             String pw = httpServletRequest.getParameter("pw");
             String birthday = httpServletRequest.getParameter("birthday");
             int age = Integer.parseInt(httpServletRequest.getParameter("age"));
+
+            if(id == "null") {id = null;}
+            if(name == "null") {name = null;}
+            if(pw == "null") {pw = null;}
+            if(birthday == "null") {birthday = null;}
 
             System.out.println("ID from android : "+id);
             System.out.println("NAME from android : "+name);

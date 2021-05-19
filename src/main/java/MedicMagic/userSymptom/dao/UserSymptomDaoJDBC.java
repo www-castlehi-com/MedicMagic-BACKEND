@@ -1,8 +1,7 @@
 package MedicMagic.userSymptom.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.userCalender.dao.DuplicateDateException;
-import MedicMagic.userCalender.dao.UserCalenderDao;
+import MedicMagic.userCalender.DuplicateDateException;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
 import org.springframework.dao.DuplicateKeyException;
@@ -10,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

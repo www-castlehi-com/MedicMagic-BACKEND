@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: MedicMagic.userMucus.dao.UserMucusDaoTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.224 s <<< FAILURE! - in MedicMagic.userMucus.dao.UserMucusDaoTest
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.204 s <<< FAILURE! - in MedicMagic.userMucus.dao.UserMucusDaoTest
 getGroupByIdOrDate  Time elapsed: 0 s  <<< ERROR!
 java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
 Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
@@ -26,7 +26,7 @@ getMucusTrue  Time elapsed: 0 s  <<< ERROR!
 java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
 Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
 
-addAndGet  Time elapsed: 0 s  <<< ERROR!
+addAndGet  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
 Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
 

@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: MedicMagic.user.service.UserServiceTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.061 s <<< FAILURE! - in MedicMagic.user.service.UserServiceTest
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.06 s <<< FAILURE! - in MedicMagic.user.service.UserServiceTest
 readOnlyTransactionAttribute  Time elapsed: 0 s  <<< ERROR!
 java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
 Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded

@@ -59,4 +59,17 @@
     <sql key="userReminderDeleteEachId">DELETE FROM userReminder WHERE id = ?</sql>
     <sql key="userReminderGetCount">SELECT COUNT(*) FROM userReminder</sql>
     <sql key="userReminderUpdate">UPDATE userReminder SET birthControlPills = ?, beforeBirthControlPills = ?, birthControlPillsTime = ?, physiology = ?, beforePhysiology = ?, sleepTimeGoal = ?, exerciseTimeGoal = ?, hospital = ?, hospitalDate = ? WHERE id = ?</sql>
+
+    <sql key="userPhysiologyAdd">INSERT INTO userPhysiology(id, startPhysiology) VALUES (?, ?)</sql>
+    <sql key="userPhysiologyGet">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology ASC</sql>
+    <sql key="userPhysiologyGetEachIdAndDate">SELECT * FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
+    <sql key="userPhysiologyGetLastEachId">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 1</sql>
+    <sql key="userPhysiologyGetAll">SELECT * FROM userPhysiology</sql>
+    <sql key="userPhysiologyGetEachIdLimit3">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 3</sql>
+    <sql key="userPhysiologyDeleteAll">DELETE FROM userPhysiology</sql>
+    <sql key="userPhysiologyDeleteEachIdAndStartPhysiology">DELETE FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
+    <sql key="userPhysiologyDeleteEachIdAndEndPhysiology">DELETE FROM userPhysiology WHERE id = ? AND endPhysiology = ?</sql>
+    <sql key="userPhysiologyGetCount">SELECT COUNT(*) FROM userPhysiology</sql>
+    <sql key="userPhysiologyGetCountEachId">SELECT COUNT(*) FROM userPhysiology WHERE id = ?</sql>
+    <sql key="userPhysiologyUpdate">UPDATE userPhysiology SET endPhysiology = ?, expectedOvulationDate = ?, expectedPhysiologyDate = ? WHERE id = ? AND startPhysiology = ?</sql>
 </sqlmap>

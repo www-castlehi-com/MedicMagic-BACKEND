@@ -47,21 +47,20 @@ public class UserDaoJDBC implements UserDao {
         try {
             nullCheck(user);
             this.jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
-//            this.jdbcTemplate.update(this.sqlService.getSql("userGoalAdd"), user.getId());
-//            this.jdbcTemplate.update(this.sqlService.getSql("userReminderAdd"), user.getId());
         } catch (DuplicateKeyException e) {
             throw new DuplicateUserIdException("이미 가입된 아이디입니다", e);
         }
     }
     private void nullCheck(User user) throws NullKeyException {
-        if(user.getId() == "null" || user.getName() == "null" || user.getPassword() == "null" || user.getBirthday() == "null" || user.getAge() == 0) {
-            throw new NullKeyException("필수 입력 사항입니다!");
+        if(user.getId() == null || user.getName() == null || user.getPassword() == null || user.getBirthday() == null || user.getAge() == 0) {
+            throw new NullKeyException("필수 입력 사항입니다");
         }
     }
 
     @Override
-    public User get(String id) throws NoUserException {
+    public User get(String id) throws NoUserException, NullKeyException {
         try {
+            if(id == null) { throw new NullKeyException("필수 입력 사항입니다");}
             return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGet"),
                     new Object[]{id}, this.userMapper);
         } catch (EmptyResultDataAccessException e) {

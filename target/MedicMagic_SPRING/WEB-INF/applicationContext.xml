@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+               http://www.springframework.org/schema/aop
+               http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+               http://www.springframework.org/schema/context
+               http://www.springframework.org/schema/context/spring-context-3.0.xsd
+               http://www.springframework.org/schema/tx
+               http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+    <context:component-scan base-package="MedicMagic" />
+
+    <bean id="userDao" class="MedicMagic.user.dao.UserDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userCalenderDao" class="MedicMagic.userCalender.dao.UserCalenderDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userSymptomDao" class="MedicMagic.userSymptom.dao.UserSymptomDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userMucusDao" class="MedicMagic.userMucus.dao.UserMucusDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userGoalDao" class="MedicMagic.userGoal.dao.UserGoalDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userReminderDao" class="MedicMagic.userReminder.dao.UserReminderDaoJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
+
+    <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
+        <property name="userCalenderDao" ref="userCalenderDao" />
+    </bean>
+
+    <bean id="userSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceImpl">
+        <property name="userSymptomDao" ref="userSymptomDao" />
+    </bean>
+
+    <bean id="userMucusService" class="MedicMagic.userMucus.service.UserMucusServiceImpl">
+        <property name="userMucusDao" ref="userMucusDao" />
+    </bean>
+
+    <bean id="userGoalService" class="MedicMagic.userGoal.service.UserGoalServiceImpl">
+        <property name="userGoalDao" ref="userGoalDao" />
+    </bean>
+
+    <bean id="userReminderService" class="MedicMagic.userReminder.service.UserReminderServiceImpl" >
+        <property name="userReminderDao" ref="userReminderDao" />
+    </bean>
+
+    <tx:annotation-driven/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <context:annotation-config />
+    <bean id="sqlService" class="MedicMagic.sqlService.BaseSqlService">
+        <property name="sqlReader" ref="sqlReader" />
+        <property name="sqlRegistry" ref="sqlRegistry" />
+    </bean>
+    <bean id="sqlReader" class="MedicMagic.sqlService.JaxbXmlSqlReader" />
+    <bean id="sqlRegistry" class="MedicMagic.sqlService.HashMapSqlRegistry" />
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/MedicMagic" />
+        <property name="username" value="root" />
+        <property name="password" value="min20617" />
+    </bean>
+</beans>

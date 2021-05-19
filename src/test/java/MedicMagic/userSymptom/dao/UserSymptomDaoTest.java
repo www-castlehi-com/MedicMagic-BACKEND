@@ -1,6 +1,6 @@
 package MedicMagic.userSymptom.dao;
 
-import MedicMagic.userCalender.dao.DuplicateDateException;
+import MedicMagic.userCalender.DuplicateDateException;
 import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
