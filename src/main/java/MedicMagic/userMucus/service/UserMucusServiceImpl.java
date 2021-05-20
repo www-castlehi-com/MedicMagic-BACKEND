@@ -39,6 +39,11 @@ public class UserMucusServiceImpl implements UserMucusService{
     }
 
     @Override
+    public int getCountEachIdAndDate(String id, String date) {
+        return userMucusDao.getCountEachIdAndDate(id, date);
+    }
+
+    @Override
     public void deleteAll() {
         userMucusDao.deleteAll();
     }

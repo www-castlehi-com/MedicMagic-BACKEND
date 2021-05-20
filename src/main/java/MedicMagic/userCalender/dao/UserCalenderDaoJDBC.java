@@ -62,7 +62,7 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
                     userCalender.isSymptom(),
                     userCalender.isMucus());
         } catch(DuplicateKeyException e) {
-            throw new DuplicateDateException(e);
+            throw new DuplicateDateException("중복된 날짜입니다", e);
         }
     }
 
@@ -101,6 +101,11 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
     @Override
     public int getCountEachId(String id) {
         return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userCalenderGetCountEachId"), new Object[]{id}, Integer.class);
+    }
+
+    @Override
+    public int getCountEachIdAndDate(String id, String date) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userCalenderGetCountEachIdAndDate"), new Object[]{id, date}, Integer.class);
     }
 
     @Override

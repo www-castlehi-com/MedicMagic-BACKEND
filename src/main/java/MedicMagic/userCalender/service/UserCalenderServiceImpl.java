@@ -3,6 +3,7 @@ package MedicMagic.userCalender.service;
 
 import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
+import MedicMagic.userCalender.dto.UserCalenderDto;
 import MedicMagic.userPhysiology.dao.UserPhysiologyDao;
 import MedicMagic.userPhysiology.domain.UserPhysiology;
 
@@ -45,6 +46,11 @@ public class UserCalenderServiceImpl implements UserCalenderService{
     @Override
     public List<UserCalender> getEachId(String id) {
         return userCalenderDao.getEachId(id);
+    }
+
+    @Override
+    public int getCountEachIdAndDate(String id, String date) {
+        return this.userCalenderDao.getCountEachIdAndDate(id, date);
     }
 
     @Override

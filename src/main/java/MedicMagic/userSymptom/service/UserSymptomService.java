@@ -2,6 +2,7 @@ package MedicMagic.userSymptom.service;
 
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
+import MedicMagic.userSymptom.dto.UserSymptomDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface UserSymptomService {
     List<UserSymptom> getEachId(String id);
     @Transactional(readOnly = true)
     List<String> getSymptomTrue(UserSymptom userSymptom);
+    int getCountEachIdAndDate(String id, String date);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
     void update(UserSymptom userSymptom);

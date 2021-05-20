@@ -40,6 +40,11 @@ public class UserSymptomServiceImpl implements UserSymptomService {
     }
 
     @Override
+    public int getCountEachIdAndDate(String id, String date) {
+        return userSymptomDao.getCountEachIdAndDate(id, date);
+    }
+
+    @Override
     public void deleteAll() {
         userSymptomDao.deleteAll();
     }

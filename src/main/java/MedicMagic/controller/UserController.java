@@ -20,12 +20,9 @@ public class UserController {
 
     @RequestMapping(value = "/signIn_view", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView signIn(HttpServletRequest httpServletRequest) throws NullKeyException, NoUserException, DifferentPasswordException {
-        System.out.println("Server requested Android");
         try {
             String id = httpServletRequest.getParameter("id");
             String pw = httpServletRequest.getParameter("pw");
-            System.out.println("ID from Android : " + id);
-            System.out.println("PW from Android : " + pw);
 
             if(id == "null") { id= null;}
             if(pw == "null") {pw = null;}

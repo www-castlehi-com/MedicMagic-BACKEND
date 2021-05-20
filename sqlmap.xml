@@ -18,6 +18,7 @@
     <sql key="userCalenderDeleteEachIdAndDate">DELETE FROM userCalender WHERE id = ? AND date = ?</sql>
     <sql key="userCalenderGetCount">SELECT COUNT(*) FROM userCalender</sql>
     <sql key="userCalenderGetCountEachId">SELECT COUNT(*) FROM userCalender GROUP BY id = ?</sql>
+    <sql key="userCalenderGetCountEachIdAndDate">SELECT COUNT(*) FROM userCalender WHERE id = ? AND date = ?</sql>
     <sql key="userCalenderUpdate">UPDATE userCalender SET weigh = ?, sleepTime = ?, exerciseTime = ?, waterIntake = ?, startDay = ?, endDay = ?, emotion = ?, symptom = ?, mucus = ? WHERE id = ? AND date = ?</sql>
 
     <sql key="userMucusAdd">INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggwhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)</sql>

@@ -17,6 +17,7 @@ public interface UserMucusService {
     List<UserMucus> getEachId(String id);
     @Transactional(readOnly = true)
     List<String> getMucusTrue(UserMucus userMucus);
+    int getCountEachIdAndDate(String id, String date);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
     void update(UserMucus userMucus);

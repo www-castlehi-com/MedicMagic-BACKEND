@@ -1,6 +1,7 @@
 package MedicMagic.userPhysiology.service;
 
 import MedicMagic.userPhysiology.domain.UserPhysiology;
+import MedicMagic.userPhysiology.dto.UserPhysiologyDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -22,5 +23,8 @@ public interface UserPhysiologyService {
     void deleteEachIdAndStartPhysiology(String id, String startPhysiology);
     void deleteEachIdAndEndPhysiology(String id, String endPhysiology);
     void update(UserPhysiology userPhysiology);
-
+    @Transactional(readOnly = true)
+    UserPhysiologyDto getLastEachIdTransform(String id);
+    @Transactional(readOnly = true)
+    List<UserPhysiologyDto> getEachIdLimit3Transform(String id);
 }
