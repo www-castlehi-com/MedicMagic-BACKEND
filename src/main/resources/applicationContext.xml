@@ -44,12 +44,20 @@
         <property name="sqlService" ref="sqlService" />
     </bean>
 
+    <bean id="userPhysiologyDao" class="MedicMagic.userPhysiology.dao.UserPhysiologyJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
+        <property name="userGoalDao" ref="userGoalDao" />
+        <property name="userReminderDao" ref="userReminderDao" />
     </bean>
 
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
         <property name="userCalenderDao" ref="userCalenderDao" />
+        <property name="userPhysiologyDao" ref="userPhysiologyDao" />
     </bean>
 
     <bean id="userSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceImpl">
@@ -66,6 +74,10 @@
 
     <bean id="userReminderService" class="MedicMagic.userReminder.service.UserReminderServiceImpl" >
         <property name="userReminderDao" ref="userReminderDao" />
+    </bean>
+
+    <bean id="userPhysiologyService" class="MedicMagic.userPhysiology.service.UserPhysiologyServiceImpl">
+        <property name="userPhysiologyDao" ref="userPhysiologyDao" />
     </bean>
 
     <tx:annotation-driven/>
