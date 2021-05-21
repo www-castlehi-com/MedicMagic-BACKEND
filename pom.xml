@@ -7,7 +7,7 @@
   <groupId>com.wingardio</groupId>
   <artifactId>MedicMagic_SPRING</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>MedicMagic_SPRING Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
@@ -181,7 +181,7 @@
             <archive>
               <manifest>
                 <mainClass>
-                  MedicMagic.main
+                  main
                 </mainClass>
               </manifest>
             </archive>
