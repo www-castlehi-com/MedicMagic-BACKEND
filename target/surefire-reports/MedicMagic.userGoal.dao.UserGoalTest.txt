@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: MedicMagic.userGoal.dao.UserGoalTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.363 s - in MedicMagic.userGoal.dao.UserGoalTest
