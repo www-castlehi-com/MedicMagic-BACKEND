@@ -1,8 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: MedicMagic.userSymptom.service.UserSymptomServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.026 s <<< FAILURE! - in MedicMagic.userSymptom.service.UserSymptomServiceTest
-readOnlyTransactionAttribute  Time elapsed: 0 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/springframework/core/ErrorCoded
-Caused by: java.lang.ClassNotFoundException: org.springframework.core.ErrorCoded
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.019 s <<< FAILURE! - in MedicMagic.userSymptom.service.UserSymptomServiceTest
+readOnlyTransactionAttribute(MedicMagic.userSymptom.service.UserSymptomServiceTest)  Time elapsed: 0.01 s  <<< FAILURE!
+java.lang.AssertionError: Expected exception: org.springframework.dao.TransientDataAccessException
 

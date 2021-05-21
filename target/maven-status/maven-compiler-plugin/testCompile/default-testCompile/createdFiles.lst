@@ -1,7 +1,9 @@
+MedicMagic\userPhysiology\service\UserPhysiologyServiceTest$TestUserPhysiologyServiceImpl.class
 MedicMagic\userCalender\dao\userCalenderDaoTest.class
 MedicMagic\userReminder\dao\UserReminderDaoTest.class
 MedicMagic\user\service\UserServiceTest.class
 MedicMagic\user\service\UserServiceTest$TestUserServiceImpl.class
+MedicMagic\userPhysiology\service\UserPhysiologyServiceTest.class
 MedicMagic\userGoal\service\UserGoalServiceTest.class
 MedicMagic\userMucus\service\UserMucusServiceTest.class
 MedicMagic\userReminder\service\UserReminderServiceTest.class

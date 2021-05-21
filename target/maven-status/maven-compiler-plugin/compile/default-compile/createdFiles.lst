@@ -1,5 +1,6 @@
 MedicMagic\controller\UserGoalController.class
 MedicMagic\user\dao\UserDaoJDBC.class
+MedicMagic\userMucus\dto\UserMucusDto.class
 MedicMagic\userMucus\service\UserMucusService.class
 MedicMagic\controller\UserController.class
 MedicMagic\userCalender\dao\UserCalenderDao.class
@@ -7,6 +8,7 @@ MedicMagic\userMucus\domain\UserMucus.class
 MedicMagic\sqlService\SqlRegistry.class
 MedicMagic\user\service\UserService.class
 MedicMagic\userReminder\dao\UserReminderDao.class
+MedicMagic\controller\UserPhysiologyController.class
 MedicMagic\sqlService\HashMapSqlRegistry.class
 MedicMagic\sqlService\SqlReader.class
 MedicMagic\sqlService\SqlRetrievalFailureException.class
@@ -18,7 +20,12 @@ MedicMagic\sqlService\BaseSqlService.class
 MedicMagic\controller\UserReminderController.class
 MedicMagic\sqlService\SqlNotFoundException.class
 MedicMagic\userReminder\dao\UserReminderDaoJDBC$1.class
+MedicMagic\controller\UserSymptomController.class
+MedicMagic\userSymptom\dto\UserSymptomDto.class
+MedicMagic\userPhysiology\dto\UserPhysiologyDto.class
 MedicMagic\userSymptom\dao\UserSymptomDaoJDBC.class
+MedicMagic\userPhysiology\service\UserPhysiologyService.class
+MedicMagic\controller\UserCalenderController.class
 MedicMagic\userCalender\DuplicateDateException.class
 MedicMagic\sqlService\jaxb\Sqlmap.class
 MedicMagic\userMucus\dao\UserMucusDaoJDBC.class
@@ -29,6 +36,8 @@ MedicMagic\user\domain\User.class
 MedicMagic\sqlService\SqlService.class
 MedicMagic\userSymptom\domain\UserSymptom.class
 MedicMagic\userCalender\NegativeException.class
+MedicMagic\controller\UserMucusController.class
+MedicMagic\userPhysiology\service\UserPhysiologyServiceImpl.class
 MedicMagic\user\NoUserException.class
 MedicMagic\userPhysiology\dao\UserPhysiologyJDBC.class
 MedicMagic\sqlService\jaxb\package-info.class
@@ -48,12 +57,14 @@ MedicMagic\user\service\UserServiceImpl.class
 MedicMagic\userPhysiology\domain\UserPhysiology.class
 MedicMagic\userGoal\domain\UserGoal.class
 MedicMagic\userGoal\dao\UserGoalDaoJDBC.class
+MedicMagic\userPhysiology\LastValueNullException.class
 MedicMagic\user\dto\UserDto.class
 MedicMagic\userGoal\dao\UserGoalDaoJDBC$1.class
 MedicMagic\userReminder\service\UserReminderServiceImpl.class
 MedicMagic\userMucus\dao\UserMucusDaoJDBC$1.class
 MedicMagic\userCalender\dao\UserCalenderDaoJDBC.class
 MedicMagic\userCalender\dao\UserCalenderDaoJDBC$1.class
+MedicMagic\userCalender\dto\UserCalenderDto.class
 MedicMagic\sqlService\jaxb\ObjectFactory.class
 MedicMagic\userPhysiology\dao\UserPhysiologyJDBC$1.class
 MedicMagic\userSymptom\dao\UserSymptomDao.class
