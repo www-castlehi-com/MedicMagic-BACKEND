@@ -26,22 +26,99 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="4fb32f08-724e-4a28-bbe9-68312de90d24">
-        <schema name="medicmagic_server" object-types="table, view" />
-        <schema name="mysql" object-types="table, view, function" />
+        <schema name="medicmagic_server" object-types="view, table, column" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="4fb32f08-724e-4a28-bbe9-68312de90d24">
-      <console name="medicmagic" type="STANDARD" schema="medicmagic_server" session="Main"><![CDATA[CREATE TABLE test (
-    id BIGINT(20) NOT NULL AUTO_INCREMENT,
-    content VARCHAR(255) DEFAULT NULL,
-    PRIMARY KEY(id)
+      <console name="medicmagic" type="STANDARD" schema="medicmagic_server" session="Main"><![CDATA[CREATE TABLE user (
+    id VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(20),
+    password VARCHAR(20),
+    birthday DATE,
+    age INTEGER
 ) ENGINE = InnoDB;
 
-INSERT INTO test(content) VALUES ('테스트');
+CREATE TABLE userCalender (
+    id VARCHAR(20),
+    date DATE,
+    weigh DOUBLE,
+    sleepTime TIME,
+    exerciseTime TIME,
+    waterIntake DOUBLE,
+    startDay DATE,
+    endDay DATE,
+    emotion VARCHAR(20),
+    symptom BOOLEAN,
+    mucus BOOLEAN,
 
-SELECT * FROM test;]]></console>
+    CONSTRAINT idWithDate PRIMARY KEY(id, date)
+) ENGINE = InnoDB;
+
+
+CREATE TABLE userSymptom (
+    id VARCHAR(20),
+    date DATE,
+    none BOOLEAN,
+    cramps BOOLEAN,
+    breastTenderness BOOLEAN,
+    headache BOOLEAN,
+    acne BOOLEAN,
+    lumbago BOOLEAN,
+    nausea BOOLEAN,
+    fatigue BOOLEAN,
+    abdominalBloating BOOLEAN,
+    desires BOOLEAN,
+    insomnia BOOLEAN,
+    constipation BOOLEAN,
+    diarrhea BOOLEAN,
+
+    CONSTRAINT idWithDate PRIMARY KEY(id, date)
+) ENGINE = InnoDB;
+
+CREATE TABLE userMucus (
+    id VARCHAR(20),
+    date DATE,
+    none BOOLEAN,
+    mottled BOOLEAN,
+    sticky BOOLEAN,
+    creamy BOOLEAN,
+    likeEggWhite BOOLEAN,
+    watery BOOLEAN,
+    abnormal BOOLEAN,
+
+    CONSTRAINT idWithDate PRIMARY KEY(id, date)
+) ENGINE = InnoDB;
+
+CREATE TABLE userGoal (
+    id VARCHAR(20) PRIMARY KEY,
+    weigh DOUBLE,
+    sleepTime TIME,
+    exerciseTime TIME,
+    waterIntake DOUBLE
+) ENGINE = InnoDB;
+
+CREATE TABLE userReminder (
+    id VARCHAR(20) PRIMARY KEY,
+    birthControlPills BOOLEAN,
+    beforeBirthControlPills INTEGER,
+    birthControlPillsTime TIME,
+    physiology BOOLEAN,
+    beforePhysiology INTEGER,
+    sleepTimeGoal BOOLEAN,
+    exerciseTimeGoal BOOLEAN,
+    hospital BOOLEAN,
+    hospitalDate INTEGER
+) ENGINE = InnoDB;
+
+CREATE TABLE userPhysiology (
+    id VARCHAR(20),
+    startPhysiology DATE,
+    endPhysiology DATE,
+    expectedOvulationDate DATE,
+    expectedPhysiologyDate DATE
+) ENGINE = InnoDB;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
