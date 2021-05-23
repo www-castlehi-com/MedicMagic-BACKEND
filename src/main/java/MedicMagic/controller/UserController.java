@@ -53,10 +53,10 @@ public class UserController {
             String name = httpServletRequest.getParameter("name");
             String pw = httpServletRequest.getParameter("pw");
             String birthday = httpServletRequest.getParameter("birthday");
-            int age = Integer.parseInt(httpServletRequest.getParameter("age"));
+            String age = httpServletRequest.getParameter("age");
 
-            User user = new User(id, name, pw, birthday, age);
-            userService.add(user);
+            UserDto userDto = new UserDto(id, name, pw, birthday, age);
+            userService.signUp(userDto);
 
             ModelAndView mv = new ModelAndView();
             mv.setViewName("user/signUp_view");

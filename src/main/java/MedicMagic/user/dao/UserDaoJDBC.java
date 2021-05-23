@@ -43,18 +43,8 @@ public class UserDaoJDBC implements UserDao {
             };
 
     @Override
-    public void add(final User user) throws DuplicateUserIdException {
-        try {
-            nullCheck(user);
-            this.jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
-        } catch (DuplicateKeyException e) {
-            throw new DuplicateUserIdException("이미 가입된 아이디입니다", e);
-        }
-    }
-    private void nullCheck(User user) throws NullKeyException {
-        if(user.getId().equals("null") || user.getName().equals("null") || user.getPassword().equals("null") || user.getBirthday().equals("null") || user.getAge().equals("null")) {
-            throw new NullKeyException("필수 입력 사항입니다");
-        }
+    public void add(final User user) {
+        this.jdbcTemplate.update(this.sqlService.getSql("userAdd"), user.getId(), user.getName(), user.getPassword(), java.sql.Date.valueOf(user.getBirthday()), user.getAge());
     }
 
     @Override
@@ -86,5 +76,10 @@ public class UserDaoJDBC implements UserDao {
     @Override
     public int getCount() {
         return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGetCount"), Integer.class);
+    }
+
+    @Override
+    public int getCountEachId(String id) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGetCountEachId"), new Object[]{id}, Integer.class);
     }
 }

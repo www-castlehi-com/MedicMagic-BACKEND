@@ -8,4 +8,8 @@ public class DuplicateUserIdException extends RuntimeException{
     public DuplicateUserIdException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public DuplicateUserIdException(String message) {
+        super(message);
+    }
 }

@@ -8,6 +8,7 @@
     <sql key="userGetAll">SELECT * FROM user ORDER BY id</sql>
     <sql key="userDeleteAll">DELETE FROM user</sql>
     <sql key="userGetCount">SELECT COUNT(*) FROM user</sql>
+    <sql key="userGetCountEachId">SELECT COUNT(*) FROM user WHERE id = ?</sql>
     <sql key="userUpdate">UPDATE user SET name = ?, password = ?, birthday = ?, age = ? where id = ?</sql>
 
     <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, weigh, sleepTime, exerciseTime, waterIntake, startDay, endDay, emotion, symptom, mucus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</sql>

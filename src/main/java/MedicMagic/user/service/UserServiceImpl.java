@@ -1,10 +1,12 @@
 package MedicMagic.user.service;
 
 import MedicMagic.user.DifferentPasswordException;
+import MedicMagic.user.DuplicateUserIdException;
 import MedicMagic.user.NullKeyException;
 import MedicMagic.user.dao.UserDao;
 import MedicMagic.user.domain.User;
 import MedicMagic.user.dto.UserDto;
+import MedicMagic.userCalender.NegativeException;
 import MedicMagic.userGoal.dao.UserGoalDao;
 import MedicMagic.userReminder.dao.UserReminderDao;
 
@@ -45,6 +47,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public int getCountEachId(String id) {
+        return userDao.getCountEachId(id);
+    }
+
+    @Override
     public void deleteAll() {
         userDao.deleteAll();
     }
@@ -67,5 +74,22 @@ public class UserServiceImpl implements UserService{
         }
 
         return new UserDto(user);
+    }
+
+    @Override
+    public void signUp(UserDto userDto) {
+        if(userDto.id == null || userDto.name == null || userDto.password == null || userDto.birthday == null || userDto.age == null) {
+            throw new NullKeyException("필수 입력 사항입니다");
+        }
+
+        if(userDto.age < 0) {
+            throw new NegativeException("양수를 입력해주세요");
+        }
+
+        if(this.getCountEachId(userDto.id) == 0) {
+            this.add(new User(userDto.id, userDto.name, userDto.password, userDto.birthday, userDto.age));
+        } else {
+            throw new DuplicateUserIdException("이미 가입된 아이디입니다");
+        }
     }
 }

@@ -11,5 +11,6 @@ public interface UserDao{
     List<User> getAll();
     void deleteAll();
     int getCount();
+    int getCountEachId(String id);
     void update(User user);
 }

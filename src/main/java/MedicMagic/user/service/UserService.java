@@ -14,8 +14,10 @@ public interface UserService {
     User get(String id);
     @Transactional(readOnly = true)
     List<User> getAll();
+    int getCountEachId(String id);
     void deleteAll();
     void update(User user);
 
     UserDto signIn(String id, String pw);
+    void signUp(UserDto userDto);
 }
