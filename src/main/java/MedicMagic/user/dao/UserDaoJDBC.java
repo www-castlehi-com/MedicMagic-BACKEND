@@ -52,7 +52,7 @@ public class UserDaoJDBC implements UserDao {
         }
     }
     private void nullCheck(User user) throws NullKeyException {
-        if(user.getId() == null || user.getName() == null || user.getPassword() == null || user.getBirthday() == null || user.getAge() == 0) {
+        if(user.getId().equals("null") || user.getName().equals("null") || user.getPassword().equals("null") || user.getBirthday().equals("null") || user.getAge().equals("null")) {
             throw new NullKeyException("필수 입력 사항입니다");
         }
     }
@@ -60,7 +60,6 @@ public class UserDaoJDBC implements UserDao {
     @Override
     public User get(String id) throws NoUserException, NullKeyException {
         try {
-            if(id == null) { throw new NullKeyException("필수 입력 사항입니다");}
             return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userGet"),
                     new Object[]{id}, this.userMapper);
         } catch (EmptyResultDataAccessException e) {

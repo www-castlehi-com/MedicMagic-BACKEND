@@ -94,13 +94,13 @@ public class UserReminderDaoJDBC implements UserReminderDao{
     }
 
     private Object nullCheck(String column, Object object) {
-        if(column == "beforeBirthControlPills" && object == null) { object = 21; }
+        if(column == "beforeBirthControlPills" && Integer.parseInt(object.toString()) == 0) { object = 21; }
         else if(column == "birthControlPillsTime") {
-            if(object == null) { object = java.sql.Time.valueOf("08:00:00"); }
+            if(object == "08:00:00") { object = java.sql.Time.valueOf("08:00:00"); }
             else { object = java.sql.Time.valueOf(object.toString()); }
         }
-        else if(column == "beforePhysiology" && object == null) { object = 3; }
-        else if(column == "hospitalDate" && object == null) { object = 1; }
+        else if(column == "beforePhysiology" && Integer.parseInt(object.toString()) == 0) { object = 3; }
+        else if(column == "hospitalDate" && Integer.parseInt(object.toString()) == 0) { object = 1; }
 
         return object;
     }

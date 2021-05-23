@@ -1,6 +1,7 @@
 package MedicMagic.user.service;
 
 import MedicMagic.user.DifferentPasswordException;
+import MedicMagic.user.NullKeyException;
 import MedicMagic.user.dao.UserDao;
 import MedicMagic.user.domain.User;
 import MedicMagic.user.dto.UserDto;
@@ -28,7 +29,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void add(User user) {
-
         userDao.add(user);
         userGoalDao.add(user.getId());
         userReminderDao.add(user.getId());
@@ -56,6 +56,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto signIn(String id, String pw){
+
+        if(id.equals("null") || pw.equals("null")) {
+            throw new NullKeyException("필수 입력 사항입니다");
+        }
+
         User user = get(id);
         if(!user.getPassword().equals(pw)) {
             throw new DifferentPasswordException("아이디 혹은 패스워드가 다릅니다");

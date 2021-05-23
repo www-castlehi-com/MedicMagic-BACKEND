@@ -1,5 +1,6 @@
 package MedicMagic.controller;
 
+import MedicMagic.user.NullKeyException;
 import MedicMagic.userGoal.dto.UserGoalDto;
 import MedicMagic.userReminder.domain.UserReminder;
 import MedicMagic.userReminder.dto.UserReminderDto;
@@ -70,7 +71,7 @@ public class UserReminderController {
     }
 
     @RequestMapping(value = "/setReminder_view", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView setReminder(HttpServletRequest httpServletRequest) {
+    public ModelAndView setReminder(HttpServletRequest httpServletRequest) throws NullKeyException {
         try {
             String id = httpServletRequest.getParameter("id");
             boolean birthControlPills;
@@ -79,15 +80,30 @@ public class UserReminderController {
             } else {
                 birthControlPills = false;
             }
-            Integer beforeBirthControlPills = Integer.parseInt(httpServletRequest.getParameter("beforeBirthControlPills"));
-            String birthControlPillsTime = httpServletRequest.getParameter("birthControlPillsTime");
+            Integer beforeBirthControlPills;
+            if(httpServletRequest.getParameter("beforeBirthControlPills") == "null") {
+                beforeBirthControlPills = 0;
+            } else {
+                beforeBirthControlPills = Integer.parseInt(httpServletRequest.getParameter("beforeBirthControlPills"));
+            }
+            String birthControlPillsTime;
+            if(httpServletRequest.getParameter("birthControlPillsTime") == "null") {
+                birthControlPillsTime = "08:00:00";
+            } else {
+                birthControlPillsTime = httpServletRequest.getParameter("birthControlPillsTime");
+            }
             boolean physiology;
             if(httpServletRequest.getParameter("physiology") == "true") {
                 physiology = true;
             } else {
                 physiology = false;
             }
-            Integer beforePhysiology = Integer.parseInt(httpServletRequest.getParameter("beforePhysiology"));
+            Integer beforePhysiology;
+            if(httpServletRequest.getParameter("beforePhysiology") == "null") {
+                beforePhysiology = 0;
+            } else {
+                beforePhysiology = Integer.parseInt(httpServletRequest.getParameter("beforePhysiology"));
+            }
             boolean sleepTimeGoal;
             if(httpServletRequest.getParameter("sleepTimeGoal") == "true") {
                 sleepTimeGoal = true;
@@ -106,7 +122,12 @@ public class UserReminderController {
             } else {
                 hospital = false;
             }
-            Integer hospitalDate = Integer.parseInt(httpServletRequest.getParameter("hospitalDate"));
+            Integer hospitalDate;
+            if(httpServletRequest.getParameter("hospitalDate") == "null") {
+                hospitalDate = 0;
+            } else {
+                hospitalDate = Integer.parseInt(httpServletRequest.getParameter("hospitalDate"));
+            }
 
             userReminderService.update(new UserReminder(id, birthControlPills, beforeBirthControlPills, birthControlPillsTime, physiology, beforePhysiology, sleepTimeGoal, exerciseTimeGoal, hospital, hospitalDate));
 
