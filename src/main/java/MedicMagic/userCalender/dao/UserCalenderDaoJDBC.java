@@ -1,8 +1,8 @@
 package MedicMagic.userCalender.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.userCalender.DuplicateDateException;
-import MedicMagic.userCalender.NegativeException;
+import MedicMagic.exception.DuplicateDateException;
+import MedicMagic.exception.NegativeException;
 import MedicMagic.userCalender.domain.UserCalender;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;

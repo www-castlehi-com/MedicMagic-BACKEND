@@ -1,15 +1,12 @@
 package MedicMagic.user.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.user.DuplicateUserIdException;
-import MedicMagic.user.NoUserException;
-import MedicMagic.user.NullKeyException;
+import MedicMagic.exception.NoUserException;
+import MedicMagic.exception.NullKeyException;
 import MedicMagic.user.domain.User;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;

@@ -1,7 +1,7 @@
 package MedicMagic.userMucus.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.userCalender.DuplicateDateException;
+import MedicMagic.exception.DuplicateDateException;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.domain.UserMucus;
 import org.springframework.dao.DuplicateKeyException;

@@ -1,7 +1,6 @@
 package MedicMagic.userPhysiology.dao;
 
-import MedicMagic.userCalender.DuplicateDateException;
-import MedicMagic.userPhysiology.LastValueNullException;
+import MedicMagic.exception.LastValueNullException;
 import MedicMagic.userPhysiology.domain.UserPhysiology;
 import org.junit.Before;
 import org.junit.Test;

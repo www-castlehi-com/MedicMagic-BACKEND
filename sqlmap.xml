@@ -46,22 +46,6 @@
     <sql key="userSymptomUpdate">UPDATE userSymptom SET none = ?, cramps = ?, breastTenderness = ?, headache = ?, acne = ?, lumbago = ?, nausea = ?, fatigue = ?, abdominalBloating = ?, desires = ?, insomnia = ?, constipation = ?, diarrhea = ? WHERE id = ? AND date = ?</sql>
     <sql key="userSymptomUpdateUserCalenderIfSymptomIsFalse">DELETE FROM userSymptom WHERE id = ? AND date = ?</sql>
 
-    <sql key="userGoalAdd">INSERT INTO userGoal(id) VALUES (?)</sql>
-    <sql key="userGoalGet">SELECT * FROM userGoal WHERE id = ?</sql>
-    <sql key="userGoalGetAll">SELECT * FROM userGoal ORDER BY id</sql>
-    <sql key="userGoalDeleteAll">DELETE FROM userGoal</sql>
-    <sql key="userGoalDeleteEachId">DELETE FROM userGoal WHERE id = ?</sql>
-    <sql key="userGoalGetCount">SELECT COUNT(*) FROM userGoal</sql>
-    <sql key="userGoalUpdate">UPDATE userGoal SET weigh = ?, sleepTime = ?, exerciseTime = ?, waterIntake = ? WHERE id = ?</sql>
-
-    <sql key="userReminderAdd">INSERT INTO userReminder(id) VALUES (?)</sql>
-    <sql key="userReminderGet">SELECT * FROM userReminder WHERE id = ?</sql>
-    <sql key="userReminderGetAll">SELECT * FROM userReminder ORDER BY id</sql>
-    <sql key="userReminderDeleteAll">DELETE FROM userReminder</sql>
-    <sql key="userReminderDeleteEachId">DELETE FROM userReminder WHERE id = ?</sql>
-    <sql key="userReminderGetCount">SELECT COUNT(*) FROM userReminder</sql>
-    <sql key="userReminderUpdate">UPDATE userReminder SET birthControlPills = ?, beforeBirthControlPills = ?, birthControlPillsTime = ?, physiology = ?, beforePhysiology = ?, sleepTimeGoal = ?, exerciseTimeGoal = ?, hospital = ?, hospitalDate = ? WHERE id = ?</sql>
-
     <sql key="userPhysiologyAdd">INSERT INTO userPhysiology(id, startPhysiology) VALUES (?, ?)</sql>
     <sql key="userPhysiologyGet">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology ASC</sql>
     <sql key="userPhysiologyGetEachIdAndDate">SELECT * FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
@@ -74,4 +58,13 @@
     <sql key="userPhysiologyGetCount">SELECT COUNT(*) FROM userPhysiology</sql>
     <sql key="userPhysiologyGetCountEachId">SELECT COUNT(*) FROM userPhysiology WHERE id = ?</sql>
     <sql key="userPhysiologyUpdate">UPDATE userPhysiology SET endPhysiology = ?, expectedOvulationDate = ?, expectedPhysiologyDate = ? WHERE id = ? AND startPhysiology = ?</sql>
+
+    <sql key="userReminderListAdd">INSERT INTO userReminderList(id, birthControlPills, physiology, hospital, waterIntake, exerciseTimeGoal, sleepTimeGoal) VALUES(?, ?, ?, ?, ?, ?, ?)</sql>
+    <sql key="userReminderListGet">SELECT * FROM userReminderList WHERE id = ?</sql>
+    <sql key="userReminderListGetAll">SELECT * FROM userReminderList</sql>
+    <sql key="userReminderListDeleteAll">DELETE FROM userReminderList</sql>
+    <sql key="userReminderListDeleteEachId">DELETE FROM userReminderList WHERE id = ?</sql>
+    <sql key="userReminderListGetCount">SELECT COUNT(*) FROM userReminderList</sql>
+    <sql key="userReminderListGetCountEachId">SELECT COUNT(*) FROM userReminderList WHERE id = ?</sql>
+    <sql key="userReminderListUpdate">UPDATE userReminderList SET birthControlPills = ?, physiology = ?, hospital = ?, waterIntake = ?, exerciseTimeGoal = ?, sleepTimeGoal = ? WHERE id = ?</sql>
 </sqlmap>

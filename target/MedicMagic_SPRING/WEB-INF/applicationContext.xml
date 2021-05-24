@@ -34,25 +34,19 @@
         <property name="sqlService" ref="sqlService" />
     </bean>
 
-    <bean id="userGoalDao" class="MedicMagic.userGoal.dao.UserGoalDaoJDBC">
-        <property name="jdbcTemplate" ref="dataSource" />
-        <property name="sqlService" ref="sqlService" />
-    </bean>
-
-    <bean id="userReminderDao" class="MedicMagic.userReminder.dao.UserReminderDaoJDBC">
-        <property name="jdbcTemplate" ref="dataSource" />
-        <property name="sqlService" ref="sqlService" />
-    </bean>
-
     <bean id="userPhysiologyDao" class="MedicMagic.userPhysiology.dao.UserPhysiologyJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userReminderListDao" class="MedicMagic.userReminder.userReminderList.dao.UserReminderListJDBC">
         <property name="jdbcTemplate" ref="dataSource" />
         <property name="sqlService" ref="sqlService" />
     </bean>
 
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
-        <property name="userGoalDao" ref="userGoalDao" />
-        <property name="userReminderDao" ref="userReminderDao" />
+        <property name="userReminderListDao" ref="userReminderListDao" />
     </bean>
 
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
@@ -68,16 +62,12 @@
         <property name="userMucusDao" ref="userMucusDao" />
     </bean>
 
-    <bean id="userGoalService" class="MedicMagic.userGoal.service.UserGoalServiceImpl">
-        <property name="userGoalDao" ref="userGoalDao" />
-    </bean>
-
-    <bean id="userReminderService" class="MedicMagic.userReminder.service.UserReminderServiceImpl" >
-        <property name="userReminderDao" ref="userReminderDao" />
-    </bean>
-
     <bean id="userPhysiologyService" class="MedicMagic.userPhysiology.service.UserPhysiologyServiceImpl">
         <property name="userPhysiologyDao" ref="userPhysiologyDao" />
+    </bean>
+
+    <bean id="userReminderListService" class="MedicMagic.userReminder.userReminderList.service.UserReminderListServiceImpl">
+        <property name="userReminderListDao" ref="userReminderListDao"/>
     </bean>
 
     <tx:annotation-driven/>

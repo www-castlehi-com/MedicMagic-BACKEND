@@ -82,7 +82,7 @@ public class UserPhysiologyController {
             e.printStackTrace();
 
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("userPhysiology/getLimit3_view");
+            mv.setViewName("userPhysiology/getLimit3Error_view");
             mv.addObject("error", e.getMessage());
 
             return mv;

@@ -1,10 +1,8 @@
 package MedicMagic.userPhysiology.dao;
 
 import MedicMagic.sqlService.SqlService;
-import MedicMagic.userCalender.DuplicateDateException;
-import MedicMagic.userPhysiology.LastValueNullException;
+import MedicMagic.exception.LastValueNullException;
 import MedicMagic.userPhysiology.domain.UserPhysiology;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 

@@ -1,39 +1,33 @@
 package MedicMagic.user.service;
 
-import MedicMagic.user.DifferentPasswordException;
-import MedicMagic.user.DuplicateUserIdException;
-import MedicMagic.user.NullKeyException;
+import MedicMagic.exception.DifferentPasswordException;
+import MedicMagic.exception.DuplicateUserIdException;
+import MedicMagic.exception.NullKeyException;
 import MedicMagic.user.dao.UserDao;
 import MedicMagic.user.domain.User;
 import MedicMagic.user.dto.UserDto;
-import MedicMagic.userCalender.NegativeException;
-import MedicMagic.userGoal.dao.UserGoalDao;
-import MedicMagic.userReminder.dao.UserReminderDao;
+import MedicMagic.exception.NegativeException;
+import MedicMagic.userReminder.userReminderList.dao.UserReminderListDao;
+import MedicMagic.userReminder.userReminderList.dto.UserReminderListDto;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
     UserDao userDao;
-    UserGoalDao userGoalDao;
-    UserReminderDao userReminderDao;
+    UserReminderListDao userReminderListDao;
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    public void setUserGoalDao(UserGoalDao userGoalDao) {
-        this.userGoalDao = userGoalDao;
-    }
-
-    public void setUserReminderDao(UserReminderDao userReminderDao) {
-        this.userReminderDao = userReminderDao;
+    public void setUserReminderListDao(UserReminderListDao userReminderListDao) {
+        this.userReminderListDao = userReminderListDao;
     }
 
     @Override
     public void add(User user) {
         userDao.add(user);
-        userGoalDao.add(user.getId());
-        userReminderDao.add(user.getId());
+        userReminderListDao.add(new UserReminderListDto(user.getId(), "false", "false", "false", "false", "false", "false"));
     }
 
     @Override

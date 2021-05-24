@@ -24,11 +24,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="4fb32f08-724e-4a28-bbe9-68312de90d24">
-        <schema name="medicmagic_server" object-types="view, table, column" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="4fb32f08-724e-4a28-bbe9-68312de90d24">
@@ -91,33 +87,22 @@ CREATE TABLE userMucus (
     CONSTRAINT idWithDate PRIMARY KEY(id, date)
 ) ENGINE = InnoDB;
 
-CREATE TABLE userGoal (
-    id VARCHAR(20) PRIMARY KEY,
-    weigh DOUBLE,
-    sleepTime TIME,
-    exerciseTime TIME,
-    waterIntake DOUBLE
-) ENGINE = InnoDB;
-
-CREATE TABLE userReminder (
-    id VARCHAR(20) PRIMARY KEY,
-    birthControlPills BOOLEAN,
-    beforeBirthControlPills INTEGER,
-    birthControlPillsTime TIME,
-    physiology BOOLEAN,
-    beforePhysiology INTEGER,
-    sleepTimeGoal BOOLEAN,
-    exerciseTimeGoal BOOLEAN,
-    hospital BOOLEAN,
-    hospitalDate INTEGER
-) ENGINE = InnoDB;
-
 CREATE TABLE userPhysiology (
     id VARCHAR(20),
     startPhysiology DATE,
     endPhysiology DATE,
     expectedOvulationDate DATE,
     expectedPhysiologyDate DATE
+) ENGINE = InnoDB;
+
+CREATE TABLE userReminderList(
+    id VARCHAR(20) PRIMARY KEY,
+    birthControlPills BOOLEAN,
+    physiology BOOLEAN,
+    hospital BOOLEAN,
+    waterIntake BOOLEAN,
+    exerciseTimeGoal BOOLEAN,
+    sleepTimeGoal BOOLEAN
 ) ENGINE = InnoDB;]]></console>
     </connection>
   </component>

@@ -1,10 +1,9 @@
 package MedicMagic.controller;
 
-import MedicMagic.user.DifferentPasswordException;
-import MedicMagic.user.DuplicateUserIdException;
-import MedicMagic.user.NoUserException;
-import MedicMagic.user.NullKeyException;
-import MedicMagic.user.domain.User;
+import MedicMagic.exception.DifferentPasswordException;
+import MedicMagic.exception.DuplicateUserIdException;
+import MedicMagic.exception.NoUserException;
+import MedicMagic.exception.NullKeyException;
 import MedicMagic.user.dto.UserDto;
 import MedicMagic.user.service.UserService;
 import lombok.RequiredArgsConstructor;

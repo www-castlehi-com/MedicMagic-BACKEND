@@ -1,14 +1,11 @@
 package MedicMagic.user.dao;
 
-import MedicMagic.user.DuplicateUserIdException;
-import MedicMagic.user.NoUserException;
-import MedicMagic.user.NullKeyException;
+import MedicMagic.exception.NoUserException;
 import MedicMagic.user.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -134,22 +131,6 @@ public class UserDaoTest {
         checkSameUser(user1, user1update);
         User user2same = dao.get(user2.getId());
         checkSameUser(user2, user2same);
-    }
-
-    @Test(expected = DuplicateUserIdException.class)
-    public void duplicateKey() {
-        dao.deleteAll();
-
-        dao.add(user1);
-        dao.add(user1);
-    }
-
-    @Test(expected = NullKeyException.class)
-    public void nullKey() {
-        dao.deleteAll();
-
-        User mockUser = new User("null", "null", "null", "null", 0);
-        dao.add(mockUser);
     }
 
     private void checkSameUser(User user1, User user2) {
