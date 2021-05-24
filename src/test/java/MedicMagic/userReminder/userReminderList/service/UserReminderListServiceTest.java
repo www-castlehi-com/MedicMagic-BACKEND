@@ -2,6 +2,7 @@ package MedicMagic.userReminder.userReminderList.service;
 
 import MedicMagic.user.domain.User;
 import MedicMagic.user.service.UserService;
+import MedicMagic.userReminder.userBirthControlPills.service.UserBirthControlPillsService;
 import MedicMagic.userReminder.userReminderList.dto.UserReminderListDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,8 @@ public class UserReminderListServiceTest {
     UserReminderListService testUserReminderListService;
     @Autowired
     UserService userService;
+    @Autowired
+    UserBirthControlPillsService userBirthControlPillsService;
 
     @Test(expected = TransientDataAccessResourceException.class)
     public void readOnlyTransactionAttribute() {testUserReminderListService.getAll();}
@@ -32,6 +35,8 @@ public class UserReminderListServiceTest {
     public void makeTableWhenSignUp() {
         userReminderListService.deleteAll();
         assertThat(userReminderListService.getAll().size(), is(0));
+
+        userBirthControlPillsService.deleteAll();
 
         userService.deleteAll();
         assertThat(userService.getAll().size(), is(0));

@@ -14,6 +14,7 @@ public interface UserReminderListService {
     List<UserReminderListDto> getAll();
     void deleteAll();
     void deleteEachId(String id);
+    @Transactional(readOnly = true)
     int getCountEachId(String id);
     void update(UserReminderListDto userReminderListDto);
 }

@@ -103,6 +103,35 @@ CREATE TABLE userReminderList(
     waterIntake BOOLEAN,
     exerciseTimeGoal BOOLEAN,
     sleepTimeGoal BOOLEAN
+) ENGINE = InnoDB;
+
+CREATE TABLE userBirthControlPills(
+    id VARCHAR(20) PRIMARY KEY,
+    pillsTime TIME,
+    pillsDate DATE,
+    days INTEGER
+) ENGINE = InnoDB;
+
+CREATE TABLE userReminderPhysiology (
+    id VARCHAR(20) PRIMARY KEY,
+    physiologyTime TIME
+) ENGINE = InnoDB;
+
+CREATE TABLE userHospital(
+    id VARCHAR(20) PRIMARY KEY,
+    hospitalDate DATE,
+    hospitalTime TIME
+) ENGINE = InnoDB;
+
+CREATE TABLE userWaterIntake(
+    id VARCHAR(20) PRIMARY KEY,
+    cups DOUBLE,
+    waterTime TIME
+) ENGINE = InnoDB;
+
+CREATE TABLE userExercise (
+    id VARCHAR(20) PRIMARY KEY,
+    exerciseHour DOUBLE
 ) ENGINE = InnoDB;]]></console>
     </connection>
   </component>

@@ -44,9 +44,39 @@
         <property name="sqlService" ref="sqlService" />
     </bean>
 
+    <bean id="userBirthControlPillsDao" class="MedicMagic.userReminder.userBirthControlPills.dao.UserBirthControlPillsJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userReminderPhysiologyDao" class="MedicMagic.userReminder.userReminderPhysiology.dao.UserReminderPhysiologyJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userHospitalDao" class="MedicMagic.userReminder.userHospital.dao.UserHospitalJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userWaterIntakeDao" class="MedicMagic.userReminder.userWaterIntake.dao.UserWaterIntakeJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
+    <bean id="userExerciseDao" class="MedicMagic.userReminder.userExercise.dao.UserExerciseJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
         <property name="userReminderListDao" ref="userReminderListDao" />
+        <property name="userBirthControlPillsDao" ref="userBirthControlPillsDao"/>
+        <property name="userReminderPhysiologyDao" ref="userReminderPhysiologyDao" />
+        <property name="userHospitalDao" ref="userHospitalDao" />
+        <property name="userWaterIntakeDao" ref="userWaterIntakeDao" />
+        <property name="userExerciseDao" ref="userExerciseDao" />
     </bean>
 
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
@@ -68,6 +98,26 @@
 
     <bean id="userReminderListService" class="MedicMagic.userReminder.userReminderList.service.UserReminderListServiceImpl">
         <property name="userReminderListDao" ref="userReminderListDao"/>
+    </bean>
+
+    <bean id="userBirthControlPillsService" class="MedicMagic.userReminder.userBirthControlPills.service.UserBirthControlPillsServiceImpl">
+        <property name="userBirthControlPillsDao" ref="userBirthControlPillsDao"/>
+    </bean>
+
+    <bean id="userReminderPhysiologyService" class="MedicMagic.userReminder.userReminderPhysiology.service.UserReminderPhysiologyServiceImpl">
+        <property name="userReminderPhysiologyDao" ref="userReminderPhysiologyDao" />
+    </bean>
+
+    <bean id="userHospitalService" class="MedicMagic.userReminder.userHospital.service.UserHospitalServiceImpl">
+        <property name="userHospitalDao" ref="userHospitalDao"/>
+    </bean>
+
+    <bean id="userWaterIntakeService" class="MedicMagic.userReminder.userWaterIntake.service.UserWaterIntakeServiceImpl">
+        <property name="userWaterIntakeDao" ref="userWaterIntakeDao" />
+    </bean>
+
+    <bean id="userExerciseService" class="MedicMagic.userReminder.userExercise.service.UserExerciseServiceImpl">
+        <property name="userExerciseDao" ref="userExerciseDao" />
     </bean>
 
     <tx:annotation-driven/>

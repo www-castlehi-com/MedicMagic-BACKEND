@@ -67,4 +67,49 @@
     <sql key="userReminderListGetCount">SELECT COUNT(*) FROM userReminderList</sql>
     <sql key="userReminderListGetCountEachId">SELECT COUNT(*) FROM userReminderList WHERE id = ?</sql>
     <sql key="userReminderListUpdate">UPDATE userReminderList SET birthControlPills = ?, physiology = ?, hospital = ?, waterIntake = ?, exerciseTimeGoal = ?, sleepTimeGoal = ? WHERE id = ?</sql>
+
+    <sql key="userBirthControlPillsAdd">INSERT INTO userBirthControlPills(id, pillsTime, pillsDate, days) VALUES(?, ?, ?, ?)</sql>
+    <sql key="userBirthControlPillsGet">SELECT * FROM userBirthControlPills WHERE id = ?</sql>
+    <sql key="userBirthControlPillsGetAll">SELECT * FROM userBirthControlPills</sql>
+    <sql key="userBirthControlPillsDeleteAll">DELETE FROM userBirthControlPills</sql>
+    <sql key="userBirthControlPillsDeleteEachId">DELETE FROM userBirthControlPills WHERE id = ?</sql>
+    <sql key="userBirthControlPillsGetCount">SELECT COUNT(*) FROM userBirthControlPills</sql>
+    <sql key="userBirthControlPillsGetCountEachId">SELECT COUNT(*) FROM userBirthControlPills WHERE id = ?</sql>
+    <sql key="userBirthControlPillsUpdate">UPDATE userBirthControlPills SET pillsTime = ?, pillsDate = ?, days = ? WHERE id = ?</sql>
+
+    <sql key="userReminderPhysiologyAdd">INSERT INTO userReminderPhysiology(id, physiologyTime) VALUES(?, ?)</sql>
+    <sql key="userReminderPhysiologyGet">SELECT * FROM userReminderPhysiology WHERE id = ?</sql>
+    <sql key="userReminderPhysiologyGetAll">SELECT * FROM userReminderPhysiology</sql>
+    <sql key="userReminderPhysiologyDeleteAll">DELETE FROM userReminderPhysiology</sql>
+    <sql key="userReminderPhysiologyDeleteEachId">DELETE FROM userReminderPhysiology WHERE id = ?</sql>
+    <sql key="userReminderPhysiologyGetCount">SELECT COUNT(*) FROM userReminderPhysiology</sql>
+    <sql key="userReminderPhysiologyGetCountEachId">SELECT COUNT(*) FROM userReminderPhysiology WHERE id = ?</sql>
+    <sql key="userReminderPhysiologyUpdate">UPDATE userReminderPhysiology SET physiologyTime = ? WHERE id = ?</sql>
+
+    <sql key="userHospitalAdd">INSERT INTO userHospital(id, hospitalDate, hospitalTime) VALUES(?, ?, ?)</sql>
+    <sql key="userHospitalGet">SELECT * FROM userHospital WHERE id = ?</sql>
+    <sql key="userHospitalGetAll">SELECT * FROM userHospital</sql>
+    <sql key="userHospitalDeleteAll">DELETE FROM userHospital</sql>
+    <sql key="userHospitalDeleteEachId">DELETE FROM userHospital WHERE id = ?</sql>
+    <sql key="userHospitalGetCount">SELECT COUNT(*) FROM userHospital</sql>
+    <sql key="userHospitalGetCountEachId">SELECT COUNT(*) FROM userHospital WHERE id = ?</sql>
+    <sql key="userHospitalUpdate">UPDATE userHospital SET hospitalDate = ?, hospitalTime = ? WHERE id = ?</sql>
+
+    <sql key="userWaterIntakeAdd">INSERT INTO userWaterIntake(id, cups, waterTime) VALUES(?, ?, ?)</sql>
+    <sql key="userWaterIntakeGet">SELECT * FROM userWaterIntake WHERE id = ?</sql>
+    <sql key="userWaterIntakeGetAll">SELECT * FROM userWaterIntake</sql>
+    <sql key="userWaterIntakeDeleteAll">DELETE FROM userWaterIntake</sql>
+    <sql key="userWaterIntakeDeleteEachId">DELETE FROM userWaterIntake WHERE id = ?</sql>
+    <sql key="userWaterIntakeGetCount">SELECT COUNT(*) FROM userWaterIntake</sql>
+    <sql key="userWaterIntakeGetCountEachId">SELECT COUNT(*) FROM userWaterIntake WHERE id = ?</sql>
+    <sql key="userWaterIntakeUpdate">UPDATE userWaterIntake SET cups = ?, waterTime = ? WHERE id = ?</sql>
+
+    <sql key="userExerciseAdd">INSERT INTO userExercise(id, exerciseHour) VALUES(?, ?)</sql>
+    <sql key="userExerciseGet">SELECT * FROM userExercise WHERE id = ?</sql>
+    <sql key="userExerciseGetAll">SELECT * FROM userExercise</sql>
+    <sql key="userExerciseDeleteAll">DELETE FROM userExercise</sql>
+    <sql key="userExerciseDeleteEachId">DELETE FROM userExercise WHERE id = ?</sql>
+    <sql key="userExerciseGetCount">SELECT COUNT(*) FROM userExercise</sql>
+    <sql key="userExerciseGetCountEachId">SELECT COUNT(*) FROM userExercise WHERE id = ?</sql>
+    <sql key="userExerciseUpdate">UPDATE userExercise SET exerciseHour = ? WHERE id = ?</sql>
 </sqlmap>
