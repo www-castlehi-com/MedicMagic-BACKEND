@@ -112,4 +112,13 @@
     <sql key="userExerciseGetCount">SELECT COUNT(*) FROM userExercise</sql>
     <sql key="userExerciseGetCountEachId">SELECT COUNT(*) FROM userExercise WHERE id = ?</sql>
     <sql key="userExerciseUpdate">UPDATE userExercise SET exerciseHour = ? WHERE id = ?</sql>
+
+    <sql key="userSleepAdd">INSERT INTO userSleep(id, sleepGoal) VALUES(?, ?)</sql>
+    <sql key="userSleepGet">SELECT * FROM userSleep WHERE id = ?</sql>
+    <sql key="userSleepGetAll">SELECT * FROM userSleep</sql>
+    <sql key="userSleepDeleteAll">DELETE FROM userSleep</sql>
+    <sql key="userSleepDeleteEachId">DELETE FROM userSleep WHERE id = ?</sql>
+    <sql key="userSleepGetCount">SELECT COUNT(*) FROM userSleep</sql>
+    <sql key="userSleepGetCountEachId">SELECT COUNT(*) FROM userSleep WHERE id = ?</sql>
+    <sql key="userSleepUpdate">UPDATE userSleep SET sleepGoal = ? WHERE id = ?</sql>
 </sqlmap>

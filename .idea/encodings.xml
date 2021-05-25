@@ -3,7 +3,8 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/MedicMagic/sqlService/jaxb/Sqlmap.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/src/main/java/MedicMagic/sqlService/jaxb/package-info.java" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-    <file url="PROJECT" charset="UTF-8" />
+    <file url="PROJECT" charset="x-windows-949" />
   </component>
 </project>

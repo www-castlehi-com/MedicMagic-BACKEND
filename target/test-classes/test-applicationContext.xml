@@ -69,6 +69,11 @@
         <property name="sqlService" ref="sqlService" />
     </bean>
 
+    <bean id="userSleepDao" class="MedicMagic.userReminder.userSleep.dao.UserSleepJDBC">
+        <property name="jdbcTemplate" ref="dataSource" />
+        <property name="sqlService" ref="sqlService" />
+    </bean>
+
     <bean id="userService" class="MedicMagic.user.service.UserServiceImpl">
         <property name="userDao" ref="userDao" />
         <property name="userReminderListDao" ref="userReminderListDao" />
@@ -77,6 +82,7 @@
         <property name="userHospitalDao" ref="userHospitalDao" />
         <property name="userWaterIntakeDao" ref="userWaterIntakeDao" />
         <property name="userExerciseDao" ref="userExerciseDao" />
+        <property name="userSleepDao" ref="userSleepDao" />
     </bean>
 
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
@@ -120,11 +126,17 @@
         <property name="userExerciseDao" ref="userExerciseDao" />
     </bean>
 
+    <bean id="userSleepService" class="MedicMagic.userReminder.userSleep.service.UserSleepServiceImpl">
+        <property name="userSleepDao" ref="userSleepDao" />
+    </bean>
+
     <bean id="testUserReminderListService" class="MedicMagic.userReminder.userReminderList.service.UserReminderListServiceTest$TestUserReminderListServiceImpl" parent="userReminderListService" />
     <bean id="testUserBirthControlPillsService" class="MedicMagic.userReminder.userBirthControlPills.service.UserBirthControlPillsServiceTest$TestUserBirthControlPillsServiceImpl" parent="userBirthControlPillsService" />
     <bean id="testUserReminderPhysiologyService" class="MedicMagic.userReminder.userReminderPhysiology.service.UserReminderPhysiologyServiceTest$TestUserReminderPhysiology" parent="userReminderPhysiologyService" />
     <bean id="testUserHospitalService" class="MedicMagic.userReminder.userHospital.service.UserHospitalServiceTest$TestUserHospitalServiceImpl" parent="userHospitalService" />
     <bean id="testUserWaterIntakeService" class="MedicMagic.userReminder.userWaterIntake.service.UserWaterIntakeServiceTest$TestUserWaterIntakeService" parent="userWaterIntakeService" />
+    <bean id="testUserExerciseService" class="MedicMagic.userReminder.userExercise.service.UserExerciseServiceTest$TestUserExerciseService" parent="userExerciseService" />
+    <bean id="testUserSleepService" class="MedicMagic.userReminder.userSleep.service.UserSleepServiceTest$TestUserSleepService" parent="userSleepService"/>
 
     <tx:annotation-driven/>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

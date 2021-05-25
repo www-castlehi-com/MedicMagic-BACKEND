@@ -17,6 +17,8 @@ import MedicMagic.userReminder.userReminderList.dao.UserReminderListDao;
 import MedicMagic.userReminder.userReminderList.dto.UserReminderListDto;
 import MedicMagic.userReminder.userReminderPhysiology.dao.UserReminderPhysiologyDao;
 import MedicMagic.userReminder.userReminderPhysiology.dto.UserReminderPhysiologyDto;
+import MedicMagic.userReminder.userSleep.dao.UserSleepDao;
+import MedicMagic.userReminder.userSleep.dto.UserSleepDto;
 import MedicMagic.userReminder.userWaterIntake.dao.UserWaterIntakeDao;
 import MedicMagic.userReminder.userWaterIntake.dto.UserWaterIntakeDto;
 
@@ -32,6 +34,7 @@ public class UserServiceImpl implements UserService{
     UserHospitalDao userHospitalDao;
     UserWaterIntakeDao userWaterIntakeDao;
     UserExerciseDao userExerciseDao;
+    UserSleepDao userSleepDao;
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -61,6 +64,10 @@ public class UserServiceImpl implements UserService{
         this.userExerciseDao = userExerciseDao;
     }
 
+    public void setUserSleepDao(UserSleepDao userSleepDao) {
+        this.userSleepDao = userSleepDao;
+    }
+
     @Override
     public void add(User user) {
         userDao.add(user);
@@ -70,6 +77,7 @@ public class UserServiceImpl implements UserService{
         userHospitalDao.add(new UserHospitalDto(user.getId(), "null", "18:00:00"));
         userWaterIntakeDao.add(new UserWaterIntakeDto(user.getId(), "0.0", "22:00:00"));
         userExerciseDao.add(new UserExerciseDto(user.getId(), "0.0"));
+        userSleepDao.add(new UserSleepDto(user.getId(), "0.0"));
     }
 
     @Override

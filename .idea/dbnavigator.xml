@@ -132,6 +132,11 @@ CREATE TABLE userWaterIntake(
 CREATE TABLE userExercise (
     id VARCHAR(20) PRIMARY KEY,
     exerciseHour DOUBLE
+) ENGINE = InnoDB;
+
+CREATE TABLE userSleep (
+    id VARCHAR(20) PRIMARY KEY,
+    sleepGoal DOUBLE
 ) ENGINE = InnoDB;]]></console>
     </connection>
   </component>

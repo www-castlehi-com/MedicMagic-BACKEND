@@ -1,5 +1,6 @@
 package MedicMagic.userReminder.userExercise.service;
 
+import MedicMagic.exception.NegativeException;
 import MedicMagic.userReminder.userExercise.dao.UserExerciseDao;
 import MedicMagic.userReminder.userExercise.dto.UserExerciseDto;
 

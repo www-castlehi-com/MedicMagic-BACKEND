@@ -23,6 +23,7 @@ MedicMagic\userSymptom\dto\UserSymptomDto.class
 MedicMagic\userSymptom\dao\UserSymptomDaoJDBC.class
 MedicMagic\controller\UserCalenderController.class
 MedicMagic\sqlService\jaxb\Sqlmap.class
+MedicMagic\userReminder\userSleep\dao\UserSleepDao.class
 MedicMagic\user\dao\UserDao.class
 MedicMagic\user\domain\User.class
 MedicMagic\userReminder\userHospital\dao\UserHospitalDao.class
@@ -33,8 +34,10 @@ MedicMagic\userReminder\userWaterIntake\dao\UserWaterIntakeJDBC.class
 MedicMagic\userPhysiology\service\UserPhysiologyServiceImpl.class
 MedicMagic\sqlService\jaxb\package-info.class
 MedicMagic\userCalender\domain\UserCalender.class
+MedicMagic\userReminder\userSleep\domain\UserSleep.class
 MedicMagic\controller\UserReminder\UserHospitalController.class
 MedicMagic\userReminder\userReminderPhysiology\dao\UserReminderPhysiologyJDBC.class
+MedicMagic\controller\UserReminder\UserExerciseController.class
 MedicMagic\userMucus\service\UserMucusServiceImpl.class
 MedicMagic\userSymptom\dao\UserSymptomDaoJDBC$1.class
 MedicMagic\user\service\UserServiceImpl.class
@@ -43,7 +46,9 @@ MedicMagic\userReminder\userReminderPhysiology\dao\UserReminderPhysiologyJDBC$1.
 MedicMagic\userReminder\userReminderPhysiology\dao\UserReminderPhysiologyDao.class
 MedicMagic\userReminder\userWaterIntake\service\UserWaterIntakeService.class
 MedicMagic\user\dto\UserDto.class
+MedicMagic\userReminder\userSleep\dao\UserSleepJDBC.class
 MedicMagic\userReminder\userReminderList\dao\UserReminderListJDBC.class
+MedicMagic\userReminder\userSleep\service\UserSleepServiceImpl.class
 MedicMagic\userCalender\dao\UserCalenderDaoJDBC.class
 MedicMagic\userCalender\dao\UserCalenderDaoJDBC$1.class
 MedicMagic\userCalender\dto\UserCalenderDto.class
@@ -71,17 +76,20 @@ MedicMagic\controller\UserSymptomController.class
 MedicMagic\userReminder\userBirthControlPills\dao\UserBirthControlPillsJDBC$1.class
 MedicMagic\userPhysiology\dto\UserPhysiologyDto.class
 MedicMagic\userPhysiology\service\UserPhysiologyService.class
+MedicMagic\controller\UserReminder\UserSleepController.class
 MedicMagic\exception\DuplicateDateException.class
 MedicMagic\userMucus\dao\UserMucusDaoJDBC.class
 MedicMagic\userMucus\dao\UserMucusDao.class
 MedicMagic\sqlService\jaxb\SqlType.class
 MedicMagic\exception\NullKeyException.class
 MedicMagic\controller\UserMucusController.class
+MedicMagic\userReminder\userSleep\dao\UserSleepJDBC$1.class
 MedicMagic\userReminder\userWaterIntake\dao\UserWaterIntakeJDBC$1.class
 MedicMagic\controller\UserReminder\UserBirthControlPillsController.class
 MedicMagic\controller\UserReminder\UserReminderPhysiologyController.class
 MedicMagic\userPhysiology\dao\UserPhysiologyJDBC.class
 MedicMagic\userReminder\userBirthControlPills\dto\UserBirthControlPillsDto.class
+MedicMagic\userReminder\userSleep\dto\UserSleepDto.class
 MedicMagic\userSymptom\service\UserSymptomServiceImpl.class
 MedicMagic\exception\DuplicateUserIdException.class
 MedicMagic\userCalender\service\UserCalenderServiceImpl.class
@@ -104,3 +112,4 @@ MedicMagic\userReminder\userHospital\dao\UserHospitalJDBC$1.class
 MedicMagic\userReminder\userReminderList\service\UserReminderListService.class
 MedicMagic\user\dao\UserDaoJDBC$1.class
 MedicMagic\sqlService\JaxbXmlSqlReader.class
+MedicMagic\userReminder\userSleep\service\UserSleepService.class
