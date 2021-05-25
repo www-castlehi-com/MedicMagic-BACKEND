@@ -6,4 +6,4 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%=request.getParameter("id")%> <%=request.getParameter("cups")%> <%=request.getParameter("water_time")%>
+<%=request.getAttribute("id")%> <%=request.getAttribute("cups")%> <%=request.getAttribute("water_time")%>

@@ -47,10 +47,13 @@ public class UserSleepController {
 
             UserSleepDto userSleepDto = userSleepService.get(id);
 
+            System.out.println(userSleepDto.id);
+            System.out.println(userSleepDto.sleepGoal);
+
             ModelAndView mv = new ModelAndView();
             mv.setViewName("userReminder/userSleep/getUserSleep_view");
             mv.addObject("id", id);
-            mv.addObject("sleep_goal", userSleepDto.sleepGoal);
+            mv.addObject("sleep_goal", userSleepDto.sleepGoal.doubleValue());
 
             return mv;
         } catch(Exception e){

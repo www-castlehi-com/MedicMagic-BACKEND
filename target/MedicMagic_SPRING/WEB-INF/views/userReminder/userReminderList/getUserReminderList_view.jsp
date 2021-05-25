@@ -6,4 +6,4 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%=request.getParameter("id")%> <%=request.getParameter("birthControlPills")%> <%=request.getParameter("physiology")%> <%=request.getParameter("hospital")%> <%=request.getParameter("water")%> <%=request.getParameter("exerciseTimeGoal")%> <%=request.getParameter("sleepTimeGoal")%>
+<%=request.getAttribute("id")%> <%=request.getAttribute("birthControlPills")%> <%=request.getAttribute("physiology")%> <%=request.getAttribute("hospital")%> <%=request.getAttribute("water")%> <%=request.getAttribute("exerciseTimeGoal")%> <%=request.getAttribute("sleepTimeGoal")%>
