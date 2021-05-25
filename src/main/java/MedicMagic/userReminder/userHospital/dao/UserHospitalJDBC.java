@@ -43,7 +43,7 @@ public class UserHospitalJDBC implements UserHospitalDao {
 
     @Override
     public UserHospitalDto get(String id) {
-        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userHospitalGet"), new Object[]{id}, userHospitalDtoRowMapper);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userHospitalGet"), new Object[]{id}, this.userHospitalDtoRowMapper);
     }
 
     @Override

@@ -10,7 +10,8 @@ public class UserHospitalDto {
     public UserHospitalDto(UserHospital userHospital) {
         this.id = userHospital.getId();
         if(userHospital.getHospitalDate() == null) {
-            this.hospitalDate = null;
+            System.out.println("date is null");
+            this.hospitalDate = "null";
         } else {
             this.hospitalDate = userHospital.getHospitalDate();
         }

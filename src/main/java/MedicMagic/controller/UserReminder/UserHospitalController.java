@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 @RestController
 public class UserHospitalController {
-    private UserHospitalService userHospitalService;
+    private final UserHospitalService userHospitalService;
 
     @RequestMapping(value = "/setUserHospital_view", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView setUserHospital(HttpServletRequest httpServletRequest) {
