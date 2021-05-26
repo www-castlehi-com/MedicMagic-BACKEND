@@ -8,23 +8,24 @@ import java.util.List;
 
 @Transactional
 public interface UserPhysiologyService {
-    void add(UserPhysiology userPhysiology);
+    void add(UserPhysiologyDto userPhysiologyDto);
+    List<UserPhysiologyDto> get(String id);
     @Transactional(readOnly = true)
-    List<UserPhysiology> get(String id);
+    UserPhysiologyDto getEachIdAndStartPhysiology(String id, String startPhysiology);
     @Transactional(readOnly = true)
-    UserPhysiology getEachIdAndStartPhysiology(String id, String startPhysiology);
+    UserPhysiologyDto getLastEachId(String id);
     @Transactional(readOnly = true)
-    UserPhysiology getLastEachId(String id);
+    List<UserPhysiologyDto> getAll();
     @Transactional(readOnly = true)
-    List<UserPhysiology> getAll();
+    List<UserPhysiologyDto> getEachIdLimit3(String id);
     @Transactional(readOnly = true)
-    List<UserPhysiology> getEachIdLimit3(String id);
+    List<UserPhysiologyDto> getEachIdAndMonth(String id, String month);
     void deleteAll();
     void deleteEachIdAndStartPhysiology(String id, String startPhysiology);
     void deleteEachIdAndEndPhysiology(String id, String endPhysiology);
-    void update(UserPhysiology userPhysiology);
     @Transactional(readOnly = true)
-    UserPhysiologyDto getLastEachIdTransform(String id);
+    int getCountEachId(String id);
     @Transactional(readOnly = true)
-    List<UserPhysiologyDto> getEachIdLimit3Transform(String id);
+    int getCountEachIdAndStartPhysiology(String id, String startPhysiology);
+    void update(UserPhysiologyDto userPhysiologyDto);
 }

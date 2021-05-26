@@ -2,6 +2,7 @@ package MedicMagic.userPhysiology.dao;
 
 import MedicMagic.exception.LastValueNullException;
 import MedicMagic.userPhysiology.domain.UserPhysiology;
+import MedicMagic.userPhysiology.dto.UserPhysiologyDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ public class UserPhysiologyDaoTest {
     @Autowired
     private UserPhysiologyDao userPhysiologyDao;
 
-    private List<UserPhysiology> userPhysiologyList = new ArrayList<>();
+    private List<UserPhysiologyDto> userPhysiologyList = new ArrayList<>();
     private String endPhysiology;
     private String expectedOvulationDate;
     private String expectedPhysiologyDate;
@@ -33,11 +34,11 @@ public class UserPhysiologyDaoTest {
     @Before
     public void setUp() throws Exception {
         userPhysiologyList = Arrays.asList(
-                new UserPhysiology("gryffindor", "2021-05-19", "2021-05-20", "2021-06-04", "2021-06-19"),
-                new UserPhysiology("gryffindor", "2021-06-19", "2021-06-20", "2021-07-04", "2021-07-19"),
-                new UserPhysiology("gryffindor", "2021-07-19", "2021-07-20", "2021-08-04", "2021-08-19"),
-                new UserPhysiology("slyderin", "2021-07-20", "2021-07-21", "2021-08-05", "2021-08-20"),
-                new UserPhysiology("slyderin", "2021-08-12", "null", "null", "null")
+                new UserPhysiologyDto("gryffindor", "2021-05-19", "2021-05-20", "2021-06-04", "2021-06-19"),
+                new UserPhysiologyDto("gryffindor", "2021-06-19", "2021-06-20", "2021-07-04", "2021-07-19"),
+                new UserPhysiologyDto("gryffindor", "2021-07-19", "2021-07-20", "2021-08-04", "2021-08-19"),
+                new UserPhysiologyDto("slyderin", "2021-07-20", "2021-07-21", "2021-08-05", "2021-08-20"),
+                new UserPhysiologyDto("slyderin", "2021-08-12", "null", "null", "null")
         );
 
         endPhysiology = "2021-08-13";
@@ -52,11 +53,11 @@ public class UserPhysiologyDaoTest {
 
         userPhysiologyDao.add(userPhysiologyList.get(0));
         assertThat(userPhysiologyDao.getCount(), is(1));
-        checkSameUserIdAndStartPhysiology(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(0).getId(), userPhysiologyList.get(0).getStartPhysiology()), userPhysiologyList.get(0));
+        checkSameUserIdAndStartPhysiology(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(0).id, userPhysiologyList.get(0).startPhysiology), userPhysiologyList.get(0));
 
         userPhysiologyDao.add(userPhysiologyList.get(3));
         assertThat(userPhysiologyDao.getCount(), is(2));
-        checkSameUserIdAndStartPhysiology(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(3).getId(), userPhysiologyList.get(3).getStartPhysiology()), userPhysiologyList.get(3));
+        checkSameUserIdAndStartPhysiology(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(3).id, userPhysiologyList.get(3).startPhysiology), userPhysiologyList.get(3));
     }
 
     @Test
@@ -65,14 +66,25 @@ public class UserPhysiologyDaoTest {
         assertThat(userPhysiologyDao.getCount(), is(0));
 
         int count = 1;
-        for(UserPhysiology userPhysiology : userPhysiologyList) {
-            userPhysiologyDao.add(userPhysiology);
+        for(UserPhysiologyDto userPhysiologyDto : userPhysiologyList) {
+            userPhysiologyDao.add(userPhysiologyDto);
             assertThat(userPhysiologyDao.getCount(), is(count++));
-            userPhysiologyDao.update(userPhysiology);
+//            userPhysiologyDao.update(userPhysiologyDto);
         }
 
         for(int i = 0; i < userPhysiologyDao.getAll().size(); i++) {
-            checkSameUser(userPhysiologyList.get(i), userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(i).getId(), userPhysiologyList.get(i).getStartPhysiology()));
+            System.out.println(userPhysiologyList.get(i).startPhysiology);
+            System.out.println(userPhysiologyList.get(i).endPhysiology);
+            System.out.println(userPhysiologyList.get(i).expectedPhysiologyDate);
+            System.out.println(userPhysiologyList.get(i).expectedOvulationDate);
+
+
+            System.out.println(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(i).id, userPhysiologyList.get(i).startPhysiology).startPhysiology);
+            System.out.println(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(i).id, userPhysiologyList.get(i).startPhysiology).endPhysiology);
+            System.out.println(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(i).id, userPhysiologyList.get(i).startPhysiology).expectedOvulationDate);
+            System.out.println(userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(i).id, userPhysiologyList.get(i).startPhysiology).expectedPhysiologyDate);
+
+            checkSameUser(userPhysiologyList.get(i), userPhysiologyDao.getEachIdAndStartPhysiology(userPhysiologyList.get(i).id, userPhysiologyList.get(i).startPhysiology));
         }
     }
 
@@ -82,15 +94,15 @@ public class UserPhysiologyDaoTest {
         assertThat(userPhysiologyDao.getCount(), is(0));
 
         int count = 1;
-        for(UserPhysiology userPhysiology : userPhysiologyList) {
-            userPhysiologyDao.add(userPhysiology);
+        for(UserPhysiologyDto userPhysiologyDto : userPhysiologyList) {
+            userPhysiologyDao.add(userPhysiologyDto);
             assertThat(userPhysiologyDao.getCount(), is(count++));
-            userPhysiologyDao.update(userPhysiology);
+            userPhysiologyDao.update(userPhysiologyDto);
         }
 
         count = 2;
-        for(UserPhysiology userPhysiology : userPhysiologyDao.getEachIdLimit3(userPhysiologyList.get(0).getId())) {
-            checkSameUser(userPhysiology, userPhysiologyList.get(count--));
+        for(UserPhysiologyDto userPhysiologyDto : userPhysiologyDao.getEachIdLimit3(userPhysiologyList.get(0).id)) {
+            checkSameUser(userPhysiologyDto, userPhysiologyList.get(count--));
         }
     }
 
@@ -105,7 +117,7 @@ public class UserPhysiologyDaoTest {
         userPhysiologyDao.update(userPhysiologyList.get(4));
         assertThat(userPhysiologyDao.getCount(), is(2));
 
-        checkSameUser(userPhysiologyList.get(4), userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).getId()));
+        checkSameUser(userPhysiologyList.get(4), userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).id));
     }
 
     @Test
@@ -119,15 +131,15 @@ public class UserPhysiologyDaoTest {
         userPhysiologyDao.update(userPhysiologyList.get(4));
         assertThat(userPhysiologyDao.getCount(), is(2));
 
-        UserPhysiology userPhysiology = userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).getId());
-        userPhysiology.setEndPhysiology(endPhysiology);
-        userPhysiology.setExpectedOvulationDate(expectedOvulationDate);
-        userPhysiology.setExpectedPhysiologyDate(expectedPhysiologyDate);
+        UserPhysiologyDto userPhysiologyDto = userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).id);
+        userPhysiologyDto.endPhysiology = endPhysiology;
+        userPhysiologyDto.expectedOvulationDate = expectedOvulationDate;
+        userPhysiologyDto.expectedPhysiologyDate = expectedPhysiologyDate;
 
-        userPhysiologyDao.update(userPhysiology);
-        assertThat(userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).getId()).getEndPhysiology(), is(endPhysiology));
-        assertThat(userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).getId()).getExpectedOvulationDate(), is(expectedOvulationDate));
-        assertThat(userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).getId()).getExpectedPhysiologyDate(), is(expectedPhysiologyDate));
+        userPhysiologyDao.update(userPhysiologyDto);
+        assertThat(userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).id).endPhysiology, is(endPhysiology));
+        assertThat(userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).id).expectedOvulationDate, is(expectedOvulationDate));
+        assertThat(userPhysiologyDao.getLastEachId(userPhysiologyList.get(3).id).expectedPhysiologyDate, is(expectedPhysiologyDate));
     }
 
     @Test(expected = LastValueNullException.class)
@@ -139,8 +151,8 @@ public class UserPhysiologyDaoTest {
         userPhysiologyDao.update(userPhysiologyList.get(4));
         assertThat(userPhysiologyDao.getCount(), is(1));
 
-        UserPhysiology userPhysiology = new UserPhysiology(userPhysiologyList.get(4).getId(), "2000-01-01", endPhysiology, expectedOvulationDate, expectedPhysiologyDate);
-        userPhysiologyDao.add(userPhysiology);
+        UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userPhysiologyList.get(4).id, "2000-01-01", endPhysiology, expectedOvulationDate, expectedPhysiologyDate);
+        userPhysiologyDao.add(userPhysiologyDto);
     }
 
     @Test
@@ -152,12 +164,12 @@ public class UserPhysiologyDaoTest {
         userPhysiologyDao.update(userPhysiologyList.get(0));
         assertThat(userPhysiologyDao.getCount(), is(1));
 
-        userPhysiologyDao.deleteEachIdAndStartPhysiology(userPhysiologyList.get(0).getId(), userPhysiologyList.get(0).getStartPhysiology());
+        userPhysiologyDao.deleteEachIdAndStartPhysiology(userPhysiologyList.get(0).id, userPhysiologyList.get(0).startPhysiology);
         assertThat(userPhysiologyDao.getCount(), is(0));
     }
 
     @Test
-    public void deleteWithEndPhsiology() {
+    public void deleteWithEndPhysiology() {
         userPhysiologyDao.deleteAll();
         assertThat(userPhysiologyDao.getCount(), is(0));
 
@@ -165,21 +177,21 @@ public class UserPhysiologyDaoTest {
         userPhysiologyDao.update(userPhysiologyList.get(0));
         assertThat(userPhysiologyDao.getCount(), is(1));
 
-        userPhysiologyDao.deleteEachIdAndEndPhysiology(userPhysiologyList.get(0).getId(), userPhysiologyList.get(0).getEndPhysiology());
+        userPhysiologyDao.deleteEachIdAndEndPhysiology(userPhysiologyList.get(0).id, userPhysiologyList.get(0).endPhysiology);
         assertThat(userPhysiologyDao.getCount(), is(0));
     }
 
-    private void checkSameUserIdAndStartPhysiology(UserPhysiology userPhysiology1, UserPhysiology userPhysiology2) {
-        assertThat(userPhysiology1.getId(), is(userPhysiology2.getId()));
-        assertThat(userPhysiology1.getStartPhysiology(), is(userPhysiology2.getStartPhysiology()));
+    private void checkSameUserIdAndStartPhysiology(UserPhysiologyDto userPhysiologyDto1, UserPhysiologyDto userPhysiologyDto2) {
+        assertThat(userPhysiologyDto1.id, is(userPhysiologyDto2.id));
+        assertThat(userPhysiologyDto1.startPhysiology, is(userPhysiologyDto2.startPhysiology));
     }
 
-    private void checkSameUser(UserPhysiology userPhysiology1, UserPhysiology userPhysiology2) {
-        assertThat(userPhysiology1.getId(), is(userPhysiology2.getId()));
-        assertThat(userPhysiology1.getStartPhysiology(), is(userPhysiology2.getStartPhysiology()));
-        assertThat(userPhysiology1.getEndPhysiology(), is(nullCheck(userPhysiology2.getEndPhysiology())));
-        assertThat(userPhysiology1.getExpectedOvulationDate(), is(nullCheck(userPhysiology2.getExpectedOvulationDate())));
-        assertThat(userPhysiology1.getExpectedPhysiologyDate(), is(nullCheck(userPhysiology2.getExpectedPhysiologyDate())));
+    private void checkSameUser(UserPhysiologyDto userPhysiologyDto1, UserPhysiologyDto userPhysiologyDto2) {
+        assertThat(userPhysiologyDto1.id, is(userPhysiologyDto2.id));
+        assertThat(userPhysiologyDto1.startPhysiology, is(userPhysiologyDto2.startPhysiology));
+        assertThat(userPhysiologyDto1.endPhysiology, is(userPhysiologyDto2.endPhysiology));
+        assertThat(userPhysiologyDto1.expectedOvulationDate, is(userPhysiologyDto2.expectedOvulationDate));
+        assertThat(userPhysiologyDto1.expectedPhysiologyDate, is(userPhysiologyDto2.expectedPhysiologyDate));
     }
 
     private String nullCheck(String object) {

@@ -3,6 +3,7 @@ package MedicMagic.userPhysiology.dao;
 import MedicMagic.sqlService.SqlService;
 import MedicMagic.exception.LastValueNullException;
 import MedicMagic.userPhysiology.domain.UserPhysiology;
+import MedicMagic.userPhysiology.dto.UserPhysiologyDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -23,50 +24,62 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
         this.sqlService = sqlService;
     }
 
-    private RowMapper<UserPhysiology> userPhysiologyRowMapper = new RowMapper<UserPhysiology>() {
+    private RowMapper<UserPhysiologyDto> userPhysiologyRowMapper = new RowMapper<UserPhysiologyDto>() {
         @Override
-        public UserPhysiology mapRow(ResultSet resultSet, int i) throws SQLException {
+        public UserPhysiologyDto mapRow(ResultSet resultSet, int i) throws SQLException {
             UserPhysiology userPhysiology = new UserPhysiology();
             userPhysiology.setId(resultSet.getString("id"));
             userPhysiology.setStartPhysiology(resultSet.getString("startPhysiology"));
             userPhysiology.setEndPhysiology(resultSet.getString("endPhysiology"));
             userPhysiology.setExpectedOvulationDate(resultSet.getString("expectedOvulationDate"));
             userPhysiology.setExpectedPhysiologyDate(resultSet.getString("expectedPhysiologyDate"));
-            return userPhysiology;
+            UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userPhysiology);
+            return userPhysiologyDto;
         }
     };
 
     @Override
-    public void add(UserPhysiology userPhysiology){
-        if(this.getCountEachId(userPhysiology.getId()) != 0 && this.getLastEachId(userPhysiology.getId()).getEndPhysiology() == null) {
+    public void add(UserPhysiologyDto userPhysiologyDto){
+        if(this.getCountEachId(userPhysiologyDto.id) != 0 && this.getLastEachId(userPhysiologyDto.id).endPhysiology == null) {
             throw new LastValueNullException("이전 주기 입력을 완료해주세요");
         }
-        this.jdbcTemplate.update(this.sqlService.getSql("userPhysiologyAdd"), userPhysiology.getId(), java.sql.Date.valueOf(userPhysiology.getStartPhysiology()).toString());
+        this.jdbcTemplate.update(this.sqlService.getSql("userPhysiologyAdd"),
+                userPhysiologyDto.id,
+                java.sql.Date.valueOf(userPhysiologyDto.startPhysiology).toString(),
+                nullCheck("endPhysiology", userPhysiologyDto.endPhysiology),
+                nullCheck("expectedOvulationDate", userPhysiologyDto.expectedOvulationDate),
+                nullCheck("expectedPhysiologyDate", userPhysiologyDto.expectedPhysiologyDate)
+        );
     }
 
     @Override
-    public List<UserPhysiology> get(String id) {
-        return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGet"), new Object[]{id}, this.userPhysiologyRowMapper);
+    public List<UserPhysiologyDto> get(String id) {
+        return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGet"), this.userPhysiologyRowMapper);
     }
 
     @Override
-    public UserPhysiology getEachIdAndStartPhysiology(String id, String startPhysiology) {
-        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetEachIdAndDate"), new Object[]{id, startPhysiology}, this.userPhysiologyRowMapper);
+    public UserPhysiologyDto getEachIdAndStartPhysiology(String id, String startPhysiology) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetEachIdAndDate"), this.userPhysiologyRowMapper, new Object[]{id, startPhysiology});
     }
 
     @Override
-    public UserPhysiology getLastEachId(String id) {
+    public UserPhysiologyDto getLastEachId(String id) {
         return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetLastEachId"), new Object[]{id}, this.userPhysiologyRowMapper);
     }
 
     @Override
-    public List<UserPhysiology> getAll() {
+    public List<UserPhysiologyDto> getAll() {
         return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGetAll"), this.userPhysiologyRowMapper);
     }
 
     @Override
-    public List<UserPhysiology> getEachIdLimit3(String id) {
+    public List<UserPhysiologyDto> getEachIdLimit3(String id) {
         return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGetEachIdLimit3"), new Object[]{id}, this.userPhysiologyRowMapper);
+    }
+
+    @Override
+    public List<UserPhysiologyDto> getEachIdAndMonth(String id, String month) {
+        return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGetEachIdAndMonth"), new Object[]{id, month, month}, this.userPhysiologyRowMapper);
     }
 
     @Override
@@ -95,24 +108,29 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
     }
 
     @Override
-    public void update(UserPhysiology userPhysiology) {
+    public int getCountEachIdAndStartPhysiology(String id, String startPhysiology) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetCountEachIdAndStartPhysiology"), new Object[]{id, startPhysiology}, Integer.class);
+    }
+
+    @Override
+    public void update(UserPhysiologyDto userPhysiologyDto) {
         this.jdbcTemplate.update(this.sqlService.getSql("userPhysiologyUpdate"),
-                nullCheck("endPhysiology", userPhysiology.getEndPhysiology()),
-                nullCheck("expectedOvulationDate", userPhysiology.getExpectedOvulationDate()),
-                nullCheck("expectedPhysiologyDate", userPhysiology.getExpectedPhysiologyDate()),
-                userPhysiology.getId(),
-                java.sql.Date.valueOf(userPhysiology.getStartPhysiology().toString())
+                nullCheck("endPhysiology", userPhysiologyDto.endPhysiology),
+                nullCheck("expectedOvulationDate", userPhysiologyDto.expectedOvulationDate),
+                nullCheck("expectedPhysiologyDate", userPhysiologyDto.expectedPhysiologyDate),
+                userPhysiologyDto.id,
+                java.sql.Date.valueOf(userPhysiologyDto.startPhysiology)
                 );
     }
 
     private Object nullCheck(String column, Object object) {
-        if(column == "endPhysiology" && object != "null") {
+        if(column == "endPhysiology" && object != null) {
             return java.sql.Date.valueOf(object.toString());
         }
-        else if(column == "expectedOvulationDate" && object != "null") {
+        else if(column == "expectedOvulationDate" && object != null) {
             return java.sql.Date.valueOf(object.toString());
         }
-        else if(column == "expectedPhysiologyDate" && object != "null") {
+        else if(column == "expectedPhysiologyDate" && object != null) {
             return java.sql.Date.valueOf(object.toString());
         }
         else {

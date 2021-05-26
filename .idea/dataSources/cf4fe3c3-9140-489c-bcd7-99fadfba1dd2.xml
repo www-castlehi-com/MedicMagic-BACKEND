@@ -4554,288 +4554,280 @@ ALL PRIVILEGES|db
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1118" parent="368" name="weigh">
+    <column id="1118" parent="368" name="sleepTime">
       <Position>3</Position>
-      <DataType>double|0s</DataType>
+      <DataType>time|0s</DataType>
     </column>
-    <column id="1119" parent="368" name="sleepTime">
+    <column id="1119" parent="368" name="exerciseTime">
       <Position>4</Position>
       <DataType>time|0s</DataType>
     </column>
-    <column id="1120" parent="368" name="exerciseTime">
+    <column id="1120" parent="368" name="waterIntake">
       <Position>5</Position>
-      <DataType>time|0s</DataType>
+      <DataType>int|0s</DataType>
     </column>
-    <column id="1121" parent="368" name="waterIntake">
+    <column id="1121" parent="368" name="startDay">
       <Position>6</Position>
-      <DataType>double|0s</DataType>
+      <DataType>date|0s</DataType>
     </column>
-    <column id="1122" parent="368" name="startDay">
+    <column id="1122" parent="368" name="endDay">
       <Position>7</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="1123" parent="368" name="endDay">
+    <column id="1123" parent="368" name="symptom">
       <Position>8</Position>
-      <DataType>date|0s</DataType>
+      <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1124" parent="368" name="emotion">
+    <column id="1124" parent="368" name="mucus">
       <Position>9</Position>
-      <DataType>varchar(20)|0s</DataType>
-    </column>
-    <column id="1125" parent="368" name="symptom">
-      <Position>10</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1126" parent="368" name="mucus">
-      <Position>11</Position>
-      <DataType>tinyint(1)|0s</DataType>
-    </column>
-    <key id="1127" parent="368" name="PRIMARY">
+    <key id="1125" parent="368" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 date</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1128" parent="369" name="id">
+    <column id="1126" parent="369" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1129" parent="369" name="exerciseHour">
+    <column id="1127" parent="369" name="exerciseHour">
       <Position>2</Position>
       <DataType>double|0s</DataType>
     </column>
-    <key id="1130" parent="369" name="PRIMARY">
+    <key id="1128" parent="369" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1131" parent="370" name="id">
+    <column id="1129" parent="370" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1132" parent="370" name="hospitalDate">
+    <column id="1130" parent="370" name="hospitalDate">
       <Position>2</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="1133" parent="370" name="hospitalTime">
+    <column id="1131" parent="370" name="hospitalTime">
       <Position>3</Position>
       <DataType>time|0s</DataType>
     </column>
-    <key id="1134" parent="370" name="PRIMARY">
+    <key id="1132" parent="370" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1135" parent="371" name="id">
+    <column id="1133" parent="371" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1136" parent="371" name="date">
+    <column id="1134" parent="371" name="date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1137" parent="371" name="none">
+    <column id="1135" parent="371" name="none">
       <Position>3</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1138" parent="371" name="mottled">
+    <column id="1136" parent="371" name="mottled">
       <Position>4</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1139" parent="371" name="sticky">
+    <column id="1137" parent="371" name="sticky">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1140" parent="371" name="creamy">
+    <column id="1138" parent="371" name="creamy">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1141" parent="371" name="likeEggWhite">
+    <column id="1139" parent="371" name="likeEggWhite">
       <Position>7</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1142" parent="371" name="watery">
+    <column id="1140" parent="371" name="watery">
       <Position>8</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1143" parent="371" name="abnormal">
+    <column id="1141" parent="371" name="abnormal">
       <Position>9</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <key id="1144" parent="371" name="PRIMARY">
+    <key id="1142" parent="371" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 date</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1145" parent="372" name="id">
+    <column id="1143" parent="372" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="1146" parent="372" name="startPhysiology">
+    <column id="1144" parent="372" name="startPhysiology">
       <Position>2</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="1147" parent="372" name="endPhysiology">
+    <column id="1145" parent="372" name="endPhysiology">
       <Position>3</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="1148" parent="372" name="expectedOvulationDate">
+    <column id="1146" parent="372" name="expectedOvulationDate">
       <Position>4</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="1149" parent="372" name="expectedPhysiologyDate">
+    <column id="1147" parent="372" name="expectedPhysiologyDate">
       <Position>5</Position>
       <DataType>date|0s</DataType>
     </column>
-    <column id="1150" parent="373" name="id">
+    <column id="1148" parent="373" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1151" parent="373" name="birthControlPills">
+    <column id="1149" parent="373" name="birthControlPills">
       <Position>2</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1152" parent="373" name="physiology">
+    <column id="1150" parent="373" name="physiology">
       <Position>3</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1153" parent="373" name="hospital">
+    <column id="1151" parent="373" name="hospital">
       <Position>4</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1154" parent="373" name="waterIntake">
+    <column id="1152" parent="373" name="waterIntake">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1155" parent="373" name="exerciseTimeGoal">
+    <column id="1153" parent="373" name="exerciseTimeGoal">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1156" parent="373" name="sleepTimeGoal">
+    <column id="1154" parent="373" name="sleepTimeGoal">
       <Position>7</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <key id="1157" parent="373" name="PRIMARY">
+    <key id="1155" parent="373" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1158" parent="374" name="id">
+    <column id="1156" parent="374" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1159" parent="374" name="physiologyTime">
+    <column id="1157" parent="374" name="physiologyTime">
       <Position>2</Position>
       <DataType>time|0s</DataType>
     </column>
-    <key id="1160" parent="374" name="PRIMARY">
+    <key id="1158" parent="374" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1161" parent="375" name="id">
+    <column id="1159" parent="375" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1162" parent="375" name="sleepGoal">
+    <column id="1160" parent="375" name="sleepGoal">
       <Position>2</Position>
       <DataType>double|0s</DataType>
     </column>
-    <key id="1163" parent="375" name="PRIMARY">
+    <key id="1161" parent="375" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1164" parent="376" name="id">
+    <column id="1162" parent="376" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1165" parent="376" name="date">
+    <column id="1163" parent="376" name="date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1166" parent="376" name="none">
+    <column id="1164" parent="376" name="none">
       <Position>3</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1167" parent="376" name="cramps">
+    <column id="1165" parent="376" name="cramps">
       <Position>4</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1168" parent="376" name="breastTenderness">
+    <column id="1166" parent="376" name="breastTenderness">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1169" parent="376" name="headache">
+    <column id="1167" parent="376" name="headache">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1170" parent="376" name="acne">
+    <column id="1168" parent="376" name="acne">
       <Position>7</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1171" parent="376" name="lumbago">
+    <column id="1169" parent="376" name="lumbago">
       <Position>8</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1172" parent="376" name="nausea">
+    <column id="1170" parent="376" name="nausea">
       <Position>9</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1173" parent="376" name="fatigue">
+    <column id="1171" parent="376" name="fatigue">
       <Position>10</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1174" parent="376" name="abdominalBloating">
+    <column id="1172" parent="376" name="abdominalBloating">
       <Position>11</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1175" parent="376" name="desires">
+    <column id="1173" parent="376" name="desires">
       <Position>12</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1176" parent="376" name="insomnia">
+    <column id="1174" parent="376" name="insomnia">
       <Position>13</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1177" parent="376" name="constipation">
+    <column id="1175" parent="376" name="constipation">
       <Position>14</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="1178" parent="376" name="diarrhea">
+    <column id="1176" parent="376" name="diarrhea">
       <Position>15</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <key id="1179" parent="376" name="PRIMARY">
+    <key id="1177" parent="376" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 date</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1180" parent="377" name="id">
+    <column id="1178" parent="377" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1181" parent="377" name="cups">
+    <column id="1179" parent="377" name="cups">
       <Position>2</Position>
       <DataType>double|0s</DataType>
     </column>
-    <column id="1182" parent="377" name="waterTime">
+    <column id="1180" parent="377" name="waterTime">
       <Position>3</Position>
       <DataType>time|0s</DataType>
     </column>
-    <key id="1183" parent="377" name="PRIMARY">
+    <key id="1181" parent="377" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

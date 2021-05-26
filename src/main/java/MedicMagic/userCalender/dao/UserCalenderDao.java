@@ -1,18 +1,19 @@
 package MedicMagic.userCalender.dao;
 
 import MedicMagic.userCalender.domain.UserCalender;
+import MedicMagic.userCalender.dto.UserCalenderDto;
 
 import java.util.List;
 
 public interface UserCalenderDao {
-    void add(UserCalender userCalender);
-    UserCalender get(String id, String date);
-    List<UserCalender> getAll();
-    List<UserCalender> getEachId(String id);
+    void add(UserCalenderDto userCalenderDto);
+    UserCalenderDto get(String id, String date);
+    List<UserCalenderDto> getAll();
+    List<UserCalenderDto> getEachId(String id);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);
-    void update(UserCalender userCalender);
+    void update(UserCalenderDto userCalenderDto);
 }

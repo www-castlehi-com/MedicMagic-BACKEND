@@ -4,6 +4,7 @@ import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.dao.UserSymptomDao;
 import MedicMagic.userSymptom.domain.UserSymptom;
+import MedicMagic.userSymptom.dto.UserSymptomDto;
 
 import java.util.List;
 
@@ -15,28 +16,23 @@ public class UserSymptomServiceImpl implements UserSymptomService {
     }
 
     @Override
-    public void add(UserSymptom userSymptom) {
-        userSymptomDao.add(userSymptom);
+    public void add(UserSymptomDto userSymptomDto) {
+        userSymptomDao.add(userSymptomDto);
     }
 
     @Override
-    public UserSymptom get(String id, String date) {
+    public UserSymptomDto get(String id, String date) {
         return userSymptomDao.get(id, date);
     }
 
     @Override
-    public List<UserSymptom> getAll() {
+    public List<UserSymptomDto> getAll() {
         return userSymptomDao.getAll();
     }
 
     @Override
-    public List<UserSymptom> getEachId(String id) {
+    public List<UserSymptomDto> getEachId(String id) {
         return userSymptomDao.getEachId(id);
-    }
-
-    @Override
-    public List<String> getSymptomTrue(UserSymptom userSymptom) {
-        return userSymptomDao.getSymptomTrue(userSymptom);
     }
 
     @Override
@@ -55,12 +51,7 @@ public class UserSymptomServiceImpl implements UserSymptomService {
     }
 
     @Override
-    public void update(UserSymptom userSymptom) {
-        userSymptomDao.update(userSymptom);
-    }
-
-    @Override
-    public void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender) {
-        userSymptomDao.updateUserCalenderIfSymptomIsFalse(userSymptom, userCalender);
+    public void update(UserSymptomDto userSymptomDto) {
+        userSymptomDao.update(userSymptomDto);
     }
 }

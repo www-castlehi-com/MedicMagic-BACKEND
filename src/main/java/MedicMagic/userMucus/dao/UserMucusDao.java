@@ -1,21 +1,21 @@
 package MedicMagic.userMucus.dao;
 
 import MedicMagic.userCalender.domain.UserCalender;
+import MedicMagic.userCalender.dto.UserCalenderDto;
 import MedicMagic.userMucus.domain.UserMucus;
+import MedicMagic.userMucus.dto.UserMucusDto;
 
 import java.util.List;
 
 public interface UserMucusDao {
-    void add(UserMucus userMucus);
-    UserMucus get(String id, String date);
-    List<UserMucus> getAll();
-    List<UserMucus> getEachId(String id);
-    List<String> getMucusTrue(UserMucus userMucus);
+    void add(UserMucusDto userMucusDto);
+    UserMucusDto get(String id, String date);
+    List<UserMucusDto> getAll();
+    List<UserMucusDto> getEachId(String id);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndDate(String id, String date);
-    void update(UserMucus userMucus);
-    void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender);
+    void update(UserMucusDto userMucusDto);
 }

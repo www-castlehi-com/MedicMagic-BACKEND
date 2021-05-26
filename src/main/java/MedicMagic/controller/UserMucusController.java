@@ -14,61 +14,23 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 @RestController
 public class UserMucusController {
-    private UserMucusService userMucusService;
+    private final UserMucusService userMucusService;
 
     @RequestMapping(value = "/sendMucus_view", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView sendMucus(HttpServletRequest httpServletRequest) {
         try {
             String id = httpServletRequest.getParameter("id");
             String date = httpServletRequest.getParameter("date");
-            boolean none;
-            if(httpServletRequest.getParameter("none") == "true") {
-                none = true;
-            } else {
-                none = false;
-            }
-            boolean mottled;
-            if(httpServletRequest.getParameter("mottled") == "true") {
-                mottled = true;
-            } else {
-                mottled = false;
-            }
-            boolean sticky;
-            if(httpServletRequest.getParameter("sticky") == "true") {
-                sticky = true;
-            } else {
-                sticky = false;
-            }
-            boolean creamy;
-            if(httpServletRequest.getParameter("creamy") == "true") {
-                creamy = true;
-            } else {
-                creamy = false;
-            }
-            boolean likeEggWhite;
-            if(httpServletRequest.getParameter("likeEggWhite") == "true") {
-                likeEggWhite = true;
-            } else {
-                likeEggWhite = false;
-            }
-            boolean watery;
-            if(httpServletRequest.getParameter("watery") == "true") {
-                watery = true;
-            } else {
-                watery = false;
-            }
-            boolean abnormal;
-            if(httpServletRequest.getParameter("abnormal") == "true") {
-                abnormal = true;
-            } else {
-                abnormal = false;
-            }
+            String none = httpServletRequest.getParameter("none");
+            String mottled = httpServletRequest.getParameter("mottled");
+            String sticky = httpServletRequest.getParameter("sticky");
+            String creamy = httpServletRequest.getParameter("creamy");
+            String likeEggWhite = httpServletRequest.getParameter("likeEggWhite");
+            String watery = httpServletRequest.getParameter("watery");
+            String abnormal = httpServletRequest.getParameter("abnormal");
 
-            if(userMucusService.getCountEachIdAndDate(id, date) == 0) {
-                userMucusService.add(new UserMucus(id, date, none, mottled, sticky, creamy, likeEggWhite, watery, abnormal));
-            } else {
-                userMucusService.update(new UserMucus(id, date, none, mottled, sticky, creamy, likeEggWhite, watery, abnormal));
-            }
+            UserMucusDto userMucusDto = new UserMucusDto(id, date, none, mottled, sticky, creamy, likeEggWhite, watery, abnormal);
+            userMucusService.update(userMucusDto);
 
             ModelAndView mv = new ModelAndView();
             mv.setViewName("userMucus/sendMucus_view");
@@ -88,62 +50,26 @@ public class UserMucusController {
         }
     }
 
-    @RequestMapping(value = "/getMucus_view", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value="/getMucus_view", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView getMucus(HttpServletRequest httpServletRequest) {
         try {
             String id = httpServletRequest.getParameter("id");
             String date = httpServletRequest.getParameter("date");
 
-            UserMucusDto userMucusDto = new UserMucusDto(userMucusService.get(id, date));
+            UserMucusDto userMucusDto = userMucusService.get(id, date);
 
             ModelAndView mv = new ModelAndView();
             mv.setViewName("userMucus/getMucus_view");
-
-            if(userMucusDto.none == true) {
-                mv.addObject("none", "true");
-            } else {
-                mv.addObject("none", "false");
-            }
-
-            if(userMucusDto.mottled == true) {
-                mv.addObject("mottled", "true");
-            } else {
-                mv.addObject("mottled", "false");
-            }
-
-            if(userMucusDto.sticky == true) {
-                mv.addObject("sticky", "true");
-            } else {
-                mv.addObject("sticky", "false");
-            }
-
-            if(userMucusDto.creamy == true) {
-                mv.addObject("creamy", "true");
-            } else {
-                mv.addObject("creamy", "false");
-            }
-
-            if(userMucusDto.likeEggWhite == true) {
-                mv.addObject("likeEggWhite", "true");
-            } else {
-                mv.addObject("likeEggWhite", "false");
-            }
-
-            if(userMucusDto.watery == true) {
-                mv.addObject("watery", "true");
-            } else {
-                mv.addObject("watery", "false");
-            }
-
-            if(userMucusDto.abnormal == true) {
-                mv.addObject("abnormal", "true");
-            } else {
-                mv.addObject("abnormal", "false");
-            }
+            mv.addObject("none", userMucusDto.none);
+            mv.addObject("mottled", userMucusDto.mottled);
+            mv.addObject("sticky", userMucusDto.sticky);
+            mv.addObject("creamy", userMucusDto.creamy);
+            mv.addObject("likeEggWhite", userMucusDto.likeEggWhite);
+            mv.addObject("watery", userMucusDto.watery);
+            mv.addObject("abnormal", userMucusDto.abnormal);
 
             return mv;
-
-        } catch(Exception e) {
+        } catch(Exception e){
             e.printStackTrace();
 
             ModelAndView mv = new ModelAndView();

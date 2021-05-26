@@ -18,13 +18,11 @@ public class UserPhysiologyController {
 
     @RequestMapping(value = "/getLast_view", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView getLast(HttpServletRequest httpServletRequest) {
-        System.out.println("Server requested Android");
         try {
             String id = httpServletRequest.getParameter("id");
-            System.out.println("ID from Android : "+id);
 
-            if(id == "null") { id = null; }
-            UserPhysiologyDto userPhysiologyDto = userPhysiologyService.getLastEachIdTransform(id);
+            UserPhysiologyDto userPhysiologyDto = userPhysiologyService.getLastEachId(id);
+
             ModelAndView mv = new ModelAndView();
             mv.setViewName("userPhysiology/getLast_view");
             mv.addObject("startPhysiology", userPhysiologyDto.startPhysiology);
@@ -33,8 +31,7 @@ public class UserPhysiologyController {
             mv.addObject("expectedPhysiologyDate", userPhysiologyDto.expectedPhysiologyDate);
 
             return mv;
-
-        } catch(Exception e) {
+        } catch(Exception e){
             e.printStackTrace();
 
             ModelAndView mv = new ModelAndView();
@@ -50,18 +47,15 @@ public class UserPhysiologyController {
         try {
             String id = httpServletRequest.getParameter("id");
 
-            if(id == "null") {id = null;}
-            List<UserPhysiologyDto> userPhysiologyDtoList = userPhysiologyService.getEachIdLimit3Transform(id);
+            List<UserPhysiologyDto> userPhysiologyDtoList = userPhysiologyService.getEachIdLimit3(id);
+
             ModelAndView mv = new ModelAndView();
             mv.setViewName("userPhysiology/getLimit3_view");
-
-            mv.addObject("size", userPhysiologyDtoList.size());
-
             if(userPhysiologyDtoList.size() >= 1) {
                 mv.addObject("startPhysiology1", userPhysiologyDtoList.get(0).startPhysiology);
                 mv.addObject("endPhysiology1", userPhysiologyDtoList.get(0).endPhysiology);
-                mv.addObject("expectedOvulationDate", userPhysiologyDtoList.get(0).expectedOvulationDate);
-                mv.addObject("expectedPhysiologyDate", userPhysiologyDtoList.get(0).expectedPhysiologyDate);
+                mv.addObject("expectedOvulationDate1", userPhysiologyDtoList.get(0).expectedOvulationDate);
+                mv.addObject("expectedPhysiologyDate1", userPhysiologyDtoList.get(0).expectedPhysiologyDate);
             }
             if(userPhysiologyDtoList.size() >= 2) {
                 mv.addObject("startPhysiology2", userPhysiologyDtoList.get(1).startPhysiology);
@@ -77,8 +71,7 @@ public class UserPhysiologyController {
             }
 
             return mv;
-
-        } catch(Exception e) {
+        } catch(Exception e){
             e.printStackTrace();
 
             ModelAndView mv = new ModelAndView();

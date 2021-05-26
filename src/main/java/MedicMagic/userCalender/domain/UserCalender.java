@@ -4,26 +4,22 @@ package MedicMagic.userCalender.domain;
 public class UserCalender {
     String id;
     String date;
-    Double weigh;
     String sleepTime;
     String exerciseTime;
-    Double waterIntake;
+    Integer waterIntake;
     String startDay;
     String endDay;
-    String emotion;
     boolean symptom;
     boolean mucus;
 
-    public UserCalender(String id, String date, Double weigh, String sleepTime, String exerciseTime, Double waterIntake, String startDay, String endDay, String emotion, boolean symptom, boolean mucus) {
+    public UserCalender(String id, String date, String sleepTime, String exerciseTime, Integer waterIntake, String startDay, String endDay, boolean symptom, boolean mucus) {
         this.id = id;
         this.date = date;
-        this.weigh = weigh;
         this.sleepTime = sleepTime;
         this.exerciseTime = exerciseTime;
         this.waterIntake = waterIntake;
         this.startDay = startDay;
         this.endDay = endDay;
-        this.emotion = emotion;
         this.symptom = symptom;
         this.mucus = mucus;
     }
@@ -47,14 +43,6 @@ public class UserCalender {
         this.date = date;
     }
 
-    public Double getWeigh() {
-        return weigh;
-    }
-
-    public void setWeigh(Double weigh) {
-        this.weigh = weigh;
-    }
-
     public String getSleepTime() {
         return sleepTime;
     }
@@ -71,11 +59,11 @@ public class UserCalender {
         this.exerciseTime = exerciseTime;
     }
 
-    public Double getWaterIntake() {
+    public Integer getWaterIntake() {
         return waterIntake;
     }
 
-    public void setWaterIntake(Double waterIntake) {
+    public void setWaterIntake(Integer waterIntake) {
         this.waterIntake = waterIntake;
     }
 
@@ -93,14 +81,6 @@ public class UserCalender {
 
     public void setEndDay(String endDay) {
         this.endDay = endDay;
-    }
-
-    public String getEmotion() {
-        return emotion;
-    }
-
-    public void setEmotion(String emotion) {
-        this.emotion = emotion;
     }
 
     public boolean isSymptom() {

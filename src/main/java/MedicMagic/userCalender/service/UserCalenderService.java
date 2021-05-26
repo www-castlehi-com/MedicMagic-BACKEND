@@ -8,15 +8,16 @@ import java.util.List;
 
 @Transactional
 public interface UserCalenderService {
-    void add(UserCalender userCalender);
+    void add(UserCalenderDto userCalenderDto);
     @Transactional(readOnly = true)
-    UserCalender get(String id, String date);
+    UserCalenderDto get(String id, String date);
     @Transactional(readOnly = true)
-    List<UserCalender> getAll();
+    List<UserCalenderDto> getAll();
     @Transactional(readOnly = true)
-    List<UserCalender> getEachId(String id);
+    List<UserCalenderDto> getEachId(String id);
+    @Transactional(readOnly = true)
     int getCountEachIdAndDate(String id, String date);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
-    void update(UserCalender userCalender);
+    void update(UserCalenderDto userCalenderDto);
 }

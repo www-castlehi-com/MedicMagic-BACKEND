@@ -11,7 +11,7 @@
     <sql key="userGetCountEachId">SELECT COUNT(*) FROM user WHERE id = ?</sql>
     <sql key="userUpdate">UPDATE user SET name = ?, password = ?, birthday = ?, age = ? where id = ?</sql>
 
-    <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, weigh, sleepTime, exerciseTime, waterIntake, startDay, endDay, emotion, symptom, mucus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</sql>
+    <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, sleepTime, exerciseTime, waterIntake, startDay, endDay, symptom, mucus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)</sql>
     <sql key="userCalenderGet">SELECT * FROM userCalender WHERE id = ? AND date = ?</sql>
     <sql key="userCalenderGetAll">SELECT * FROM userCalender ORDER BY id, date DESC</sql>
     <sql key="userCalenderGetEachId">SELECT * FROM userCalender WHERE id = ?</sql>
@@ -20,9 +20,9 @@
     <sql key="userCalenderGetCount">SELECT COUNT(*) FROM userCalender</sql>
     <sql key="userCalenderGetCountEachId">SELECT COUNT(*) FROM userCalender GROUP BY id = ?</sql>
     <sql key="userCalenderGetCountEachIdAndDate">SELECT COUNT(*) FROM userCalender WHERE id = ? AND date = ?</sql>
-    <sql key="userCalenderUpdate">UPDATE userCalender SET weigh = ?, sleepTime = ?, exerciseTime = ?, waterIntake = ?, startDay = ?, endDay = ?, emotion = ?, symptom = ?, mucus = ? WHERE id = ? AND date = ?</sql>
+    <sql key="userCalenderUpdate">UPDATE userCalender SET sleepTime = ?, exerciseTime = ?, waterIntake = ?, startDay = ?, endDay = ?, symptom = ?, mucus = ? WHERE id = ? AND date = ?</sql>
 
-    <sql key="userMucusAdd">INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggwhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)</sql>
+    <sql key="userMucusAdd">INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggWhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)</sql>
     <sql key="userMucusGet">SELECT * FROM userMucus WHERE id = ? AND date = ?</sql>
     <sql key="userMucusGetAll">SELECT * FROM userMucus ORDER BY id, date DESC</sql>
     <sql key="userMucusGetEachId">SELECT * FROM userMucus WHERE id = ?</sql>
@@ -30,8 +30,8 @@
     <sql key="userMucusDeleteEachIdAndDate">DELETE FROM userMucus WHERE id = ? AND date = ?</sql>
     <sql key="userMucusGetCount">SELECT COUNT(*) FROM userMucus</sql>
     <sql key="userMucusGetCountEachId">SELECT COUNT(*) FROM userMucus GROUP BY id = ?</sql>
-    <sql key="userMucusGetCountEachIdAndDate">SELECT COUNT(*) FROM userMucus WHERE date = ? GROUP BY id = ?</sql>
-    <sql key="userMucusUpdate">UPDATE userMucus SET none = ?, mottled = ?, sticky = ?, creamy = ?, likeEggwhite = ?, watery = ?, abnormal = ? WHERE id = ? AND date = ?</sql>
+    <sql key="userMucusGetCountEachIdAndDate">SELECT COUNT(*) FROM userMucus WHERE id = ? AND date = ?</sql>
+    <sql key="userMucusUpdate">UPDATE userMucus SET none = ?, mottled = ?, sticky = ?, creamy = ?, likeEggWhite = ?, watery = ?, abnormal = ? WHERE id = ? AND date = ?</sql>
     <sql key="userMucusUpdateUserCalenderIfMucusIsFalse">DELETE FROM userMucus WHERE id = ? AND date = ?</sql>
 
     <sql key="userSymptomAdd">INSERT INTO userSymptom(id, date, none, cramps, breastTenderness, headache, acne, lumbago, nausea, fatigue, abdominalBloating, desires, insomnia, constipation, diarrhea) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</sql>
@@ -42,21 +42,23 @@
     <sql key="userSymptomDeleteEachIdAndDate">DELETE FROM userSymptom WHERE id = ? AND date = ?</sql>
     <sql key="userSymptomGetCount">SELECT COUNT(*) FROM userSymptom</sql>
     <sql key="userSymptomGetCountEachId">SELECT COUNT(*) FROM userSymptom GROUP BY id = ?</sql>
-    <sql key="userSymptomGetCountEachIdAndDate">SELECT COUNT(*) FROM userSymptom WHERE date = ? GROUP BY id = ?</sql>
+    <sql key="userSymptomGetCountEachIdAndDate">SELECT COUNT(*) FROM userSymptom WHERE id = ? AND date = ?</sql>
     <sql key="userSymptomUpdate">UPDATE userSymptom SET none = ?, cramps = ?, breastTenderness = ?, headache = ?, acne = ?, lumbago = ?, nausea = ?, fatigue = ?, abdominalBloating = ?, desires = ?, insomnia = ?, constipation = ?, diarrhea = ? WHERE id = ? AND date = ?</sql>
     <sql key="userSymptomUpdateUserCalenderIfSymptomIsFalse">DELETE FROM userSymptom WHERE id = ? AND date = ?</sql>
 
-    <sql key="userPhysiologyAdd">INSERT INTO userPhysiology(id, startPhysiology) VALUES (?, ?)</sql>
+    <sql key="userPhysiologyAdd">INSERT INTO userPhysiology(id, startPhysiology, endPhysiology, expectedOvulationDate, expectedPhysiologyDate) VALUES (?, ?, ?, ?, ?)</sql>
     <sql key="userPhysiologyGet">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology ASC</sql>
     <sql key="userPhysiologyGetEachIdAndDate">SELECT * FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
     <sql key="userPhysiologyGetLastEachId">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 1</sql>
     <sql key="userPhysiologyGetAll">SELECT * FROM userPhysiology</sql>
     <sql key="userPhysiologyGetEachIdLimit3">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 3</sql>
+    <sql key="userPhysiologyGetEachIdAndMonth">SELECT * FROM userPhysiology WHERE id = ? AND MONTH(startPhysiology) = ? OR MONTH(endPhysiology) = ?</sql>
     <sql key="userPhysiologyDeleteAll">DELETE FROM userPhysiology</sql>
     <sql key="userPhysiologyDeleteEachIdAndStartPhysiology">DELETE FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
     <sql key="userPhysiologyDeleteEachIdAndEndPhysiology">DELETE FROM userPhysiology WHERE id = ? AND endPhysiology = ?</sql>
     <sql key="userPhysiologyGetCount">SELECT COUNT(*) FROM userPhysiology</sql>
     <sql key="userPhysiologyGetCountEachId">SELECT COUNT(*) FROM userPhysiology WHERE id = ?</sql>
+    <sql key="userPhysiologyGetCountEachIdAndStartPhysiology">SELECT COUNT(*) FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
     <sql key="userPhysiologyUpdate">UPDATE userPhysiology SET endPhysiology = ?, expectedOvulationDate = ?, expectedPhysiologyDate = ? WHERE id = ? AND startPhysiology = ?</sql>
 
     <sql key="userReminderListAdd">INSERT INTO userReminderList(id, birthControlPills, physiology, hospital, waterIntake, exerciseTimeGoal, sleepTimeGoal) VALUES(?, ?, ?, ?, ?, ?, ?)</sql>

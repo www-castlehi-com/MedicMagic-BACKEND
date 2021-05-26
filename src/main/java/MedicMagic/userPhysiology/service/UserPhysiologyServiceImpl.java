@@ -16,33 +16,48 @@ public class UserPhysiologyServiceImpl implements UserPhysiologyService{
     }
 
     @Override
-    public void add(UserPhysiology userPhysiology) {
-        this.userPhysiologyDao.add(userPhysiology);
+    public void add(UserPhysiologyDto userPhysiologyDto) {
+        this.userPhysiologyDao.add(userPhysiologyDto);
     }
 
     @Override
-    public List<UserPhysiology> get(String id) {
+    public List<UserPhysiologyDto> get(String id) {
         return this.userPhysiologyDao.get(id);
     }
 
     @Override
-    public UserPhysiology getEachIdAndStartPhysiology(String id, String startPhysiology) {
+    public UserPhysiologyDto getEachIdAndStartPhysiology(String id, String startPhysiology) {
         return this.userPhysiologyDao.getEachIdAndStartPhysiology(id, startPhysiology);
     }
 
     @Override
-    public UserPhysiology getLastEachId(String id) {
+    public UserPhysiologyDto getLastEachId(String id) {
         return this.userPhysiologyDao.getLastEachId(id);
     }
 
     @Override
-    public List<UserPhysiology> getAll() {
+    public List<UserPhysiologyDto> getAll() {
         return this.userPhysiologyDao.getAll();
     }
 
     @Override
-    public List<UserPhysiology> getEachIdLimit3(String id) {
+    public List<UserPhysiologyDto> getEachIdLimit3(String id) {
         return this.userPhysiologyDao.getEachIdLimit3(id);
+    }
+
+    @Override
+    public List<UserPhysiologyDto> getEachIdAndMonth(String id, String month) {
+        return this.userPhysiologyDao.getEachIdAndMonth(id, month);
+    }
+
+    @Override
+    public int getCountEachId(String id) {
+        return this.userPhysiologyDao.getCountEachId(id);
+    }
+
+    @Override
+    public int getCountEachIdAndStartPhysiology(String id, String startPhysiology) {
+        return this.userPhysiologyDao.getCountEachIdAndStartPhysiology(id, startPhysiology);
     }
 
     @Override
@@ -61,21 +76,7 @@ public class UserPhysiologyServiceImpl implements UserPhysiologyService{
     }
 
     @Override
-    public void update(UserPhysiology userPhysiology) {
-        this.userPhysiologyDao.update(userPhysiology);
-    }
-
-    @Override
-    public UserPhysiologyDto getLastEachIdTransform(String id) {
-        return new UserPhysiologyDto(this.getLastEachId(id));
-    }
-
-    @Override
-    public List<UserPhysiologyDto> getEachIdLimit3Transform(String id) {
-        List<UserPhysiologyDto> userPhysiologyDtoList = new ArrayList<>();
-        for(UserPhysiology userPhysiology : this.getEachIdLimit3(id)) {
-            userPhysiologyDtoList.add(new UserPhysiologyDto(userPhysiology));
-        }
-        return userPhysiologyDtoList;
+    public void update(UserPhysiologyDto userPhysiologyDto) {
+        this.userPhysiologyDao.update(userPhysiologyDto);
     }
 }

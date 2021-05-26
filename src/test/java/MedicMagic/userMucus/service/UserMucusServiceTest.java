@@ -1,6 +1,8 @@
 package MedicMagic.userMucus.service;
 
+import MedicMagic.userMucus.dao.UserMucusDao;
 import MedicMagic.userMucus.domain.UserMucus;
+import MedicMagic.userMucus.dto.UserMucusDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,9 @@ public class UserMucusServiceTest {
 
     static class TestUserMucusServiceImpl extends UserMucusServiceImpl {
         @Override
-        public List<UserMucus> getAll() {
-            for(UserMucus userMucus : super.getAll()) {
-                super.update(userMucus);
+        public List<UserMucusDto> getAll() {
+            for(UserMucusDto userMucusDto : super.getAll()) {
+                super.update(userMucusDto);
             }
             return null;
         }

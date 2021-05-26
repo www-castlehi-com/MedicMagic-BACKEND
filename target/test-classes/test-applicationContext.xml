@@ -88,6 +88,8 @@
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
         <property name="userCalenderDao" ref="userCalenderDao" />
         <property name="userPhysiologyDao" ref="userPhysiologyDao" />
+        <property name="userSymptomDao" ref="userSymptomDao" />
+        <property name="userMucusDao" ref="userMucusDao" />
     </bean>
 
     <bean id="userSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceImpl">
@@ -137,6 +139,11 @@
     <bean id="testUserWaterIntakeService" class="MedicMagic.userReminder.userWaterIntake.service.UserWaterIntakeServiceTest$TestUserWaterIntakeService" parent="userWaterIntakeService" />
     <bean id="testUserExerciseService" class="MedicMagic.userReminder.userExercise.service.UserExerciseServiceTest$TestUserExerciseService" parent="userExerciseService" />
     <bean id="testUserSleepService" class="MedicMagic.userReminder.userSleep.service.UserSleepServiceTest$TestUserSleepService" parent="userSleepService"/>
+
+    <bean id="testUserSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceTest$TestUserSymptomServiceImpl" parent="userSymptomService" />
+    <bean id="testUserMucusService" class="MedicMagic.userMucus.service.UserMucusServiceTest$TestUserMucusServiceImpl" parent="userMucusService" />
+    <bean id="testUserPhysiologyService" class="MedicMagic.userPhysiology.service.UserPhysiologyServiceTest$TestUserPhysiologyServiceImpl" parent="userPhysiologyService" />
+    <bean id="testUserCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceTest$TestUserCalenderServiceImpl" parent="userCalenderService" />
 
     <tx:annotation-driven/>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

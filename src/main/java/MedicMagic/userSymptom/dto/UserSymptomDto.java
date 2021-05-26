@@ -36,4 +36,74 @@ public class UserSymptomDto {
         this.constipation = userSymptom.isConstipation();
         this.diarrhea = userSymptom.isDiarrhea();
     }
+
+    public UserSymptomDto(String id, String date, String none, String cramps, String breastTenderness, String headache, String acne, String lumbago, String nausea, String fatigue, String abdominalBloating, String desires, String insomnia, String constipation, String diarrhea) {
+        this.id = id;
+        this.date=  date;
+        if(none.equals("true")) {
+            this.none = true;
+        } else {
+            this.none = false;
+        }
+        if(cramps.equals("true")) {
+            this.cramps = true;
+        } else {
+            this.cramps = false;
+        }
+        if(breastTenderness.equals("true")) {
+            this.breastTenderness = true;
+        } else {
+            this.breastTenderness = false;
+        }
+        if(headache.equals("true")) {
+            this.headache = true;
+        } else {
+            this.headache = false;
+        }
+        if(acne.equals("true")) {
+            this.acne = true;
+        } else {
+            this.acne = false;
+        }
+        if(lumbago.equals("true")) {
+            this.lumbago = true;
+        } else {
+            this.lumbago = false;
+        }
+        if(nausea.equals("true")) {
+            this.nausea = true;
+        } else {
+            this.nausea = false;
+        }
+        if(fatigue.equals("true")) {
+            this.fatigue = true;
+        } else {
+            this.fatigue = false;
+        }
+        if(abdominalBloating.equals("true")) {
+            this.abdominalBloating = true;
+        } else {
+            this.abdominalBloating = false;
+        }
+        if(desires.equals("true")) {
+            this.desires = true;
+        } else {
+            this.desires = false;
+        }
+        if(insomnia.equals("true")) {
+            this.insomnia = true;
+        } else {
+            this.insomnia = false;
+        }
+        if(constipation.equals("true")) {
+            this.constipation = true;
+        } else {
+            this.constipation = false;
+        }
+        if(diarrhea.equals("true")) {
+            this.diarrhea = true;
+        } else {
+            this.diarrhea = false;
+        }
+    }
 }

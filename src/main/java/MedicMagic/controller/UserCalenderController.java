@@ -3,6 +3,8 @@ package MedicMagic.controller;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userCalender.dto.UserCalenderDto;
 import MedicMagic.userCalender.service.UserCalenderService;
+import MedicMagic.userPhysiology.dto.UserPhysiologyDto;
+import MedicMagic.userPhysiology.service.UserPhysiologyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,58 +12,47 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
 public class UserCalenderController {
-    private UserCalenderService userCalenderService;
+    private final UserCalenderService userCalenderService;
+    private final UserPhysiologyService userPhysiologyService;
 
-    @RequestMapping(value = "/sendCalender_view", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView sendCalender(HttpServletRequest httpServletRequest) {
+    @RequestMapping(value = "/setUserCalender_view", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView setUserCalender(HttpServletRequest httpServletRequest) {
         try {
             String id = httpServletRequest.getParameter("id");
-            String date = httpServletRequest.getParameter("date");
-            Double weigh = Double.parseDouble(httpServletRequest.getParameter("weigh"));
-            String sleepTime = httpServletRequest.getParameter("sleepTime");
-            String exerciseTime = httpServletRequest.getParameter("exerciseTime");
-            Double waterIntake = Double.parseDouble(httpServletRequest.getParameter("waterIntake"));
-            String startDay = httpServletRequest.getParameter("startDay");
-            String endDay = httpServletRequest.getParameter("endDay");
-            String emotion = httpServletRequest.getParameter("emotion");
-            String symptomString = httpServletRequest.getParameter("symptom");
-            String mucusString = httpServletRequest.getParameter("mucus");
-            Boolean symptom;
-            Boolean mucus;
+            String today_date = httpServletRequest.getParameter("today_date");
 
-            if(symptomString == "true") {
-                symptom = true;
-            } else {
-                symptom = false;
-            }
-
-            if(mucusString == "true") {
-                mucus = true;
-            }else {
-                mucus = false;
-            }
-
-            if(sleepTime == "null") {sleepTime = null;}
-            if(exerciseTime == "null") {exerciseTime=null;}
-            if(startDay == "null") {startDay = null;}
-            if(endDay == "null") {endDay = null;}
-            if(emotion == "null") {emotion = null;}
-
-            if(userCalenderService.getCountEachIdAndDate(id, date) == 0) {
-                userCalenderService.add(new UserCalender(id, date, weigh, sleepTime, exerciseTime, waterIntake, startDay, endDay, emotion, symptom, mucus));
-            }
-            else {
-                userCalenderService.update(new UserCalender(id, date, weigh, sleepTime, exerciseTime, waterIntake, startDay, endDay, emotion, symptom, mucus));
-            }
+            UserCalenderDto userCalenderDto = userCalenderService.get(id,today_date);
 
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("userCalender/sendCalender_view");
-            mv.addObject("id", id);
-            mv.addObject("date", date);
+            mv.setViewName("userCalender/setUserCalender_view");
+            mv.addObject("sleepTime", userCalenderDto.sleepTime);
+            mv.addObject("exerciseTime", userCalenderDto.exerciseTime);
+            mv.addObject("waterIntake", userCalenderDto.waterIntake);
+            mv.addObject("startDay", userCalenderDto.startDay);
+            mv.addObject("endDay", userCalenderDto.endDay);
+            mv.addObject("symptom", userCalenderDto.symptom);
+            mv.addObject("mucus", userCalenderDto.mucus);
+
+            String month = today_date.split("-")[1];
+
+            List<UserPhysiologyDto> userPhysiologyDto = userPhysiologyService.getEachIdAndMonth(id, month);
+            if(userPhysiologyDto.size() >= 1) {
+                mv.addObject("startPhysiology1", userPhysiologyDto.get(0).startPhysiology);
+                mv.addObject("endPhysiology1", userPhysiologyDto.get(0).endPhysiology);
+            }
+            if(userPhysiologyDto.size() >= 2) {
+                mv.addObject("startPhysiology2", userPhysiologyDto.get(1).startPhysiology);
+                mv.addObject("endPhysiology2", userPhysiologyDto.get(1).endPhysiology);
+            }
+            if(userPhysiologyDto.size() >= 3) {
+                mv.addObject("startPhysiology3", userPhysiologyDto.get(2).startPhysiology);
+                mv.addObject("endPhysiology3", userPhysiologyDto.get(2).endPhysiology);
+            }
 
             return mv;
 
@@ -69,99 +60,105 @@ public class UserCalenderController {
             e.printStackTrace();
 
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("userCalender/sendCalenderError_view");
+            mv.setViewName("userCalender/setUserCalenderError_view");
             mv.addObject("error", e.getMessage());
 
             return mv;
         }
     }
 
-    @RequestMapping(value = "/getCalender_view", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView getCalender(HttpServletRequest httpServletRequest) {
-        System.out.println("Server requested Android");
+    @RequestMapping(value="/getUserCalender_view", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView getUserCalender(HttpServletRequest httpServletRequest) {
         try {
             String id = httpServletRequest.getParameter("id");
-            String date = httpServletRequest.getParameter("date");
-            System.out.println("ID from Android : "+id);
-            System.out.println("DATE from Android : " + date);
+            String today_date = httpServletRequest.getParameter("today_date");
+            String sleepTime = httpServletRequest.getParameter("sleepTime");
+            String exerciseTime = httpServletRequest.getParameter("exerciseTime");
+            String waterIntake = httpServletRequest.getParameter("waterIntake");
+            String startDay = httpServletRequest.getParameter("startDay");
+            String endDay = httpServletRequest.getParameter("endDay");
+            String symptom = httpServletRequest.getParameter("symptom");
+            String mucus = httpServletRequest.getParameter("mucus");
 
-            UserCalenderDto userCalenderDto = new UserCalenderDto(userCalenderService.get(id, date));
+            UserCalenderDto userCalenderDto = new UserCalenderDto(id, today_date, sleepTime, exerciseTime, waterIntake, startDay, endDay, symptom, mucus);
+            userCalenderService.update(userCalenderDto);
 
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("userCalender/getCalender_view");
-            mv.addObject("weigh", userCalenderDto.weigh);
-
-            String sleepTime;
-            if(userCalenderDto.sleepTime == null) {
-                sleepTime = "null";
-            } else {
-                sleepTime = userCalenderDto.sleepTime;
-            }
-
-            mv.addObject("sleepTime", sleepTime);
-
-            String exerciseTime;
-            if(userCalenderDto.exerciseTime == null) {
-                exerciseTime = "null";
-            } else {
-                exerciseTime = userCalenderDto.exerciseTime;
-            }
-
-            mv.addObject("exerciseTime", exerciseTime);
-            mv.addObject("waterIntake", userCalenderDto.waterIntake);
-
-            String startDay;
-            if(userCalenderDto.startDay == null) {
-                startDay = "null";
-            }else {
-                startDay = userCalenderDto.startDay;
-            }
-
-            mv.addObject("startDay", userCalenderDto.startDay);
-
-            String endDay;
-            if(userCalenderDto.endDay == null) {
-                endDay = "null";
-            } else {
-                endDay = userCalenderDto.endDay;
-            }
-
-            mv.addObject("endDay", userCalenderDto.endDay);
-
-            String emotion;
-            if(userCalenderDto.emotion == null) {
-                emotion = "null";
-            } else {
-                emotion = userCalenderDto.emotion;
-            }
-
-            mv.addObject("emotion", userCalenderDto.emotion);
-
-            String symptom;
-            if(userCalenderDto.symptom == true) {
-                symptom = "true";
-            } else {
-                symptom = "false";
-            }
-
-            mv.addObject("symptom", symptom);
-
-            String mucus;
-            if(userCalenderDto.mucus == true) {
-                mucus = "true";
-            } else {
-                mucus = "false";
-            }
-
-            mv.addObject("mucus", mucus);
+            mv.setViewName("userCalender/getUserCalender_view");
+            mv.addObject("id", id);
+            mv.addObject("today_date", today_date);
 
             return mv;
+        } catch(Exception e){
+            e.printStackTrace();
 
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("userCalender/getUserCalenderError_view");
+            mv.addObject("error", e.getMessage());
+
+            return mv;
+        }
+    }
+
+    @RequestMapping(value = "/getDate_view", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView getDate(HttpServletRequest httpServletRequest) {
+        try {
+            String id = httpServletRequest.getParameter("id");
+            String selected_date = httpServletRequest.getParameter("selected_date");
+
+            UserCalenderDto userCalenderDto = userCalenderService.get(id, selected_date);
+
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("userCalender/getDate_view");
+            mv.addObject("sleepTime", userCalenderDto.sleepTime);
+            mv.addObject("exerciseTime", userCalenderDto.exerciseTime);
+            mv.addObject("waterIntake", userCalenderDto.waterIntake);
+            mv.addObject("startDay", userCalenderDto.startDay);
+            mv.addObject("endDay", userCalenderDto.endDay);
+            mv.addObject("symptom", userCalenderDto.symptom);
+            mv.addObject("mucus", userCalenderDto.mucus);
+
+            return mv;
         } catch(Exception e) {
             e.printStackTrace();
 
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("userCalender/getCalenderError_view");
+            mv.setViewName("userCalender/getDateError_view");
+            mv.addObject("error", e.getMessage());
+
+            return mv;
+        }
+    }
+
+    @RequestMapping(value = "/getMonth_view", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView getMonth(HttpServletRequest httpServletRequest) {
+        try {
+            String id = httpServletRequest.getParameter("id");
+            String month = httpServletRequest.getParameter("month");
+
+            List<UserPhysiologyDto> userPhysiologyDto = userPhysiologyService.getEachIdAndMonth(id, month);
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("userCalender/getMonth_view");
+            if(userPhysiologyDto.size() >= 1) {
+                mv.addObject("startPhysiology1", userPhysiologyDto.get(0).startPhysiology);
+                mv.addObject("endPhysiology1", userPhysiologyDto.get(0).endPhysiology);
+            }
+            if(userPhysiologyDto.size() >= 2) {
+                mv.addObject("startPhysiology2", userPhysiologyDto.get(1).startPhysiology);
+                mv.addObject("endPhysiology2", userPhysiologyDto.get(1).endPhysiology);
+            }
+            if(userPhysiologyDto.size() >= 3) {
+                mv.addObject("startPhysiology3", userPhysiologyDto.get(2).startPhysiology);
+                mv.addObject("endPhysiology3", userPhysiologyDto.get(2).endPhysiology);
+            }
+
+            return mv;
+
+        } catch(Exception e){
+            e.printStackTrace();
+
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("userCalender/getMonthError_view");
             mv.addObject("error", e.getMessage());
 
             return mv;

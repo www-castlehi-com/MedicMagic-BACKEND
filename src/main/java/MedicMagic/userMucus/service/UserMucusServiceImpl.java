@@ -3,6 +3,7 @@ package MedicMagic.userMucus.service;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.dao.UserMucusDao;
 import MedicMagic.userMucus.domain.UserMucus;
+import MedicMagic.userMucus.dto.UserMucusDto;
 
 import java.util.List;
 
@@ -14,28 +15,23 @@ public class UserMucusServiceImpl implements UserMucusService{
     }
 
     @Override
-    public void add(UserMucus userMucus) {
-        userMucusDao.add(userMucus);
+    public void add(UserMucusDto userMucusDto) {
+        userMucusDao.add(userMucusDto);
     }
 
     @Override
-    public UserMucus get(String id, String date) {
+    public UserMucusDto get(String id, String date) {
         return userMucusDao.get(id, date);
     }
 
     @Override
-    public List<UserMucus> getAll() {
+    public List<UserMucusDto> getAll() {
         return userMucusDao.getAll();
     }
 
     @Override
-    public List<UserMucus> getEachId(String id) {
+    public List<UserMucusDto> getEachId(String id) {
         return userMucusDao.getEachId(id);
-    }
-
-    @Override
-    public List<String> getMucusTrue(UserMucus userMucus) {
-        return userMucusDao.getMucusTrue(userMucus);
     }
 
     @Override
@@ -54,12 +50,7 @@ public class UserMucusServiceImpl implements UserMucusService{
     }
 
     @Override
-    public void update(UserMucus userMucus) {
-        userMucusDao.update(userMucus);
-    }
-
-    @Override
-    public void updateUserCalenderIfMucusIsFalse(UserMucus userMucus, UserCalender userCalender) {
-        userMucusDao.updateUserCalenderIfMucusIsFalse(userMucus, userCalender);
+    public void update(UserMucusDto userMucusDto) {
+        userMucusDao.update(userMucusDto);
     }
 }

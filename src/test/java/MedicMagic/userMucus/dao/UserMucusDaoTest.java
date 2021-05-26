@@ -3,6 +3,7 @@ package MedicMagic.userMucus.dao;
 import MedicMagic.exception.DuplicateDateException;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userMucus.domain.UserMucus;
+import MedicMagic.userMucus.dto.UserMucusDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,51 +29,23 @@ public class UserMucusDaoTest {
     @Autowired
     private DataSource dataSource;
 
-    List<UserCalender> userCalenderList;
-    List<UserMucus> userMucusList = new ArrayList<>();
+    private UserMucus userMucus1;
+    private UserMucus userMucus2;
+
+    private UserMucusDto userMucusDto1;
+    private UserMucusDto userMucusDto2;
+
+    private UserMucusDto userMucusDto3;
 
     @Before
     public void setUp() throws Exception {
-        userCalenderList = Arrays.asList(
-                new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, null, null, null, null, null, null, true, true),
-                new UserCalender("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, null, null, null, null, null, null, false, false),
-                new UserCalender("ravenClaw", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, null, null, null, null, null, null, false, true),
-                new UserCalender("slytherin", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, null, null, null, null, null, null, true, false)
-        );
+        userMucus1 = new UserMucus("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false, false, false, false, false, false, false);
+        userMucus2 = new UserMucus("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false, false, true, true ,false, false, true);
 
-        mappingCalenderAndMucus();
-    }
-    private void mappingCalenderAndMucus() {
-        for (UserCalender userCalender : userCalenderList) {
-            if(userCalender.isMucus()) {
-                userMucusList.add(new UserMucus(userCalender.getId(), userCalender.getDate(), true, false, true, false, true, false, true));
-            }
-        }
-    }
+        userMucusDto1 = new UserMucusDto(userMucus1);
+        userMucusDto2 = new UserMucusDto(userMucus2);
 
-    @Test
-    public void connectIdFromUserCalender() {
-        userMucusDao.deleteAll();
-        assertThat(userMucusDao.getCount(), is(0));
-
-        assertThat(userCalenderList.get(0).getId(), is(userMucusList.get(0).getId()));
-        assertThat(userCalenderList.get(0).getDate(), is(userMucusList.get(0).getDate()));
-        assertThat(userCalenderList.get(2).getId(), is(userMucusList.get(1).getId()));
-        assertThat(userCalenderList.get(2).getDate(), is(userMucusList.get(1).getDate()));
-    }
-
-    @Test(expected = DuplicateDateException.class)
-    public void duplicateIdAndDate() {
-        userMucusDao.deleteAll();
-        assertThat(userMucusDao.getCount(), is(0));
-
-        userMucusList.get(1).setId(userMucusList.get(0).getId());
-        userMucusList.get(1).setDate(userMucusList.get(0).getDate());
-
-        for(UserMucus userMucus : userMucusList) {
-            userMucusDao.add(userMucus);
-        }
-        assertThat(userMucusDao.getCount(), is(1));
+        userMucusDto3 = new UserMucusDto("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "false", "false", "true", "true", "false", "false", "true");
     }
 
     @Test
@@ -80,16 +53,14 @@ public class UserMucusDaoTest {
         userMucusDao.deleteAll();
         assertThat(userMucusDao.getCount(), is(0));
 
-        for (UserMucus userMucus : userMucusList) {
-            userMucusDao.add(userMucus);
-        }
+        userMucusDao.add(userMucusDto1);
+        assertThat(userMucusDao.getCount(), is(1));
+
+        userMucusDao.add(userMucusDto2);
         assertThat(userMucusDao.getCount(), is(2));
 
-        UserMucus userMucusGet1 = userMucusDao.get(userMucusList.get(0).getId(), userMucusList.get(0).getDate());
-        checkSameUserMucus(userMucusGet1, userMucusList.get(0));
-
-        UserMucus userMucusGet2 = userMucusDao.get(userMucusList.get(1).getId(), userMucusList.get(1).getDate());
-        checkSameUserMucus(userMucusGet2, userMucusList.get(1));
+        checkSameUserMucus(userMucusDao.get(userMucusDto1.id, userMucusDto1.date), userMucusDto1);
+        checkSameUserMucus(userMucusDao.get(userMucusDto2.id, userMucusDto2.date), userMucusDto2);
     }
 
     @Test
@@ -97,16 +68,16 @@ public class UserMucusDaoTest {
         userMucusDao.deleteAll();
         assertThat(userMucusDao.getCount(), is(0));
 
-        userMucusList.get(1).setId(userMucusList.get(0).getId());
-        userMucusList.get(1).setDate("2000-01-01");
+        userMucusDto2.id = userMucusDto1.id;
+        userMucusDto2.date = "2000-01-01";
 
-        for (UserMucus userMucus : userMucusList) {
-            userMucusDao.add(userMucus);
-        }
+        userMucusDao.add(userMucusDto1);
+        userMucusDao.add(userMucusDto2);
         assertThat(userMucusDao.getCount(), is(2));
-        assertThat(userMucusDao.getCountEachId(userMucusList.get(0).getId()), is(2));
-        assertThat(userMucusDao.getCountEachIdAndDate(userMucusList.get(0).getId(), new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusDao.getCountEachIdAndDate(userMucusList.get(0).getId(), "2000-01-01"), is(1));
+
+        assertThat(userMucusDao.getCountEachId(userMucusDto1.id), is(2));
+        assertThat(userMucusDao.getCountEachIdAndDate(userMucusDto1.id, new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusDao.getCountEachIdAndDate(userMucusDto1.id, "2000-01-01"), is(1));
     }
 
     @Test
@@ -114,50 +85,24 @@ public class UserMucusDaoTest {
         userMucusDao.deleteAll();
         assertThat(userMucusDao.getCount(), is(0));
 
-        for (UserMucus userMucus : userMucusList) {
-            userMucusDao.add(userMucus);
-        }
+        userMucusDao.add(userMucusDto1);
+        userMucusDao.add(userMucusDto2);
         assertThat(userMucusDao.getCount(), is(2));
 
-        List<UserMucus> userMucusListGet = userMucusDao.getEachId(userMucusList.get(0).getId());
+        List<UserMucusDto> userMucusListGet = userMucusDao.getEachId(userMucusDto1.id);
         assertThat(userMucusListGet.size(), is(1));
-        for(UserMucus userMucus : userMucusListGet) {
-            checkSameUserMucus(userMucusList.get(0), userMucus);
+        for(UserMucusDto userMucusDto : userMucusListGet) {
+            checkSameUserMucus(userMucusDto1, userMucusDto);
         }
 
-        userMucusDao.deleteAll();
-        assertThat(userMucusDao.getCount(), is(0));
+        userMucusDto2.id = userMucusDto1.id;
+        userMucusDto2.date = "2000-01-01";
+        userMucusDao.add(userMucusDto2);
 
-        userMucusList.get(0).setId(userMucusList.get(1).getId());
-        userMucusList.get(0).setDate("2000-01-01");
-        for (UserMucus userMucus : userMucusList) {
-            userMucusDao.add(userMucus);
-        }
-
-        List<UserMucus> userMucusListGet2 = userMucusDao.getEachId(userMucusList.get(0).getId());
+        List<UserMucusDto> userMucusListGet2 = userMucusDao.getEachId(userMucusDto1.id);
         assertThat(userMucusListGet2.size(), is(2));
-        for (int i = 0; i < userMucusListGet2.size(); i++) {
-            checkSameUserMucus(userMucusList.get(i), userMucusListGet2.get(i));
-        }
-    }
-
-    @Test
-    public void getMucusTrue() {
-        userMucusDao.deleteAll();
-        assertThat(userMucusDao.getCount(), is(0));
-
-        userMucusDao.add(userMucusList.get(0));
-        assertThat(userMucusDao.getCount(), is(1));
-
-        List<String> mucusGet = userMucusDao.getMucusTrue(userMucusDao.get(userMucusList.get(0).getId(), userMucusList.get(0).getDate()));
-
-        assertThat(mucusGet.size(), is(6));
-        assertThat(mucusGet.get(0), is(userMucusList.get(0).getId()));
-        assertThat(mucusGet.get(1), is(userMucusList.get(1).getDate()));
-        assertThat(mucusGet.get(2), is("없음"));
-        assertThat(mucusGet.get(3), is("끈적함"));
-        assertThat(mucusGet.get(4), is("계란 흰자 같음"));
-        assertThat(mucusGet.get(5), is("비정상적임"));
+        checkSameUserMucus(userMucusListGet2.get(0), userMucusDto2);
+        checkSameUserMucus(userMucusListGet2.get(1), userMucusDto1);
     }
 
     @Test
@@ -165,33 +110,15 @@ public class UserMucusDaoTest {
         userMucusDao.deleteAll();
         assertThat(userMucusDao.getCount(), is(0));
 
-        for(UserMucus userMucus : userMucusList) {
-            userMucusDao.add(userMucus);
-        }
+        userMucusDao.add(userMucusDto1);
+        userMucusDao.add(userMucusDto2);
         assertThat(userMucusDao.getCount(), is(2));
 
-        userMucusList.get(1).setWatery(true);
-        userMucusDao.update(userMucusList.get(1));
+        userMucusDto1.watery = true;
 
-        checkSameUserMucus(userMucusList.get(1), userMucusDao.get(userMucusList.get(1).getId(), userMucusList.get(1).getDate()));
-    }
+        userMucusDao.update(userMucusDto1);
 
-    @Test
-    public void deleteColumnIfMucusIsAllFalse() {
-        userMucusDao.deleteAll();
-        assertThat(userMucusDao.getCount(), is(0));
-
-        UserCalender userCalender = new UserCalender(userMucusList.get(0).getId(), userMucusList.get(0).getDate(), null, null, null, null, null, null, null, false, true);
-        UserMucus userMucus = new UserMucus(userMucusList.get(0).getId(), userMucusList.get(0).getDate(), false, false, false, false, false, false, true);
-
-        userMucusDao.add(userMucus);
-        assertThat(userMucusDao.getCount(), is(1));
-
-        userMucus.setAbnormal(false);
-        userMucusDao.update(userMucus);
-        userMucusDao.updateUserCalenderIfMucusIsFalse(userMucusDao.get(userMucus.getId(), userMucus.getDate()), userCalender);
-        assertThat(userMucusDao.getCount(), is(0));
-        assertThat(userCalender.isMucus(), is(false));
+        checkSameUserMucus(userMucusDto1, userMucusDao.get(userMucusDto1.id, userMucusDto1.date));
     }
 
     @Test
@@ -199,22 +126,32 @@ public class UserMucusDaoTest {
         userMucusDao.deleteAll();
         assertThat(userMucusDao.getCount(), is(0));
 
-        userMucusDao.add(userMucusList.get(0));
+        userMucusDao.add(userMucusDto1);
         assertThat(userMucusDao.getCount(), is(1));
 
-        userMucusDao.deleteEachIdAndDate(userMucusList.get(0).getId(), userMucusList.get(0).getDate());
+        userMucusDao.deleteEachIdAndDate(userMucusDto1.id, userMucusDto1.date);
         assertThat(userMucusDao.getCount(), is(0));
     }
 
-    private void checkSameUserMucus(UserMucus userMucus1, UserMucus userMucus2) {
-        assertThat(userMucus1.getId(), is(userMucus2.getId()));
-        assertThat(userMucus1.getDate(), is(userMucus2.getDate()));
-        assertThat(userMucus1.isNone(), is(userMucus2.isNone()));
-        assertThat(userMucus1.isMottled(), is(userMucus2.isMottled()));
-        assertThat(userMucus1.isCreamy(), is(userMucus2.isCreamy()));
-        assertThat(userMucus1.isSticky(), is(userMucus2.isSticky()));
-        assertThat(userMucus1.isLikeEggWhite(), is(userMucus2.isLikeEggWhite()));
-        assertThat(userMucus1.isWatery(), is(userMucus2.isWatery()));
-        assertThat(userMucus1.isAbnormal(), is(userMucus2.isAbnormal()));
+    @Test
+    public void stringTypeAddAndGet() {
+        userMucusDao.deleteAll();
+        assertThat(userMucusDao.getCount(), is(0));
+
+        userMucusDao.add(userMucusDto3);
+        assertThat(userMucusDao.getCount(), is(1));
+        checkSameUserMucus(userMucusDto2, userMucusDao.get(userMucusDto3.id, userMucusDto3.date));
+    }
+
+    private void checkSameUserMucus(UserMucusDto userMucusDto1, UserMucusDto userMucusDto2) {
+        assertThat(userMucusDto1.id, is(userMucusDto2.id));
+        assertThat(userMucusDto1.date, is(userMucusDto2.date));
+        assertThat(userMucusDto1.none, is(userMucusDto2.none));
+        assertThat(userMucusDto1.mottled, is(userMucusDto2.mottled));
+        assertThat(userMucusDto1.sticky, is(userMucusDto2.sticky));
+        assertThat(userMucusDto1.creamy, is(userMucusDto2.creamy));
+        assertThat(userMucusDto1.likeEggWhite, is(userMucusDto2.likeEggWhite));
+        assertThat(userMucusDto1.watery, is(userMucusDto2.watery));
+        assertThat(userMucusDto1.abnormal, is(userMucusDto2.abnormal));
     }
 }

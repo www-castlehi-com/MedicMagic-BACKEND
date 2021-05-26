@@ -88,6 +88,8 @@
     <bean id="userCalenderService" class="MedicMagic.userCalender.service.UserCalenderServiceImpl">
         <property name="userCalenderDao" ref="userCalenderDao" />
         <property name="userPhysiologyDao" ref="userPhysiologyDao" />
+        <property name="userSymptomDao" ref="userSymptomDao" />
+        <property name="userMucusDao" ref="userMucusDao" />
     </bean>
 
     <bean id="userSymptomService" class="MedicMagic.userSymptom.service.UserSymptomServiceImpl">

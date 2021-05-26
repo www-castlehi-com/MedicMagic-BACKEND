@@ -4,6 +4,7 @@ import MedicMagic.exception.DuplicateDateException;
 import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
+import MedicMagic.userSymptom.dto.UserSymptomDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,48 +30,23 @@ public class UserSymptomDaoTest {
     @Autowired
     private DataSource dataSource;
 
-    private UserCalender userCalender1;
-    private UserCalender userCalender2;
-
     private UserSymptom userSymptom1;
     private UserSymptom userSymptom2;
 
+    private UserSymptomDto userSymptomDto1;
+    private UserSymptomDto userSymptomDto2;
+
+    private UserSymptomDto userSymptomDto3;
+
     @Before
     public void setUp() throws Exception {
-        userCalender1 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), 51.4, "07:30:00", "01:30:00", 1.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, "즐거움", true, true);
-        userCalender2 = new UserCalender("slytherin", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), 52.5, "13:00:00", "02:00:00", 2.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        userSymptom1 = new UserSymptom("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), true, true, true, true, true, true, true, true, false, false, false, false, false);
+        userSymptom2 = new UserSymptom("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false, false, false, false, false, false, false, false, false, false, false, false, true);
 
-        userSymptom1 = new UserSymptom(null, null, true, true, true, true, true, true, true, true, false, false, false, false, false);
-        userSymptom2 = new UserSymptom(null, null, false, false, false, false, false, false, false, false, false, false, false, false, true);
+        userSymptomDto1 = new UserSymptomDto(userSymptom1);
+        userSymptomDto2 = new UserSymptomDto(userSymptom2);
 
-        userSymptom1.setId(userCalender1.getId());
-        userSymptom1.setDate(userCalender1.getDate());
-        userSymptom2.setId(userCalender2.getId());
-        userSymptom2.setDate(userCalender2.getDate());
-    }
-
-    @Test
-    public void connectIdFromUserCalender() {
-        userSymptomDao.deleteAll();
-        assertThat(userSymptomDao.getCount(), is(0));
-
-        assertThat(userSymptom1.getId(), is(userCalender1.getId()));
-        assertThat(userSymptom1.getDate(), is(userCalender1.getDate()));
-        assertThat(userSymptom2.getId(), is(userCalender2.getId()));
-        assertThat(userSymptom2.getDate(), is(userCalender2.getDate()));
-    }
-
-    @Test(expected = DuplicateDateException.class)
-    public void duplicateIdAndDate() {
-        userSymptomDao.deleteAll();
-        assertThat(userSymptomDao.getCount(), is(0));
-
-        userSymptom2.setId(userSymptom1.getId());
-        userSymptom2.setDate(userSymptom1.getDate());
-
-        userSymptomDao.add(userSymptom1);
-        userSymptomDao.add(userSymptom2);
-        assertThat(userSymptomDao.getCount(), is(1));
+        userSymptomDto3 = new UserSymptomDto("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
     }
 
     @Test
@@ -78,15 +54,12 @@ public class UserSymptomDaoTest {
         userSymptomDao.deleteAll();
         assertThat(userSymptomDao.getCount(), is(0));
 
-        userSymptomDao.add(userSymptom1);
-        userSymptomDao.add(userSymptom2);
+        userSymptomDao.add(userSymptomDto1);
+        userSymptomDao.add(userSymptomDto2);
         assertThat(userSymptomDao.getCount(), is(2));
 
-        UserSymptom userSymptomGet1 = userSymptomDao.get(userSymptom1.getId(), userSymptom1.getDate());
-        checkSameUserSymptom(userSymptomGet1, userSymptom1);
-
-        UserSymptom userSymptomGet2 = userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate());
-        checkSameUserSymptom(userSymptomGet2, userSymptom2);
+        checkSameUserSymptom(userSymptomDao.get(userSymptom1.getId(), userSymptom1.getDate()), userSymptomDto1);
+        checkSameUserSymptom(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userSymptomDto2);
     }
 
     @Test
@@ -94,11 +67,11 @@ public class UserSymptomDaoTest {
         userSymptomDao.deleteAll();
         assertThat(userSymptomDao.getCount(), is(0));
 
-        userSymptom2.setId(userSymptom1.getId());
-        userSymptom2.setDate("2000-01-01");
+        userSymptomDto2.id = userSymptom1.getId();
+        userSymptomDto2.date = "2000-01-01";
 
-        userSymptomDao.add(userSymptom1);
-        userSymptomDao.add(userSymptom2);
+        userSymptomDao.add(userSymptomDto1);
+        userSymptomDao.add(userSymptomDto2);
         assertThat(userSymptomDao.getCount(),is(2));
         assertThat(userSymptomDao.getCountEachId(userSymptom1.getId()), is(2));
         assertThat(userSymptomDao.getCountEachIdAndDate(userSymptom1.getId(), new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
@@ -109,29 +82,15 @@ public class UserSymptomDaoTest {
         userSymptomDao.deleteAll();
         assertThat(userSymptomDao.getCount(), is(0));
 
-        userSymptomDao.add(userSymptom1);
-        userSymptomDao.add(userSymptom2);
+        userSymptomDao.add(userSymptomDto1);
+        userSymptomDao.add(userSymptomDto2);
         assertThat(userSymptomDao.getCount(),is(2));
 
-        List<UserSymptom> userSymptoms = userSymptomDao.getEachId(userSymptom1.getId());
+        List<UserSymptomDto> userSymptoms = userSymptomDao.getEachId(userSymptom1.getId());
         assertThat(userSymptoms.size(), is(1));
-        for(UserSymptom userSymptom : userSymptoms) {
-            checkSameUserSymptom(userSymptom1, userSymptom);
+        for(UserSymptomDto userSymptomDto : userSymptoms) {
+            checkSameUserSymptom(userSymptomDto1, userSymptomDto);
         }
-    }
-
-    @Test
-    public void getSymptomTrue() {
-        userSymptomDao.deleteAll();
-        assertThat(userSymptomDao.getCount(), is(0));
-
-        userSymptomDao.add(userSymptom2);
-        assertThat(userSymptomDao.getCount(), is(1));
-
-        List<String> symptomsGet = userSymptomDao.getSymptomTrue(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()));
-
-        assertThat(symptomsGet.size(), is(3));
-        assertThat(symptomsGet.get(2), is("설사"));
     }
 
     @Test
@@ -139,27 +98,12 @@ public class UserSymptomDaoTest {
         userSymptomDao.deleteAll();
         assertThat(userSymptomDao.getCount(), is(0));
 
-        userSymptomDao.add(userSymptom2);
+        userSymptomDao.add(userSymptomDto2);
         assertThat(userSymptomDao.getCount(), is(1));
 
-        userSymptom2.setAbdominalBloating(true);
-        userSymptomDao.update(userSymptom2);
-        checkSameUserSymptom(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userSymptom2);
-    }
-
-    @Test
-    public void deleteColumnIfSymptomIsAllFalse() {
-        userSymptomDao.deleteAll();
-        assertThat(userSymptomDao.getCount(), is(0));
-
-        userSymptomDao.add(userSymptom2);
-        assertThat(userSymptomDao.getCount(), is(1));
-
-        userSymptom2.setDiarrhea(false);
-        userSymptomDao.update(userSymptom2);
-        userSymptomDao.updateUserCalenderIfSymptomIsFalse(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userCalender2);
-        assertThat(userSymptomDao.getCount(), is(0));
-        assertThat(userCalender2.isSymptom(), is(false));
+        userSymptomDto2.abdominalBloating = true;
+        userSymptomDao.update(userSymptomDto2);
+        checkSameUserSymptom(userSymptomDao.get(userSymptom2.getId(), userSymptom2.getDate()), userSymptomDto2);
     }
 
     @Test
@@ -167,28 +111,28 @@ public class UserSymptomDaoTest {
         userSymptomDao.deleteAll();
         assertThat(userSymptomDao.getCount(), is(0));
 
-        userSymptomDao.add(userSymptom1);
+        userSymptomDao.add(userSymptomDto1);
         assertThat(userSymptomDao.getCount(), is(1));
 
         userSymptomDao.deleteEachIdAndDate(userSymptom1.getId(), userSymptom2.getDate());
         assertThat(userSymptomDao.getCount(), is(0));
     }
 
-    private void checkSameUserSymptom(UserSymptom userSymptom1, UserSymptom userSymptom2) {
-        assertThat(userSymptom1.getId(), is(userSymptom2.getId()));
-        assertThat(userSymptom1.getDate(), is(userSymptom2.getDate()));
-        assertThat(userSymptom1.isNone(), is(userSymptom2.isNone()));
-        assertThat(userSymptom1.isCramps(), is(userSymptom2.isCramps()));
-        assertThat(userSymptom1.isBreastTenderness(), is(userSymptom2.isBreastTenderness()));
-        assertThat(userSymptom1.isHeadache(), is(userSymptom2.isHeadache()));
-        assertThat(userSymptom1.isAcne(), is(userSymptom2.isAcne()));
-        assertThat(userSymptom1.isLumbago(), is(userSymptom2.isLumbago()));
-        assertThat(userSymptom1.isNausea(), is(userSymptom2.isNausea()));
-        assertThat(userSymptom1.isFatigue(), is(userSymptom2.isFatigue()));
-        assertThat(userSymptom1.isAbdominalBloating(), is(userSymptom2.isAbdominalBloating()));
-        assertThat(userSymptom1.isDesires(), is(userSymptom2.isDesires()));
-        assertThat(userSymptom1.isInsomnia(), is(userSymptom2.isInsomnia()));
-        assertThat(userSymptom1.isConstipation(), is(userSymptom2.isConstipation()));
-        assertThat(userSymptom1.isDiarrhea(), is(userSymptom2.isDiarrhea()));
+    private void checkSameUserSymptom(UserSymptomDto userSymptomDto1, UserSymptomDto userSymptomDto2) {
+        assertThat(userSymptomDto1.id, is(userSymptomDto2.id));
+        assertThat(userSymptomDto1.date, is(userSymptomDto2.date));
+        assertThat(userSymptomDto1.none, is(userSymptomDto2.none));
+        assertThat(userSymptomDto1.cramps, is(userSymptomDto2.cramps));
+        assertThat(userSymptomDto1.breastTenderness, is(userSymptomDto2.breastTenderness));
+        assertThat(userSymptomDto1.headache, is(userSymptomDto2.headache));
+        assertThat(userSymptomDto1.acne, is(userSymptomDto2.acne));
+        assertThat(userSymptomDto1.lumbago, is(userSymptomDto2.lumbago));
+        assertThat(userSymptomDto1.nausea, is(userSymptomDto2.nausea));
+        assertThat(userSymptomDto1.fatigue, is(userSymptomDto2.fatigue));
+        assertThat(userSymptomDto1.abdominalBloating, is(userSymptomDto2.abdominalBloating));
+        assertThat(userSymptomDto1.desires, is(userSymptomDto2.desires));
+        assertThat(userSymptomDto1.insomnia, is(userSymptomDto2.insomnia));
+        assertThat(userSymptomDto1.constipation, is(userSymptomDto2.constipation));
+        assertThat(userSymptomDto1.diarrhea, is(userSymptomDto2.diarrhea));
     }
 }

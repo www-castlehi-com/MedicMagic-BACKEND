@@ -39,19 +39,16 @@
 CREATE TABLE userCalender (
     id VARCHAR(20),
     date DATE,
-    weigh DOUBLE,
     sleepTime TIME,
     exerciseTime TIME,
     waterIntake DOUBLE,
     startDay DATE,
     endDay DATE,
-    emotion VARCHAR(20),
     symptom BOOLEAN,
     mucus BOOLEAN,
 
     CONSTRAINT idWithDate PRIMARY KEY(id, date)
 ) ENGINE = InnoDB;
-
 
 CREATE TABLE userSymptom (
     id VARCHAR(20),

@@ -4,6 +4,7 @@ import MedicMagic.sqlService.SqlService;
 import MedicMagic.exception.DuplicateDateException;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userSymptom.domain.UserSymptom;
+import MedicMagic.userSymptom.dto.UserSymptomDto;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,10 +25,10 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
         this.sqlService = sqlService;
     }
 
-    private RowMapper<UserSymptom> userSymptomRowMapper =
-            new RowMapper<UserSymptom>() {
+    private RowMapper<UserSymptomDto> userSymptomRowMapper =
+            new RowMapper<UserSymptomDto>() {
                 @Override
-                public UserSymptom mapRow(ResultSet resultSet, int i) throws SQLException {
+                public UserSymptomDto mapRow(ResultSet resultSet, int i) throws SQLException {
                     UserSymptom userSymptom = new UserSymptom();
                     userSymptom.setId(resultSet.getString("id"));
                     userSymptom.setDate(resultSet.getString("date"));
@@ -44,93 +45,50 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
                     userSymptom.setInsomnia(resultSet.getBoolean("insomnia"));
                     userSymptom.setConstipation(resultSet.getBoolean("constipation"));
                     userSymptom.setDiarrhea(resultSet.getBoolean("diarrhea"));
-
-                    return userSymptom;
+                    UserSymptomDto userSymptomDto = new UserSymptomDto(userSymptom);
+                    return userSymptomDto;
                 }
             };
 
     @Override
-    public void add(UserSymptom userSymptom) throws DuplicateDateException {
+    public void add(UserSymptomDto userSymptomDto) throws DuplicateDateException {
         try {
-            this.jdbcTemplate.update(this.sqlService.getSql("userSymptomAdd"), userSymptom.getId(), java.sql.Date.valueOf(userSymptom.getDate()), userSymptom.isNone(), userSymptom.isCramps(), userSymptom.isBreastTenderness(), userSymptom.isHeadache(), userSymptom.isAcne(), userSymptom.isLumbago(), userSymptom.isLumbago(), userSymptom.isFatigue(), userSymptom.isAbdominalBloating(), userSymptom.isDesires(), userSymptom.isInsomnia(), userSymptom.isConstipation(), userSymptom.isDiarrhea());
+            this.jdbcTemplate.update(this.sqlService.getSql("userSymptomAdd"),
+                    userSymptomDto.id,
+                    java.sql.Date.valueOf(userSymptomDto.date),
+                    userSymptomDto.none,
+                    userSymptomDto.cramps,
+                    userSymptomDto.breastTenderness,
+                    userSymptomDto.headache,
+                    userSymptomDto.acne,
+                    userSymptomDto.lumbago,
+                    userSymptomDto.nausea,
+                    userSymptomDto.fatigue,
+                    userSymptomDto.abdominalBloating,
+                    userSymptomDto.desires,
+                    userSymptomDto.insomnia,
+                    userSymptomDto.constipation,
+                    userSymptomDto.diarrhea);
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException(e);
         }
     }
 
     @Override
-    public UserSymptom get(String id, String date) {
+    public UserSymptomDto get(String id, String date) {
         return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGet"),
                 new Object[]{id, date}, this.userSymptomRowMapper);
     }
 
     @Override
-    public List<UserSymptom> getAll() {
+    public List<UserSymptomDto> getAll() {
         return this.jdbcTemplate.query(this.sqlService.getSql("userSymptomGetAll"), this.userSymptomRowMapper);
     }
 
     @Override
-    public List<UserSymptom> getEachId(String id) {
+    public List<UserSymptomDto> getEachId(String id) {
         return this.jdbcTemplate.query(this.sqlService.getSql("userSymptomGetEachId"),
                 new Object[]{id}, this.userSymptomRowMapper);
-    }
-
-    @Override
-    public List<String> getSymptomTrue(UserSymptom userSymptom) {
-        List<String> symptoms = new ArrayList<>();
-
-        symptoms.add(userSymptom.getId());
-        symptoms.add(userSymptom.getDate());
-
-        if(userSymptom.isNone()) {
-            symptoms.add("없음");
-        }
-
-        if(userSymptom.isCramps()){
-            symptoms.add("생리통");
-        }
-
-        if(userSymptom.isBreastTenderness()) {
-            symptoms.add("유방의 압통");
-        }
-
-        if(userSymptom.isHeadache()) {
-            symptoms.add("두통");
-        }
-
-        if(userSymptom.isAcne()) {
-            symptoms.add("여드름");
-        }
-
-        if(userSymptom.isLumbago()) {
-            symptoms.add("요통");
-        }
-
-        if(userSymptom.isFatigue()) {
-            symptoms.add("피로감");
-        }
-
-        if(userSymptom.isAbdominalBloating()) {
-            symptoms.add("복부 팽만감");
-        }
-
-        if(userSymptom.isDesires()) {
-            symptoms.add("갈망감");
-        }
-
-        if(userSymptom.isInsomnia()) {
-            symptoms.add("불면증");
-        }
-
-        if(userSymptom.isConstipation()) {
-            symptoms.add("변비");
-        }
-
-        if(userSymptom.isDiarrhea()) {
-            symptoms.add("설사");
-        }
-
-        return symptoms;
     }
 
     @Override
@@ -155,37 +113,28 @@ public class UserSymptomDaoJDBC implements UserSymptomDao{
 
     @Override
     public int getCountEachIdAndDate(String id, String date) {
-        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGetCountEachIdAndDate"), new Object[]{date, id}, Integer.class);
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userSymptomGetCountEachIdAndDate"), new Object[]{id, date}, Integer.class);
     }
 
     @Override
-    public void update(UserSymptom userSymptom) {
+    public void update(UserSymptomDto userSymptomDto) {
         this.jdbcTemplate.update(
                 this.sqlService.getSql("userSymptomUpdate"),
-                userSymptom.isNone(),
-                userSymptom.isCramps(),
-                userSymptom.isBreastTenderness(),
-                userSymptom.isHeadache(),
-                userSymptom.isAcne(),
-                userSymptom.isLumbago(),
-                userSymptom.isNausea(),
-                userSymptom.isFatigue(),
-                userSymptom.isAbdominalBloating(),
-                userSymptom.isDesires(),
-                userSymptom.isInsomnia(),
-                userSymptom.isConstipation(),
-                userSymptom.isDiarrhea(),
-                userSymptom.getId(),
-                userSymptom.getDate()
+                userSymptomDto.none,
+                userSymptomDto.cramps,
+                userSymptomDto.breastTenderness,
+                userSymptomDto.headache,
+                userSymptomDto.acne,
+                userSymptomDto.lumbago,
+                userSymptomDto.nausea,
+                userSymptomDto.fatigue,
+                userSymptomDto.abdominalBloating,
+                userSymptomDto.desires,
+                userSymptomDto.insomnia,
+                userSymptomDto.constipation,
+                userSymptomDto.diarrhea,
+                userSymptomDto.id,
+                userSymptomDto.date
         );
-    }
-
-    @Override
-    public void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender) {
-        if(this.getSymptomTrue(userSymptom).size() == 2) {
-            userCalender.setSymptom(false);
-            this.jdbcTemplate.update(this.sqlService.getSql("userSymptomUpdateUserCalenderIfSymptomIsFalse"), userCalender.getId(), userCalender.getDate());
-        }
-
     }
 }

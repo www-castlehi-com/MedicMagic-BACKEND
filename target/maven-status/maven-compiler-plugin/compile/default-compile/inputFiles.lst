@@ -17,6 +17,7 @@ C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\controll
 C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\exception\LastValueNullException.java
 C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\sqlService\jaxb\SqlType.java
 C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\exception\DuplicateUserIdException.java
+C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\exception\LastValueNotNullException.java
 C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\userReminder\userWaterIntake\service\UserWaterIntakeServiceImpl.java
 C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\userSymptom\service\UserSymptomServiceImpl.java
 C:\Users\夢熱團\IdeaProjects\MedicMagic_SPRING\src\main\java\MedicMagic\userSymptom\dto\UserSymptomDto.java

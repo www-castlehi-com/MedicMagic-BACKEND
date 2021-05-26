@@ -9,18 +9,16 @@ import java.util.List;
 
 @Transactional
 public interface UserSymptomService {
-    void add(UserSymptom userSymptom);
+    void add(UserSymptomDto userSymptomDto);
     @Transactional(readOnly = true)
-    UserSymptom get(String id, String date);
+    UserSymptomDto get(String id, String date);
     @Transactional(readOnly = true)
-    List<UserSymptom> getAll();
+    List<UserSymptomDto> getAll();
     @Transactional(readOnly = true)
-    List<UserSymptom> getEachId(String id);
-    @Transactional(readOnly = true)
-    List<String> getSymptomTrue(UserSymptom userSymptom);
-    int getCountEachIdAndDate(String id, String date);
+    List<UserSymptomDto> getEachId(String id);
     void deleteAll();
     void deleteEachIdAndDate(String id, String date);
-    void update(UserSymptom userSymptom);
-    void updateUserCalenderIfSymptomIsFalse(UserSymptom userSymptom, UserCalender userCalender);
+    @Transactional(readOnly = true)
+    int getCountEachIdAndDate(String id, String date);
+    void update(UserSymptomDto userSymptomDto);
 }

@@ -65,6 +65,7 @@ MedicMagic\user\service\UserService.class
 MedicMagic\exception\NegativeException.class
 MedicMagic\controller\UserReminder\UserWaterIntakeController.class
 MedicMagic\sqlService\SqlRetrievalFailureException.class
+MedicMagic\exception\LastValueNotNullException.class
 MedicMagic\sqlService\BaseSqlService.class
 MedicMagic\userReminder\userReminderList\service\UserReminderListServiceImpl.class
 MedicMagic\userReminder\userExercise\dao\UserExerciseJDBC.class

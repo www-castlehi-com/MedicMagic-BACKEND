@@ -1,7 +1,12 @@
 package MedicMagic.userCalender.service;
 
 import MedicMagic.userCalender.domain.UserCalender;
+import MedicMagic.userCalender.dto.UserCalenderDto;
+import MedicMagic.userMucus.service.UserMucusService;
 import MedicMagic.userPhysiology.dao.UserPhysiologyDao;
+import MedicMagic.userPhysiology.service.UserPhysiologyService;
+import MedicMagic.userPhysiology.service.UserPhysiologyServiceTest;
+import MedicMagic.userSymptom.service.UserSymptomService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +29,174 @@ public class UserCalenderServiceTest {
     @Autowired
     UserCalenderService userCalenderService;
     @Autowired
-    UserPhysiologyDao userPhysiologyDao;
+    UserPhysiologyService userPhysiologyService;
+    @Autowired
+    UserMucusService userMucusService;
+    @Autowired
+    UserSymptomService userSymptomService;
 
     @Test(expected = TransientDataAccessResourceException.class)
     public void readOnlyTransactionAttribute() {
+        userPhysiologyService.deleteAll();
+        assertThat(userPhysiologyService.getAll().size(), is(0));
+
+        userCalenderService.deleteAll();
+        assertThat(userCalenderService.getAll().size(), is(0));
+
+        userMucusService.deleteAll();
+        assertThat(userMucusService.getAll().size(), is(0));
+
+        userSymptomService.deleteAll();
+        assertThat(userSymptomService.getAll().size(), is(0));
+
+        userCalenderService.add(new UserCalenderDto(new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "08:30:00", null, 3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, false, false)));
+        assertThat(userCalenderService.getAll().size(), is(1));
+
         testUserCalenderService.getAll();
     }
 
     @Test
-    public void createUserPhysiologyDao() {
-        userPhysiologyDao.deleteAll();
-        assertThat(userPhysiologyDao.getCount(), is(0));
-        userCalenderService.deleteAll();
+    public void createRelatedDao() {
+        userPhysiologyService.deleteAll();
+        assertThat(userPhysiologyService.getAll().size(), is(0));
 
-        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), 51.4, "07:30:00", "01:30:00", 1.5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, "Αρ°ΕΏς", true, true);
-        userCalenderService.add(userCalender);
-        assertThat(userPhysiologyDao.getCount(), is(1));
+        userCalenderService.deleteAll();
+        assertThat(userCalenderService.getAll().size(), is(0));
+
+        userMucusService.deleteAll();
+        assertThat(userMucusService.getAll().size(), is(0));
+
+        userSymptomService.deleteAll();
+        assertThat(userSymptomService.getAll().size(), is(0));
+
+        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
+        userCalenderService.add(userCalenderDto);
+        assertThat(userCalenderService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+
+        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
+        assertThat(userCalenderService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+    }
+
+    @Test
+    public void ifSymptomIsTrueToFalse() {
+        userPhysiologyService.deleteAll();
+        assertThat(userPhysiologyService.getAll().size(), is(0));
+
+        userCalenderService.deleteAll();
+        assertThat(userCalenderService.getAll().size(), is(0));
+
+        userMucusService.deleteAll();
+        assertThat(userMucusService.getAll().size(), is(0));
+
+        userSymptomService.deleteAll();
+        assertThat(userSymptomService.getAll().size(), is(0));
+
+        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
+        userCalenderService.add(userCalenderDto);
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+
+        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, false, true);
+        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
+        userCalenderService.update(userCalenderDto2);
+        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+    }
+
+    @Test
+    public void ifMucusIsTrueToFalse() {
+        userPhysiologyService.deleteAll();
+        assertThat(userPhysiologyService.getAll().size(), is(0));
+
+        userCalenderService.deleteAll();
+        assertThat(userCalenderService.getAll().size(), is(0));
+
+        userMucusService.deleteAll();
+        assertThat(userMucusService.getAll().size(), is(0));
+
+        userSymptomService.deleteAll();
+        assertThat(userSymptomService.getAll().size(), is(0));
+
+        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
+        userCalenderService.add(userCalenderDto);
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+
+        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, false);
+        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
+        userCalenderService.update(userCalenderDto2);
+        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
+    }
+
+    @Test
+    public void ifSymptomIsFalseToTrue() {
+        userPhysiologyService.deleteAll();
+        assertThat(userPhysiologyService.getAll().size(), is(0));
+
+        userCalenderService.deleteAll();
+        assertThat(userCalenderService.getAll().size(), is(0));
+
+        userMucusService.deleteAll();
+        assertThat(userMucusService.getAll().size(), is(0));
+
+        userSymptomService.deleteAll();
+        assertThat(userSymptomService.getAll().size(), is(0));
+
+        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, false, true);
+        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
+        userCalenderService.add(userCalenderDto);
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+
+        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
+        userCalenderService.update(userCalenderDto2);
+        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+    }
+
+    @Test
+    public void IfMucusIsFalseToTrue() {
+        userPhysiologyService.deleteAll();
+        assertThat(userPhysiologyService.getAll().size(), is(0));
+
+        userCalenderService.deleteAll();
+        assertThat(userCalenderService.getAll().size(), is(0));
+
+        userMucusService.deleteAll();
+        assertThat(userMucusService.getAll().size(), is(0));
+
+        userSymptomService.deleteAll();
+        assertThat(userSymptomService.getAll().size(), is(0));
+
+        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, false);
+        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
+        userCalenderService.add(userCalenderDto);
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
+
+        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
+        userCalenderService.update(userCalenderDto2);
+        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
+        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
+        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
     }
 
     static class TestUserCalenderServiceImpl extends UserCalenderServiceImpl {
         @Override
-        public List<UserCalender> getAll() {
-            for(UserCalender userCalender : super.getAll()) {
-                super.update(userCalender);
+        public List<UserCalenderDto> getAll() {
+            for(UserCalenderDto userCalenderDto : super.getAll()) {
+                super.update(userCalenderDto);
             }
             return null;
         }
