@@ -30,10 +30,6 @@ public class UserCalenderServiceTest {
     UserCalenderService userCalenderService;
     @Autowired
     UserPhysiologyService userPhysiologyService;
-    @Autowired
-    UserMucusService userMucusService;
-    @Autowired
-    UserSymptomService userSymptomService;
 
     @Test(expected = TransientDataAccessResourceException.class)
     public void readOnlyTransactionAttribute() {
@@ -43,13 +39,7 @@ public class UserCalenderServiceTest {
         userCalenderService.deleteAll();
         assertThat(userCalenderService.getAll().size(), is(0));
 
-        userMucusService.deleteAll();
-        assertThat(userMucusService.getAll().size(), is(0));
-
-        userSymptomService.deleteAll();
-        assertThat(userSymptomService.getAll().size(), is(0));
-
-        userCalenderService.add(new UserCalenderDto(new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "08:30:00", null, 3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, false, false)));
+        userCalenderService.add(new UserCalenderDto(new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "08:30:00", null, 3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null)));
         assertThat(userCalenderService.getAll().size(), is(1));
 
         testUserCalenderService.getAll();
@@ -63,133 +53,13 @@ public class UserCalenderServiceTest {
         userCalenderService.deleteAll();
         assertThat(userCalenderService.getAll().size(), is(0));
 
-        userMucusService.deleteAll();
-        assertThat(userMucusService.getAll().size(), is(0));
-
-        userSymptomService.deleteAll();
-        assertThat(userSymptomService.getAll().size(), is(0));
-
-        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
+        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null);
         UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
         userCalenderService.add(userCalenderDto);
         assertThat(userCalenderService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
 
         assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
         assertThat(userCalenderService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-    }
-
-    @Test
-    public void ifSymptomIsTrueToFalse() {
-        userPhysiologyService.deleteAll();
-        assertThat(userPhysiologyService.getAll().size(), is(0));
-
-        userCalenderService.deleteAll();
-        assertThat(userCalenderService.getAll().size(), is(0));
-
-        userMucusService.deleteAll();
-        assertThat(userMucusService.getAll().size(), is(0));
-
-        userSymptomService.deleteAll();
-        assertThat(userSymptomService.getAll().size(), is(0));
-
-        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
-        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
-        userCalenderService.add(userCalenderDto);
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-
-        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, false, true);
-        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
-        userCalenderService.update(userCalenderDto2);
-        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-    }
-
-    @Test
-    public void ifMucusIsTrueToFalse() {
-        userPhysiologyService.deleteAll();
-        assertThat(userPhysiologyService.getAll().size(), is(0));
-
-        userCalenderService.deleteAll();
-        assertThat(userCalenderService.getAll().size(), is(0));
-
-        userMucusService.deleteAll();
-        assertThat(userMucusService.getAll().size(), is(0));
-
-        userSymptomService.deleteAll();
-        assertThat(userSymptomService.getAll().size(), is(0));
-
-        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
-        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
-        userCalenderService.add(userCalenderDto);
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-
-        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, false);
-        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
-        userCalenderService.update(userCalenderDto2);
-        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
-    }
-
-    @Test
-    public void ifSymptomIsFalseToTrue() {
-        userPhysiologyService.deleteAll();
-        assertThat(userPhysiologyService.getAll().size(), is(0));
-
-        userCalenderService.deleteAll();
-        assertThat(userCalenderService.getAll().size(), is(0));
-
-        userMucusService.deleteAll();
-        assertThat(userMucusService.getAll().size(), is(0));
-
-        userSymptomService.deleteAll();
-        assertThat(userSymptomService.getAll().size(), is(0));
-
-        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, false, true);
-        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
-        userCalenderService.add(userCalenderDto);
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-
-        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
-        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
-        userCalenderService.update(userCalenderDto2);
-        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-    }
-
-    @Test
-    public void IfMucusIsFalseToTrue() {
-        userPhysiologyService.deleteAll();
-        assertThat(userPhysiologyService.getAll().size(), is(0));
-
-        userCalenderService.deleteAll();
-        assertThat(userCalenderService.getAll().size(), is(0));
-
-        userMucusService.deleteAll();
-        assertThat(userMucusService.getAll().size(), is(0));
-
-        userSymptomService.deleteAll();
-        assertThat(userSymptomService.getAll().size(), is(0));
-
-        UserCalender userCalender = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, false);
-        UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
-        userCalenderService.add(userCalenderDto);
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(0));
-
-        UserCalender userCalender2 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "07:30:00", "01:30:00", 1, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, true);
-        UserCalenderDto userCalenderDto2 = new UserCalenderDto(userCalender2);
-        userCalenderService.update(userCalenderDto2);
-        assertThat(userPhysiologyService.getCountEachId("gryffindor"), is(1));
-        assertThat(userSymptomService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
-        assertThat(userMucusService.getCountEachIdAndDate("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date())), is(1));
     }
 
     static class TestUserCalenderServiceImpl extends UserCalenderServiceImpl {

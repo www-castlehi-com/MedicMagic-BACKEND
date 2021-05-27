@@ -38,13 +38,13 @@ public class userCalenderDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        userCalender1 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "08:30:00", null, 3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, true, false);
-        userCalender2 = new UserCalender("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, "02:30:00", 0, null, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), false, true);
+        userCalender1 = new UserCalender("gryffindor", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "08:30:00", null, 3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null);
+        userCalender2 = new UserCalender("hufflepuff", new SimpleDateFormat("yyyy-MM-dd").format(new Date()), null, "02:30:00", 0, null, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
         userCalenderDto1 = new UserCalenderDto(userCalender1);
         userCalenderDto2 = new UserCalenderDto(userCalender2);
 
-        userCalenderDto3 = new UserCalenderDto("slyderin", "2021-05-26", "null", "02:30:00", "2", "null", "2021-05-26", "true", "false");
+        userCalenderDto3 = new UserCalenderDto("slyderin", "2021-05-26", "null", "02:30:00", "2", "null", "2021-05-26");
     }
 
     @Test
@@ -119,7 +119,5 @@ public class userCalenderDaoTest {
         assertThat(userCalenderDto1.startDay, is(userCalenderDto2.startDay));
         assertThat(userCalenderDto1.endDay, is(userCalenderDto2.endDay));
         assertThat(userCalenderDto1.waterIntake, is(userCalenderDto2.waterIntake));
-        assertThat(userCalenderDto1.symptom, is(userCalenderDto2.symptom));
-        assertThat(userCalenderDto1.mucus, is(userCalenderDto2.mucus));
     }
 }

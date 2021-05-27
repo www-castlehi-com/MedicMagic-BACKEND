@@ -38,8 +38,6 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
                     userCalender.setWaterIntake(resultSet.getInt("waterIntake"));
                     userCalender.setStartDay(resultSet.getString("startDay"));
                     userCalender.setEndDay(resultSet.getString("endDay"));
-                    userCalender.setSymptom(resultSet.getBoolean("symptom"));
-                    userCalender.setMucus(resultSet.getBoolean("mucus"));
                     UserCalenderDto userCalenderDto = new UserCalenderDto(userCalender);
                     return userCalenderDto;
                 }
@@ -55,9 +53,8 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
                     userCalenderDto.exerciseTime,
                     userCalenderDto.waterIntake,
                     nullCheck("startDay", userCalenderDto.startDay),
-                    nullCheck("endDay", userCalenderDto.endDay),
-                    userCalenderDto.symptom,
-                    userCalenderDto.mucus);
+                    nullCheck("endDay", userCalenderDto.endDay)
+            );
         } catch(DuplicateKeyException e) {
             throw new DuplicateDateException("중복된 날짜입니다", e);
         }
@@ -114,8 +111,6 @@ public class UserCalenderDaoJDBC implements UserCalenderDao {
                 userCalenderDto.waterIntake,
                 nullCheck("startDay", userCalenderDto.startDay),
                 nullCheck("endDay", userCalenderDto.endDay),
-                userCalenderDto.symptom,
-                userCalenderDto.mucus,
                 userCalenderDto.id,
                 userCalenderDto.date
         );

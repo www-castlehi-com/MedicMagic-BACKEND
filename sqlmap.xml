@@ -11,7 +11,7 @@
     <sql key="userGetCountEachId">SELECT COUNT(*) FROM user WHERE id = ?</sql>
     <sql key="userUpdate">UPDATE user SET name = ?, password = ?, birthday = ?, age = ? where id = ?</sql>
 
-    <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, sleepTime, exerciseTime, waterIntake, startDay, endDay, symptom, mucus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)</sql>
+    <sql key="userCalenderAdd">INSERT INTO userCalender(id, date, sleepTime, exerciseTime, waterIntake, startDay, endDay) VALUES (?, ?, ?, ?, ?, ?, ?)</sql>
     <sql key="userCalenderGet">SELECT * FROM userCalender WHERE id = ? AND date = ?</sql>
     <sql key="userCalenderGetAll">SELECT * FROM userCalender ORDER BY id, date DESC</sql>
     <sql key="userCalenderGetEachId">SELECT * FROM userCalender WHERE id = ?</sql>
@@ -20,7 +20,7 @@
     <sql key="userCalenderGetCount">SELECT COUNT(*) FROM userCalender</sql>
     <sql key="userCalenderGetCountEachId">SELECT COUNT(*) FROM userCalender GROUP BY id = ?</sql>
     <sql key="userCalenderGetCountEachIdAndDate">SELECT COUNT(*) FROM userCalender WHERE id = ? AND date = ?</sql>
-    <sql key="userCalenderUpdate">UPDATE userCalender SET sleepTime = ?, exerciseTime = ?, waterIntake = ?, startDay = ?, endDay = ?, symptom = ?, mucus = ? WHERE id = ? AND date = ?</sql>
+    <sql key="userCalenderUpdate">UPDATE userCalender SET sleepTime = ?, exerciseTime = ?, waterIntake = ?, startDay = ?, endDay = ? WHERE id = ? AND date = ?</sql>
 
     <sql key="userMucusAdd">INSERT INTO userMucus(id, date, none, mottled, sticky, creamy, likeEggWhite, watery, abnormal) VALUES (?,?,?,?,?,?,?,?,?)</sql>
     <sql key="userMucusGet">SELECT * FROM userMucus WHERE id = ? AND date = ?</sql>

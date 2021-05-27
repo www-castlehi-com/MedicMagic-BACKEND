@@ -18,8 +18,6 @@ import java.util.List;
 public class UserCalenderServiceImpl implements UserCalenderService{
     UserCalenderDao userCalenderDao;
     UserPhysiologyDao userPhysiologyDao;
-    UserSymptomDao userSymptomDao;
-    UserMucusDao userMucusDao;
 
     public void setUserCalenderDao(UserCalenderDao userCalenderDao) {
         this.userCalenderDao = userCalenderDao;
@@ -27,14 +25,6 @@ public class UserCalenderServiceImpl implements UserCalenderService{
 
     public void setUserPhysiologyDao(UserPhysiologyDao userPhysiologyDao) {
         this.userPhysiologyDao = userPhysiologyDao;
-    }
-
-    public void setUserSymptomDao(UserSymptomDao userSymptomDao) {
-        this.userSymptomDao = userSymptomDao;
-    }
-
-    public void setUserMucusDao(UserMucusDao userMucusDao) {
-        this.userMucusDao = userMucusDao;
     }
 
     @Override
@@ -47,29 +37,19 @@ public class UserCalenderServiceImpl implements UserCalenderService{
         }
         if(userCalenderDto.endDay != null) {
             if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology != null) {
-                throw new LastValueNotNullException("시작된 주기가 없습니다");
+                if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology != userCalenderDto.endDay) {
+                    throw new LastValueNotNullException("시작된 주기가 없습니다");
+                }
             }
             UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userPhysiologyDao.getLastEachId(userCalenderDto.id).startPhysiology, userCalenderDto.endDay, "null", "null");
             userPhysiologyDao.update(userPhysiologyDto);
-        }
-        if(userCalenderDto.symptom == true) {
-            UserSymptomDto userSymptomDto = new UserSymptomDto(userCalenderDto.id, userCalenderDto.date, "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
-            userSymptomDao.add(userSymptomDto);
-        } else {
-            userSymptomDao.deleteEachIdAndDate(userCalenderDto.id, userCalenderDto.date);
-        }
-        if(userCalenderDto.mucus == true) {
-            UserMucusDto userMucusDto = new UserMucusDto(userCalenderDto.id, userCalenderDto.date, "false", "false", "false", "false", "false", "false", "false");
-            userMucusDao.add(userMucusDto);
-        } else {
-            userMucusDao.deleteEachIdAndDate(userCalenderDto.id, userCalenderDto.date);
         }
     }
 
     @Override
     public UserCalenderDto get(String id, String date) {
         if(userCalenderDao.getCountEachIdAndDate(id, date) == 0) {
-            this.add(new UserCalenderDto(id, date, "00:00:00", "00:00:00", "0", "null", "null", "false", "false"));
+            this.add(new UserCalenderDto(id, date, "00:00:00", "00:00:00", "0", "null", "null"));
         }
         return userCalenderDao.get(id, date);
     }
@@ -112,31 +92,12 @@ public class UserCalenderServiceImpl implements UserCalenderService{
         }
         if(userCalenderDto.endDay != null) {
             if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology != null) {
-                throw new LastValueNotNullException("시작된 주기가 없습니다");
-            }
-            if(!userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology.equals(userCalenderDto.endDay)) {
+                if(!userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology.equals(userCalenderDto.endDay)) {
+                    throw new LastValueNotNullException("시작된 주기가 없습니다");
+                }
+            } else {
                 UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userPhysiologyDao.getLastEachId(userCalenderDto.id).startPhysiology, userCalenderDto.endDay, "null", "null");
                 userPhysiologyDao.update(userPhysiologyDto);
-            }
-        }
-        if(userCalenderDto.symptom == true) {
-            if(userSymptomDao.getCountEachIdAndDate(userCalenderDto.id, userCalenderDto.date) == 0) {
-                UserSymptomDto userSymptomDto = new UserSymptomDto(userCalenderDto.id, userCalenderDto.date, "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
-                userSymptomDao.add(userSymptomDto);
-            }
-        } else {
-            if(userSymptomDao.getCountEachIdAndDate(userCalenderDto.id, userCalenderDto.date) != 0) {
-                userSymptomDao.deleteEachIdAndDate(userCalenderDto.id, userCalenderDto.date);
-            }
-        }
-        if(userCalenderDto.mucus == true) {
-            if(userMucusDao.getCountEachIdAndDate(userCalenderDto.id, userCalenderDto.date) == 0) {
-                UserMucusDto userMucusDto = new UserMucusDto(userCalenderDto.id, userCalenderDto.date, "false", "false", "false", "false", "false", "false", "false");
-                userMucusDao.add(userMucusDto);
-            }
-        } else {
-            if(userMucusDao.getCountEachIdAndDate(userCalenderDto.id, userCalenderDto.date) != 0) {
-                userMucusDao.deleteEachIdAndDate(userCalenderDto.id, userCalenderDto.date);
             }
         }
         userCalenderDao.update(userCalenderDto);

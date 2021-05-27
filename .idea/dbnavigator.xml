@@ -44,8 +44,6 @@ CREATE TABLE userCalender (
     waterIntake DOUBLE,
     startDay DATE,
     endDay DATE,
-    symptom BOOLEAN,
-    mucus BOOLEAN,
 
     CONSTRAINT idWithDate PRIMARY KEY(id, date)
 ) ENGINE = InnoDB;

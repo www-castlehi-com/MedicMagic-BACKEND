@@ -10,8 +10,6 @@ public class UserCalenderDto {
     public Integer waterIntake;
     public String startDay;
     public String endDay;
-    public boolean symptom;
-    public boolean mucus;
 
     public UserCalenderDto(UserCalender userCalender) {
         this.id = userCalender.getId();
@@ -21,11 +19,9 @@ public class UserCalenderDto {
         this.waterIntake = userCalender.getWaterIntake();
         this.startDay = userCalender.getStartDay();
         this.endDay = userCalender.getEndDay();
-        this.symptom = userCalender.isSymptom();
-        this.mucus = userCalender.isMucus();
     }
 
-    public UserCalenderDto(String id, String date, String sleepTime, String exerciseTime, String waterIntake, String startDay, String endDay, String symptom, String mucus) {
+    public UserCalenderDto(String id, String date, String sleepTime, String exerciseTime, String waterIntake, String startDay, String endDay) {
         this.id = id;
         this.date = date;
         this.sleepTime = sleepTime;
@@ -40,16 +36,6 @@ public class UserCalenderDto {
             this.endDay = null;
         } else {
             this.endDay = endDay;
-        }
-        if(symptom.equals("true")) {
-            this.symptom = true;
-        } else {
-            this.symptom = false;
-        }
-        if(mucus.equals("true")) {
-            this.mucus = true;
-        } else {
-            this.mucus = false;
         }
     }
 }

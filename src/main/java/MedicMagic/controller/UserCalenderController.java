@@ -35,8 +35,6 @@ public class UserCalenderController {
             mv.addObject("waterIntake", userCalenderDto.waterIntake);
             mv.addObject("startDay", userCalenderDto.startDay);
             mv.addObject("endDay", userCalenderDto.endDay);
-            mv.addObject("symptom", userCalenderDto.symptom);
-            mv.addObject("mucus", userCalenderDto.mucus);
 
             String month = today_date.split("-")[1];
 
@@ -77,10 +75,8 @@ public class UserCalenderController {
             String waterIntake = httpServletRequest.getParameter("waterIntake");
             String startDay = httpServletRequest.getParameter("startDay");
             String endDay = httpServletRequest.getParameter("endDay");
-            String symptom = httpServletRequest.getParameter("symptom");
-            String mucus = httpServletRequest.getParameter("mucus");
 
-            UserCalenderDto userCalenderDto = new UserCalenderDto(id, today_date, sleepTime, exerciseTime, waterIntake, startDay, endDay, symptom, mucus);
+            UserCalenderDto userCalenderDto = new UserCalenderDto(id, today_date, sleepTime, exerciseTime, waterIntake, startDay, endDay);
             userCalenderService.update(userCalenderDto);
 
             ModelAndView mv = new ModelAndView();
@@ -115,8 +111,6 @@ public class UserCalenderController {
             mv.addObject("waterIntake", userCalenderDto.waterIntake);
             mv.addObject("startDay", userCalenderDto.startDay);
             mv.addObject("endDay", userCalenderDto.endDay);
-            mv.addObject("symptom", userCalenderDto.symptom);
-            mv.addObject("mucus", userCalenderDto.mucus);
 
             return mv;
         } catch(Exception e) {
