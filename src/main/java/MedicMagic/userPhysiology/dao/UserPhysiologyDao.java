@@ -12,7 +12,7 @@ public interface UserPhysiologyDao {
     UserPhysiologyDto getEachIdAndStartPhysiology(String id, String startPhysiology);
     UserPhysiologyDto getLastEachId(String id);
     List<UserPhysiologyDto> getAll();
-    List<UserPhysiologyDto> getEachIdLimit3(String id);
+    List<UserPhysiologyDto> getEachIdLimit6(String id);
     List<UserPhysiologyDto> getEachIdAndMonth(String id, String month);
     void deleteAll();
     void deleteEachIdAndStartPhysiology(String id, String startPhysiology);

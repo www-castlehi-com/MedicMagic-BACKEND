@@ -101,7 +101,7 @@ public class UserPhysiologyDaoTest {
         }
 
         count = 2;
-        for(UserPhysiologyDto userPhysiologyDto : userPhysiologyDao.getEachIdLimit3(userPhysiologyList.get(0).id)) {
+        for(UserPhysiologyDto userPhysiologyDto : userPhysiologyDao.getEachIdLimit6(userPhysiologyList.get(0).id)) {
             checkSameUser(userPhysiologyDto, userPhysiologyList.get(count--));
         }
     }

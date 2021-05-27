@@ -47,7 +47,7 @@ public class UserPhysiologyController {
         try {
             String id = httpServletRequest.getParameter("id");
 
-            List<UserPhysiologyDto> userPhysiologyDtoList = userPhysiologyService.getEachIdLimit3(id);
+            List<UserPhysiologyDto> userPhysiologyDtoList = userPhysiologyService.getEachIdLimit6(id);
 
             ModelAndView mv = new ModelAndView();
             mv.setViewName("userPhysiology/getLimit3_view");
@@ -68,6 +68,24 @@ public class UserPhysiologyController {
                 mv.addObject("endPhysiology3", userPhysiologyDtoList.get(2).endPhysiology);
                 mv.addObject("expectedOvulationDate3", userPhysiologyDtoList.get(2).expectedOvulationDate);
                 mv.addObject("expectedPhysiologyDate3", userPhysiologyDtoList.get(2).expectedPhysiologyDate);
+            }
+            if(userPhysiologyDtoList.size() >= 4) {
+                mv.addObject("startPhysiology4", userPhysiologyDtoList.get(3).startPhysiology);
+                mv.addObject("endPhysiology4", userPhysiologyDtoList.get(3).endPhysiology);
+                mv.addObject("expectedOvulationDate4", userPhysiologyDtoList.get(3).expectedOvulationDate);
+                mv.addObject("expectedPhysiologyDate4", userPhysiologyDtoList.get(3).expectedPhysiologyDate);
+            }
+            if(userPhysiologyDtoList.size() >= 5) {
+                mv.addObject("startPhysiology5", userPhysiologyDtoList.get(4).startPhysiology);
+                mv.addObject("endPhysiology5", userPhysiologyDtoList.get(4).endPhysiology);
+                mv.addObject("expectedOvulationDate5", userPhysiologyDtoList.get(4).expectedOvulationDate);
+                mv.addObject("expectedPhysiologyDate5", userPhysiologyDtoList.get(4).expectedPhysiologyDate);
+            }
+            if(userPhysiologyDtoList.size() >= 6) {
+                mv.addObject("startPhysiology6", userPhysiologyDtoList.get(5).startPhysiology);
+                mv.addObject("endPhysiology6", userPhysiologyDtoList.get(5).endPhysiology);
+                mv.addObject("expectedOvulationDate6", userPhysiologyDtoList.get(5).expectedOvulationDate);
+                mv.addObject("expectedPhysiologyDate6", userPhysiologyDtoList.get(5).expectedPhysiologyDate);
             }
 
             return mv;

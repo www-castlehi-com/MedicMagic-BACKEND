@@ -41,8 +41,8 @@ public class UserPhysiologyServiceImpl implements UserPhysiologyService{
     }
 
     @Override
-    public List<UserPhysiologyDto> getEachIdLimit3(String id) {
-        return this.userPhysiologyDao.getEachIdLimit3(id);
+    public List<UserPhysiologyDto> getEachIdLimit6(String id) {
+        return this.userPhysiologyDao.getEachIdLimit6(id);
     }
 
     @Override

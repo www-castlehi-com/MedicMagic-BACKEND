@@ -51,8 +51,8 @@
     <sql key="userPhysiologyGetEachIdAndDate">SELECT * FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
     <sql key="userPhysiologyGetLastEachId">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 1</sql>
     <sql key="userPhysiologyGetAll">SELECT * FROM userPhysiology</sql>
-    <sql key="userPhysiologyGetEachIdLimit3">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 3</sql>
-    <sql key="userPhysiologyGetEachIdAndMonth">SELECT * FROM userPhysiology WHERE id = ? AND MONTH(startPhysiology) = ? OR MONTH(endPhysiology) = ?</sql>
+    <sql key="userPhysiologyGetEachIdLimit6">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 6</sql>
+    <sql key="userPhysiologyGetEachIdAndMonth">SELECT * FROM userPhysiology WHERE id = ? AND (MONTH(startPhysiology) = ? OR MONTH(endPhysiology) = ?)</sql>
     <sql key="userPhysiologyDeleteAll">DELETE FROM userPhysiology</sql>
     <sql key="userPhysiologyDeleteEachIdAndStartPhysiology">DELETE FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
     <sql key="userPhysiologyDeleteEachIdAndEndPhysiology">DELETE FROM userPhysiology WHERE id = ? AND endPhysiology = ?</sql>

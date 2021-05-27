@@ -73,8 +73,8 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
     }
 
     @Override
-    public List<UserPhysiologyDto> getEachIdLimit3(String id) {
-        return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGetEachIdLimit3"), new Object[]{id}, this.userPhysiologyRowMapper);
+    public List<UserPhysiologyDto> getEachIdLimit6(String id) {
+        return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGetEachIdLimit6"), new Object[]{id}, this.userPhysiologyRowMapper);
     }
 
     @Override

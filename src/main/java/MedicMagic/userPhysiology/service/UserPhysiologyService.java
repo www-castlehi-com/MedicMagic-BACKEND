@@ -17,7 +17,7 @@ public interface UserPhysiologyService {
     @Transactional(readOnly = true)
     List<UserPhysiologyDto> getAll();
     @Transactional(readOnly = true)
-    List<UserPhysiologyDto> getEachIdLimit3(String id);
+    List<UserPhysiologyDto> getEachIdLimit6(String id);
     @Transactional(readOnly = true)
     List<UserPhysiologyDto> getEachIdAndMonth(String id, String month);
     void deleteAll();
