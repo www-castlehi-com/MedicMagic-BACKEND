@@ -22,6 +22,9 @@ public class UserSymptomServiceImpl implements UserSymptomService {
 
     @Override
     public UserSymptomDto get(String id, String date) {
+        if(userSymptomDao.getCountEachIdAndDate(id, date) == 0) {
+            userSymptomDao.add(new UserSymptomDto(id, date, "false", "false" ,"false", "false", "false", "false", "false", "false" ,"false" ,"false" ,"false" ,"false", "false"));
+        }
         return userSymptomDao.get(id, date);
     }
 
