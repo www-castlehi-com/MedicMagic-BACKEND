@@ -51,6 +51,11 @@ public class UserPhysiologyServiceImpl implements UserPhysiologyService{
     }
 
     @Override
+    public UserPhysiologyDto getNull(String id) {
+        return this.userPhysiologyDao.getNull(id);
+    }
+
+    @Override
     public int getCountEachId(String id) {
         return this.userPhysiologyDao.getCountEachId(id);
     }

@@ -15,6 +15,8 @@ public interface UserPhysiologyService {
     @Transactional(readOnly = true)
     UserPhysiologyDto getLastEachId(String id);
     @Transactional(readOnly = true)
+    UserPhysiologyDto getNull(String id);
+    @Transactional(readOnly = true)
     List<UserPhysiologyDto> getAll();
     @Transactional(readOnly = true)
     List<UserPhysiologyDto> getEachIdLimit6(String id);

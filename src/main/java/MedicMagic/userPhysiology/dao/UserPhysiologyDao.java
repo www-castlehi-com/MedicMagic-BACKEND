@@ -11,6 +11,7 @@ public interface UserPhysiologyDao {
     List<UserPhysiologyDto> get(String id);
     UserPhysiologyDto getEachIdAndStartPhysiology(String id, String startPhysiology);
     UserPhysiologyDto getLastEachId(String id);
+    UserPhysiologyDto getNull(String id);
     List<UserPhysiologyDto> getAll();
     List<UserPhysiologyDto> getEachIdLimit6(String id);
     List<UserPhysiologyDto> getEachIdAndMonth(String id, String month);

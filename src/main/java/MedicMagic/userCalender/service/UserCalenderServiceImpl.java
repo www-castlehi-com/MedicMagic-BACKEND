@@ -2,6 +2,7 @@ package MedicMagic.userCalender.service;
 
 
 import MedicMagic.exception.LastValueNotNullException;
+import MedicMagic.exception.LastValueNullException;
 import MedicMagic.userCalender.dao.UserCalenderDao;
 import MedicMagic.userCalender.domain.UserCalender;
 import MedicMagic.userCalender.dto.UserCalenderDto;
@@ -83,8 +84,12 @@ public class UserCalenderServiceImpl implements UserCalenderService{
     public void update(UserCalenderDto userCalenderDto) {
         if(userCalenderDto.startDay != null) {
             if(userPhysiologyDao.getCountEachIdAndStartPhysiology(userCalenderDto.id, userCalenderDto.startDay) == 0) {
-                UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userCalenderDto.startDay, "null", "null", "null");
-                userPhysiologyDao.add(userPhysiologyDto);
+                if(userPhysiologyDao.getNull(userCalenderDto.id).endPhysiology == null) {
+                    throw new LastValueNullException("이전 주기를 완료해주세요");
+                } else {
+                    UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userCalenderDto.startDay, "null", "null", "null");
+                    userPhysiologyDao.add(userPhysiologyDto);
+                }
             } else {
                 UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userCalenderDto.startDay, "null", "null", "null");
                 userPhysiologyDao.update(userPhysiologyDto);

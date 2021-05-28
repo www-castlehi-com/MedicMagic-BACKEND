@@ -68,6 +68,11 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
     }
 
     @Override
+    public UserPhysiologyDto getNull(String id) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetNull"), new Object[]{id}, this.userPhysiologyRowMapper);
+    }
+
+    @Override
     public List<UserPhysiologyDto> getAll() {
         return this.jdbcTemplate.query(this.sqlService.getSql("userPhysiologyGetAll"), this.userPhysiologyRowMapper);
     }

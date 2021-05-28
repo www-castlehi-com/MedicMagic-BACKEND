@@ -21,6 +21,9 @@ public class UserMucusServiceImpl implements UserMucusService{
 
     @Override
     public UserMucusDto get(String id, String date) {
+        if(this.getCountEachIdAndDate(id, date) == 0) {
+            this.add(new UserMucusDto(id, date, "false", "false", "false", "false", "false", "false", "false"));
+        }
         return userMucusDao.get(id, date);
     }
 
