@@ -101,6 +101,7 @@ MedicMagic\userReminder\userHospital\dto\UserHospitalDto.class
 MedicMagic\userReminder\userReminderList\dao\UserReminderListDao.class
 MedicMagic\userReminder\userExercise\dao\UserExerciseDao.class
 MedicMagic\userReminder\userWaterIntake\domain\UserWaterIntake.class
+MedicMagic\controller\UserGraph\UserGraphExerciseController.class
 MedicMagic\userReminder\userBirthControlPills\dao\UserBirthControlPillsJDBC.class
 MedicMagic\userMucus\dao\UserMucusDaoJDBC$1.class
 MedicMagic\userReminder\userExercise\dto\UserExerciseDto.class
@@ -110,7 +111,9 @@ MedicMagic\sqlService\jaxb\ObjectFactory.class
 MedicMagic\userSymptom\dao\UserSymptomDao.class
 MedicMagic\userPhysiology\dao\UserPhysiologyDao.class
 MedicMagic\userReminder\userHospital\dao\UserHospitalJDBC$1.class
+MedicMagic\controller\UserGraph\UserGraphWaterController.class
 MedicMagic\userReminder\userReminderList\service\UserReminderListService.class
+MedicMagic\controller\UserGraph\UserGraphSleepController.class
 MedicMagic\user\dao\UserDaoJDBC$1.class
 MedicMagic\sqlService\JaxbXmlSqlReader.class
 MedicMagic\userReminder\userSleep\service\UserSleepService.class
