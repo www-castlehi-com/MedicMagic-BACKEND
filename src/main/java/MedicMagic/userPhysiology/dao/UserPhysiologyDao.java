@@ -10,6 +10,7 @@ public interface UserPhysiologyDao {
     void add(UserPhysiologyDto userPhysiologyDto);
     List<UserPhysiologyDto> get(String id);
     UserPhysiologyDto getEachIdAndStartPhysiology(String id, String startPhysiology);
+    UserPhysiologyDto getEachIdAndEndPhysiology(String id, String endPhysiology);
     UserPhysiologyDto getLastEachId(String id);
     UserPhysiologyDto getNull(String id);
     List<UserPhysiologyDto> getAll();
@@ -21,5 +22,6 @@ public interface UserPhysiologyDao {
     int getCount();
     int getCountEachId(String id);
     int getCountEachIdAndStartPhysiology(String id, String startPhysiology);
+    int getCountEachIdAndEndPhysiology(String id, String endPhysiology);
     void update(UserPhysiologyDto userPhysiologyDto);
 }

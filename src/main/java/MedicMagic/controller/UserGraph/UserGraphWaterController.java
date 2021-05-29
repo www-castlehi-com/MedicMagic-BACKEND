@@ -27,7 +27,7 @@ public class UserGraphWaterController {
                 count = userCalenderDtoList.size() - 30;
             } else {
                 for(int i = userCalenderDtoList.size(); i <= 30; i++) {
-                    userCalenderDtoList.add(null);
+                    userCalenderDtoList.add(new UserCalenderDto());
                 }
                 count = 0;
             }

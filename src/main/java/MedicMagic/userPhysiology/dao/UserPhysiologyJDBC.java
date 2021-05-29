@@ -63,6 +63,11 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
     }
 
     @Override
+    public UserPhysiologyDto getEachIdAndEndPhysiology(String id, String endPhysiology) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetEachIdAndEndPhysiology"), this.userPhysiologyRowMapper, new Object[]{id, endPhysiology});
+    }
+
+    @Override
     public UserPhysiologyDto getLastEachId(String id) {
         return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetLastEachId"), new Object[]{id}, this.userPhysiologyRowMapper);
     }
@@ -115,6 +120,11 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
     @Override
     public int getCountEachIdAndStartPhysiology(String id, String startPhysiology) {
         return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetCountEachIdAndStartPhysiology"), new Object[]{id, startPhysiology}, Integer.class);
+    }
+
+    @Override
+    public int getCountEachIdAndEndPhysiology(String id, String endPhysiology) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetCountEachIdAndEndPhysiology"), new Object[]{id, endPhysiology}, Integer.class);
     }
 
     @Override

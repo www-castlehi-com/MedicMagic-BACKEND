@@ -49,6 +49,7 @@
     <sql key="userPhysiologyAdd">INSERT INTO userPhysiology(id, startPhysiology, endPhysiology, expectedOvulationDate, expectedPhysiologyDate) VALUES (?, ?, ?, ?, ?)</sql>
     <sql key="userPhysiologyGet">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology ASC</sql>
     <sql key="userPhysiologyGetEachIdAndDate">SELECT * FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
+    <sql key="userPhysiologyGetEachIdAndEndPhysiology">SELECT * FROM userPhysiology WHERE id = ? AND endPhysiology = ?</sql>
     <sql key="userPhysiologyGetLastEachId">SELECT * FROM userPhysiology WHERE id = ? ORDER BY startPhysiology DESC LIMIT 1</sql>
     <sql key="userPhysiologyGetNull">SELECT * FROM userPhysiology WHERE id = ? ORDER BY endPhysiology LIMIT 1</sql>
     <sql key="userPhysiologyGetAll">SELECT * FROM userPhysiology</sql>
@@ -60,6 +61,7 @@
     <sql key="userPhysiologyGetCount">SELECT COUNT(*) FROM userPhysiology</sql>
     <sql key="userPhysiologyGetCountEachId">SELECT COUNT(*) FROM userPhysiology WHERE id = ?</sql>
     <sql key="userPhysiologyGetCountEachIdAndStartPhysiology">SELECT COUNT(*) FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
+    <sql key="userPhysiologyGetCountEachIdAndEndPhysiology">SELECT COUNT(*) FROM userPhysiology WHERE id = ? AND endPhysiology = ?</sql>
     <sql key="userPhysiologyUpdate">UPDATE userPhysiology SET endPhysiology = ?, expectedOvulationDate = ?, expectedPhysiologyDate = ? WHERE id = ? AND startPhysiology = ?</sql>
 
     <sql key="userReminderListAdd">INSERT INTO userReminderList(id, birthControlPills, physiology, hospital, waterIntake, exerciseTimeGoal, sleepTimeGoal) VALUES(?, ?, ?, ?, ?, ?, ?)</sql>

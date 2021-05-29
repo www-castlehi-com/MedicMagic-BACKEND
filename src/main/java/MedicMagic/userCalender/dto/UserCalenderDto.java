@@ -38,4 +38,14 @@ public class UserCalenderDto {
             this.endDay = endDay;
         }
     }
+
+    public UserCalenderDto(){
+        this.id = null;
+        this.date = null;
+        this.sleepTime = null;
+        this.exerciseTime = null;
+        this.waterIntake = null;
+        this.startDay = null;
+        this.endDay = null;
+    }
 }
