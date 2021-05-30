@@ -128,6 +128,11 @@ public class UserPhysiologyJDBC implements UserPhysiologyDao{
     }
 
     @Override
+    public int getNullCount(String id) {
+        return this.jdbcTemplate.queryForObject(this.sqlService.getSql("userPhysiologyGetNullCount"), new Object[]{id}, Integer.class);
+    }
+
+    @Override
     public void update(UserPhysiologyDto userPhysiologyDto) {
         this.jdbcTemplate.update(this.sqlService.getSql("userPhysiologyUpdate"),
                 nullCheck("endPhysiology", userPhysiologyDto.endPhysiology),

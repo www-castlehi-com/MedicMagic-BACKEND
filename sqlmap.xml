@@ -62,6 +62,7 @@
     <sql key="userPhysiologyGetCountEachId">SELECT COUNT(*) FROM userPhysiology WHERE id = ?</sql>
     <sql key="userPhysiologyGetCountEachIdAndStartPhysiology">SELECT COUNT(*) FROM userPhysiology WHERE id = ? AND startPhysiology = ?</sql>
     <sql key="userPhysiologyGetCountEachIdAndEndPhysiology">SELECT COUNT(*) FROM userPhysiology WHERE id = ? AND endPhysiology = ?</sql>
+    <sql key="userPhysiologyGetNullCount">SELECT COUNT(*) FROM userPhysiology WHERE id = ? ORDER BY endPhysiology</sql>
     <sql key="userPhysiologyUpdate">UPDATE userPhysiology SET endPhysiology = ?, expectedOvulationDate = ?, expectedPhysiologyDate = ? WHERE id = ? AND startPhysiology = ?</sql>
 
     <sql key="userReminderListAdd">INSERT INTO userReminderList(id, birthControlPills, physiology, hospital, waterIntake, exerciseTimeGoal, sleepTimeGoal) VALUES(?, ?, ?, ?, ?, ?, ?)</sql>

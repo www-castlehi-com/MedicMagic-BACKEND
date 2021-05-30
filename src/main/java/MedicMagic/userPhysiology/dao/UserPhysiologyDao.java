@@ -23,5 +23,6 @@ public interface UserPhysiologyDao {
     int getCountEachId(String id);
     int getCountEachIdAndStartPhysiology(String id, String startPhysiology);
     int getCountEachIdAndEndPhysiology(String id, String endPhysiology);
+    int getNullCount(String id);
     void update(UserPhysiologyDto userPhysiologyDto);
 }

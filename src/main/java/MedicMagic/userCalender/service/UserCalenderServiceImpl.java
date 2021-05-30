@@ -83,9 +83,16 @@ public class UserCalenderServiceImpl implements UserCalenderService{
     @Override
     public void update(UserCalenderDto userCalenderDto) {
         if(userCalenderDto.startDay != null) {
+            System.out.println("11");
             if(userPhysiologyDao.getCountEachIdAndStartPhysiology(userCalenderDto.id, userCalenderDto.startDay) == 0) {
-                if(userPhysiologyDao.getNull(userCalenderDto.id).endPhysiology == null) {
-                    throw new LastValueNullException("이전 주기를 완료해주세요");
+                System.out.println("22");
+                if(userPhysiologyDao.getNullCount(userCalenderDto.id) != 0) {
+                    if(userPhysiologyDao.getNull(userCalenderDto.id).endPhysiology == null) {
+                        throw new LastValueNullException("이전 주기를 완료해주세요");
+                    } else {
+                        UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userCalenderDto.startDay, "null", "null", "null");
+                        userPhysiologyDao.add(userPhysiologyDto);
+                    }
                 } else {
                     UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userCalenderDto.startDay, "null", "null", "null");
                     userPhysiologyDao.add(userPhysiologyDto);
@@ -104,30 +111,34 @@ public class UserCalenderServiceImpl implements UserCalenderService{
             }
         }
         if(userCalenderDto.endDay != null) {
-            if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology != null && userPhysiologyDao.getNull(userCalenderDto.id).endPhysiology != null) {
-                if(!userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology.equals(userCalenderDto.endDay)) {
-                    throw new LastValueNotNullException("시작된 주기가 없습니다");
+            if(userPhysiologyDao.getCountEachId(userCalenderDto.id) != 0) {
+                if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology != null && userPhysiologyDao.getNull(userCalenderDto.id).endPhysiology != null) {
+                    if(!userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology.equals(userCalenderDto.endDay)) {
+                        throw new LastValueNotNullException("시작된 주기가 없습니다");
+                    }
+                } else {
+                    String startDay;
+                    boolean getLastEachId = true;
+                    if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology == null) {
+                        startDay = userPhysiologyDao.getLastEachId(userCalenderDto.id).startPhysiology;
+                        getLastEachId = true;
+                    } else {
+                        startDay = userPhysiologyDao.getNull(userCalenderDto.id).startPhysiology;
+                        getLastEachId = false;
+                    }
+
+                    if(startDay.compareTo(userCalenderDto.endDay) < 0) {
+                        UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userPhysiologyDao.getLastEachId(userCalenderDto.id).startPhysiology, userCalenderDto.endDay, "null", "null");;
+                        if(getLastEachId == false) {
+                            userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userPhysiologyDao.getNull(userCalenderDto.id).startPhysiology, userCalenderDto.endDay, "null", "null");
+                        }
+                        userPhysiologyDao.update(userPhysiologyDto);
+                    } else {
+                        throw new IllegalArgumentException("시작 날짜를 끝나는 날짜 이전으로 맞춰주세요");
+                    }
                 }
             } else {
-                String startDay;
-                boolean getLastEachId = true;
-                if(userPhysiologyDao.getLastEachId(userCalenderDto.id).endPhysiology == null) {
-                    startDay = userPhysiologyDao.getLastEachId(userCalenderDto.id).startPhysiology;
-                    getLastEachId = true;
-                } else {
-                    startDay = userPhysiologyDao.getNull(userCalenderDto.id).startPhysiology;
-                    getLastEachId = false;
-                }
-
-                if(startDay.compareTo(userCalenderDto.endDay) < 0) {
-                    UserPhysiologyDto userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userPhysiologyDao.getLastEachId(userCalenderDto.id).startPhysiology, userCalenderDto.endDay, "null", "null");;
-                    if(getLastEachId == false) {
-                        userPhysiologyDto = new UserPhysiologyDto(userCalenderDto.id, userPhysiologyDao.getNull(userCalenderDto.id).startPhysiology, userCalenderDto.endDay, "null", "null");
-                    }
-                    userPhysiologyDao.update(userPhysiologyDto);
-                } else {
-                    throw new IllegalArgumentException("시작 날짜를 끝나는 날짜 이전으로 맞춰주세요");
-                }
+                throw new LastValueNotNullException("시작된 주기가 없습니다");
             }
         } else {
             if(userPhysiologyDao.getCountEachIdAndEndPhysiology(userCalenderDto.id, userCalenderDto.date) == 1) {
