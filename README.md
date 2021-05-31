@@ -2,9 +2,9 @@
 
 ## 프로젝트 구성 안내 
 MedicMagic은 여성을 대상으로 건강을 추적하고 관리할 수 있도록 도와주는 안드로이드 기반 어플리케이션입니다.<br>
-캘린더를 기반으로 한 생리주기와 수면시간, 운동시간 등을 기록할 수 있는 달력 통합 서비스입니다.  
-해당 Repository는 BACKEND 코드를 포함하고 있습니다.
-사용한 오픈소스의 라이선스의 경우 NOTICE.txt와 http://3.36.134.232:8080/MedicMagic_SPRING 에서 명시하고 있습니다.
+캘린더를 기반으로 한 생리주기와 수면시간, 운동시간 등을 기록할 수 있는 달력 통합 서비스입니다.  <br>
+해당 Repository는 BACKEND 코드를 포함하고 있습니다. <br>
+사용한 오픈소스의 라이선스의 경우 NOTICE.txt와 http://3.36.134.232:8080/MedicMagic_SPRING 에서 명시하고 있습니다. <br>
 ![2021-05-31](https://user-images.githubusercontent.com/67732143/120162504-6b0bfb00-c233-11eb-8214-d5fc825d77c9.png)
 
 
