@@ -157,14 +157,9 @@
     <bean id="sqlRegistry" class="MedicMagic.sqlService.HashMapSqlRegistry" />
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-<!--        <property name="driverClass" value="org.mariadb.jdbc.Driver" />-->
-<!--        <property name="url" value="jdbc:mariadb://medicmagic-server.cdjty7ay8ee6.ap-northeast-2.rds.amazonaws.com:3306/medicmagic_server" />-->
-<!--        <property name="username" value="pushclap" />-->
-<!--        <property name="password" value="min20617^^" />-->
-
-        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost/medicmagic" />
-        <property name="username" value="root" />
-        <property name="password" value="min20617" />
+        <property name="driverClass" value="" />
+        <property name="url" value="" />
+        <property name="username" value="" />
+        <property name="password" value="" />
     </bean>
 </beans>
