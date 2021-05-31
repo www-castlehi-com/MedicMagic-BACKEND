@@ -43,7 +43,6 @@ MedicMagic은 여성을 대상으로 건강을 추적하고 관리할 수 있도
    - 클라우드 데이터베이스를 위한 AWS RDS사용
    - EC2에 접근하기 위해 PUTTY사용
    - EC2에 TOMCAT 설치 후(```sudo yum install tomcat```), 프로젝트 BUILD시 생성되는 WAR을 TOMCAT이 배포(FileZilla이용)
-   - 
 
 ## 프로젝트 설치 방법
 > git clone [repository 주소]
