@@ -64,7 +64,7 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
       ```
    - 프로젝트 상단에 있는 db파일의 테이블 정보를 사용하려는 관계형 데이터베이스에 주입
    
-## 프로젝트 사용법
+## 프로젝트 사용법, 기능
    1. 프로젝트를 설치 합니다.
    2. 호스팅 한 서버에 프로젝트 파일을 배포합니다.
    3. UserController
@@ -94,3 +94,12 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
         - userReminderList파일(UserReminderList, UserReminderListDao, UserReminderListDto, UserReminderListService)
         - userReminderPhysiology파일(UserReminderPhysiology, UserReminderPhysiologyDao, UserReminderPhysiologyDto, UserReminderPhysiologyService)
         - userSleep파일(UserSleep, UserSleepDao, UserSleepDto, UserSleepService)
+
+## 버그
+   - 날짜와 시간을 받는 형식이 정해져있습니다. 사용하려는 Front 코드에서 이를 정확하게 맞추어야 합니다.
+
+## 프로젝트 작성자 및 도움을 준 사람
+   - 작성자 : moong2
+   - 이메일 : pushclap@gmail.com
+   - 도움을 준 사람 : aelim0409, slcloe, srsw000521
+   - 관련 FRONT REPO : https://github.com/aelim0409/magicmadic.git
