@@ -17,5 +17,5 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
 ## 기술 스택
 - Spring Framework(MVC)
 - MariaDB
-- AWS
+- AWS(EC2, RDS)
 - Apache Tomcat
