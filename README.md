@@ -109,5 +109,5 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
 ## 프로젝트 작성자 및 도움을 준 사람
    - 작성자 : moong2
    - 이메일 : pushclap@gmail.com
-   - 도움을 준 사람 : aelim0409, slcloe, srsw000521
+   - 도움을 준 사람 : aelim0409, slcloe, srsw000521 
    - 관련 FRONT REPO : https://github.com/aelim0409/magicmadic.git
