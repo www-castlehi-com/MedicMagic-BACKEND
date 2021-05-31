@@ -14,4 +14,8 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
 <달력 하나에 주로 쓰는 기능들을 한번에 볼 수 있다면 어떨까?> 
 하는 생각으로 이 프로젝트를 시작하게 되었습니다. 
 
-## 
+## 기술 스택
+- Spring Framework(MVC)
+- MariaDB
+- AWS
+- Apache Tomcat
