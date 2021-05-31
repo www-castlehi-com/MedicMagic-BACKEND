@@ -24,6 +24,7 @@ MedicMagic은 여성을 대상으로 건강을 추적하고 관리할 수 있도
 - MariaDB
 - AWS(EC2, RDS)
 - Apache Tomcat
+- Linux
 
 ### 개발, 배포 환경
 1. 개발 환경
