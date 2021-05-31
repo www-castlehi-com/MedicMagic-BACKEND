@@ -97,6 +97,14 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
 
 ## 버그
    - 날짜와 시간을 받는 형식이 정해져있습니다. 사용하려는 Front 코드에서 이를 정확하게 맞추어야 합니다.
+   - 정보를 주고 받는 과정에서 고려되지 못한 exception이 있을 수 있습니다. 
+   
+   ### 버그 수정 방법
+   1. 프로젝트를 fork합니다.
+   2. branch를 생성합니다.(```git checkout -b MedicMagic-BACKEND```)
+   3. 버그를 수정하고 커밋합니다.(```git commit -m 'Catch some Error'```)
+   4. branch를 push합니다. (```git push origin MedicMagic-BACKEND```)
+   5. Pull Request합니다.
 
 ## 프로젝트 작성자 및 도움을 준 사람
    - 작성자 : moong2
