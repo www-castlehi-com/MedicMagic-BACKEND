@@ -54,12 +54,37 @@ MedicMagic은 가임기 여성을 대상으로 건강을 추적하고 관리할 
    - 프로젝트 상단에 있는 db파일의 테이블 정보를 로컬 데이터베이스에 주입
 2. 배포시
    - WEB-INF/applicationContext.xml의 <dataSource> 빈에 빈칸을 채워 작성
-   ```xml
-   <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="사용하려는 db의 jdbc driver 주소" />
-        <property name="url" value="jdbc:사용하려는 db://호스팅주소/프로젝트 DATABASE명" />
-        <property name="username" value="DB user이름" />
-        <property name="password" value="DB pw" />
-    </bean>
-   ```
+      ```xml
+      <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+           <property name="driverClass" value="사용하려는 db의 jdbc driver 주소" />
+           <property name="url" value="jdbc:사용하려는 db://호스팅주소/프로젝트 DATABASE명" />
+           <property name="username" value="DB user이름" />
+           <property name="password" value="DB pw" />
+       </bean>
+      ```
    - 프로젝트 상단에 있는 db파일의 테이블 정보를 사용하려는 관계형 데이터베이스에 주입
+   
+## 프로젝트 사용법
+   1. 프로젝트를 설치 합니다.
+   2. 호스팅 한 서버에 프로젝트 파일을 배포합니다.
+   3. UserController
+      - **역할** : 로그인, 회원가입
+      - **관련 파일** : user파일(User, UserDao, UserDto, UserService)
+   4. UserCalendarController
+      - **역할** : user에 대한 건강 세부 정보 내보내기, 저장하기.
+      - **관련 파일** : userCalendar파일(UserCalendar, UserCalendarDao, UserCalendarDto, UserCalendarService), userPhysiology파일(UserPhysiology, UserPhysiologyDao, UserPhysiologyDto, UserPhysiologyService)
+   5. UserMucusController
+      - **역할** : user의 분비물에 대한 세부 정보 내보내기, 저장하기.
+      - **관련 파일** : userMucus파일(UserMucus, UserMucusDao, UserMucusDto, UserMucusService)
+   6. UserSymptomController
+      - **역할** : user의 증후군에 대한 세부 정보 내보내기, 저장하기.
+      - **관련 파일** : userSymptom파일(UserSymptom, UserSymptomDao, UserSymptomDto, UserSymptomService)
+   7. UserPhysiologyController
+      - **역할** : user의 주기 정보에 대한 세부 정보 내보내기, 저장하기.
+      - **관련 파일** : userPhysiology파일(UserPhsyiology, UserPhysiologyDao, UserPhysiologyDto, UserPhysiologyService)
+   8. UserGraphExerciseController, UserGraphSleepController, UserGraphWaterController
+      - **역할** : user의 정보로 그래프를 생성하기 위해 운동 정보, 수면 시간, 수분 섭취량 내보내기, 저장하기.
+      - **관련 파일** : userCalendar파일(UserCalendar, UserCalendarDao, UserCalendarDto, UserCalendarService)
+   9. UserBirthControlPills, UserExerciseController, UserHospitalController, UserReminderListController, UserReminderPhysiologyController, UserSleepController, UserWaterIntakeController
+      - **역할** : user의 리마인더 정보 내보내기, 저장하기
+      - **관련 파일** : userBirthControlPills파일(UserBirthControlPills, UserBirthControlPillsDao, UserBirthControlPillsDto, UserBirthControlPillsService), userExercise파일(UserExercise, UserExerciseDao, UserExerciseDto, UserExerciseSercie), userHospital파일(userHospital, userHospitalDao, userHospitalDto, userHospitalService),  userReminderPhysiology파일(UserReminderPhysiology, UserReminderPhysiologyDao, UserReminderPhysiologyDto, UserReminderPhysiologyService)
