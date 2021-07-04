@@ -44,6 +44,9 @@ MedicMagic은 여성을 대상으로 건강을 추적하고 관리할 수 있도
    - EC2에 접근하기 위해 PUTTY사용
    - EC2에 TOMCAT 설치 후(```sudo yum install tomcat```), 프로젝트 BUILD시 생성되는 WAR을 TOMCAT이 배포(FileZilla이용)
 
+### 프로젝트 ERD
+   ![medicmagic](https://user-images.githubusercontent.com/67732143/124377902-7dbd9800-dce9-11eb-95aa-f2cf9a0ea084.png)
+
 ## 프로젝트 설치 방법
 > git clone [repository 주소]
 
@@ -69,9 +72,6 @@ MedicMagic은 여성을 대상으로 건강을 추적하고 관리할 수 있도
        </bean>
       ```
    - 프로젝트 상단에 있는 db파일의 테이블 정보를 사용하려는 관계형 데이터베이스에 주입
-   
-## 프로젝트 ERD
-   ![medicmagic](https://user-images.githubusercontent.com/67732143/124377902-7dbd9800-dce9-11eb-95aa-f2cf9a0ea084.png)
    
 ## 프로젝트 사용법, 기능
    1. 프로젝트를 설치 합니다.
