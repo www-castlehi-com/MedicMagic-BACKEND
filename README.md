@@ -116,7 +116,7 @@ MedicMagic은 여성을 대상으로 건강을 추적하고 관리할 수 있도
    5. Pull Request합니다.
 
 ## 프로젝트 작성자 및 도움을 준 사람
-   - 작성자 : moong2
-   - 이메일 : pushclap@gmail.com
+   - 작성자 : @www-castlehi-com
+   - 이메일 : www.castlehi@gmail.com
    - 도움을 준 사람 : aelim0409(https://github.com/aelim0409), slcloe(https://github.com/slcloe), srsw000521(https://github.com/srsw000521)
    - 관련 FRONT REPO : https://github.com/aelim0409/magicmadic.git
